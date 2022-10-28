@@ -14,8 +14,9 @@ function App() {
     try {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
       const result = await response.json();
-      let fixedName = result.name;
-      setOppName(fixedName.charAt(0).toUpperCase() + fixedName.slice(1));
+      // let fixedName = result.name;
+      // setOppName(fixedName.charAt(0).toUpperCase() + fixedName.slice(1));
+      setOppName(result.name.toUpperCase());
       setOppImgSrc(result.sprites.other["official-artwork"]["front_default"]);
       let tempTypes = [];
       result.types.forEach((slot) => {
@@ -38,8 +39,10 @@ function App() {
 
   return (
     <div className="App flex flex-col h-screen items-center">
-      <header className="fixed grid grid-cols-3 w-screen py-3 px-4 justify-between bg-gray-300/20 backdrop-blur-sm border-b border-gray-400 shadow-md">
-        <h1 className="text-lg font-medium drop-shadow">⚔️ typeDex</h1>
+      <header className="fixed grid grid-cols-3 w-screen py-3 px-4 justify-between bg-gray-300/10 backdrop-blur-[3px] border-b border-gray-400 shadow-md">
+        <h1 className="text-lg font-medium drop-shadow uppercase">
+          ⚔️ TypeDex
+        </h1>
         <Search inputRef={inputRef} handleSearch={handleSearch} />
         <button className="justify-self-end">🌙</button>
       </header>
