@@ -38,12 +38,12 @@ function App() {
 
   return (
     <div className="App flex flex-col h-screen items-center">
-      <header className="fixed grid grid-cols-3 w-screen py-3 px-6 justify-between bg-gray-300/20 backdrop-blur-sm border-b border-gray-400 shadow-lg">
-        <h1 className="text-2xl font-medium drop-shadow">⚔️ typeDex</h1>
+      <header className="fixed grid grid-cols-3 w-screen py-3 px-4 justify-between bg-gray-300/20 backdrop-blur-sm border-b border-gray-400 shadow-lg">
+        <h1 className="text-lg font-medium drop-shadow">⚔️ typeDex</h1>
         <Search inputRef={inputRef} handleSearch={handleSearch} />
         <button className="justify-self-end">🌙</button>
       </header>
-      <section className="content pt-20 w-full flex flex-col items-center">
+      <section className="content pt-20 max-w-[70ch] flex flex-col items-center">
         <Viewport oppImgSrc={oppImgSrc} oppName={oppName} oppTypes={oppTypes} />
       </section>
     </div>
