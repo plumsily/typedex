@@ -31,7 +31,7 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, oppWeakness }) => {
         <li
           style={{ background: typeColors[type] }}
           key={type}
-          className="text-sm py-1 px-2 border border-gray-600 mb-[-1px]"
+          className="text-sm py-1 px-2 border border-gray-600 ml-[-1px]"
         >
           {type.toUpperCase()}
         </li>
@@ -99,14 +99,19 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, oppWeakness }) => {
             className="border border-gray-600 drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
             src={oppImgSrc}
           ></img>
-          <div className="flex flex-col gap-4 text-sm w-full">
-            <p>✔️ Super effective types:</p>
-            <ul className="text-center text-white">{oppSuperEffective}</ul>
-            {/* <p>⚪ Normal effective types:</p> */}
-            <p>🟡 Not very effective types:</p>
-            <ul className="text-center text-white">{oppNotVeryEffective}</ul>
-            <p>❌ No effect types:</p>
-            <ul className="text-center text-white">{oppNotEffective}</ul>
+          <div className="flex flex-col gap-8 text-sm w-full">
+            <div className="flex flex-col gap-4 text-sm w-full">
+              <p>✔️ Super effective types:</p>
+              <ul className="text-center text-white">{oppSuperEffective}</ul>
+            </div>
+            <div className="flex flex-col gap-4 text-sm w-full">
+              <p>🟡 Not very effective types:</p>
+              <ul className="text-center text-white">{oppNotVeryEffective}</ul>
+            </div>
+            <div className="flex flex-col gap-4 text-sm w-full">
+              <p>❌ No effect types:</p>
+              <ul className="text-center text-white">{oppNotEffective}</ul>
+            </div>
           </div>
         </div>
       </div>
@@ -121,6 +126,9 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, oppWeakness }) => {
           Don't know what the opponent Pokémon's type is? Use the TypeDex to
           search for your opponent's type weaknesses and check if your moves are
           going to be super effective!
+        </p>
+        <p className="text-sm mt-10">
+          Currently does not support mega evolutions or regional forms.
         </p>
       </div>
     );
