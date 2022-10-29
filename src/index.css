@@ -16,5 +16,5 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: auto;
   line-height: 1.75;
-  background: url("./Assets/lightpattern.svg");
+  /* background: url("./Assets/lightpattern.svg"); */
 }

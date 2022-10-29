@@ -24,7 +24,7 @@ const Search = ({ inputRef, handleSearch }) => {
       ></input>
       <button
         onClick={(event) => handleSearch(inputRef.current.value.toLowerCase())}
-        className="w-1/6 border text-sm border-gray-500 ml-[-1px] hover:bg-blue-400 hover:text-white"
+        className="w-1/6 border text-sm border-gray-500 ml-[-1px] hover:bg-blue-500 hover:text-white"
       >
         Search
       </button>
