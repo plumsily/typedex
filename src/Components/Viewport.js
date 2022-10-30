@@ -85,7 +85,7 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, oppWeakness }) => {
         <div className="flex flex-row justify-between">
           <a
             href={`https://bulbapedia.bulbagarden.net/wiki/${oppName}_(Pok%C3%A9mon)`}
-            className="text-2xl dark:bg-black dark:hover:bg-blue-500  px-4 py-0.5 mb-6 w-max hover:bg-blue-500 hover:text-white border bg-yellow-200 border-gray-600"
+            className="text-xl dark:bg-black dark:hover:bg-blue-500  px-4 py-0.5 mb-6 w-max hover:bg-blue-500 hover:text-white border bg-yellow-200 border-gray-600"
             target="_blank"
           >
             {oppName.toUpperCase()}
@@ -118,8 +118,8 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, oppWeakness }) => {
     );
   } else {
     return (
-      <div className="flex flex-col justify-center items-center bg-gray-300/20 dark:bg-gray-300/10 backdrop-blur-[2px] border border-gray-600  px-6 py-10">
-        <h2 className="text-lg mb-4">
+      <div className="flex flex-col justify-center items-center bg-gray-300/20 dark:bg-gray-300/10 backdrop-blur-[2px] border border-gray-600 p-10">
+        <h2 className="text-xl mb-8">
           The guide to mastering your Pokémon's moveset!
         </h2>
         <p>
@@ -127,8 +127,8 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, oppWeakness }) => {
           search for your opponent's type weaknesses and check if your moves are
           going to be super effective!
         </p>
-        <p className="text-sm mt-10">
-          Currently does not support mega evolutions or regional forms.
+        <p className="text-xs mt-10">
+          *Currently does not support mega evolutions or regional forms.
         </p>
       </div>
     );

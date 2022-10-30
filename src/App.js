@@ -86,7 +86,7 @@ function App() {
         darkMode === true ? "dark" : ""
       } App flex flex-col h-screen items-center`}
     >
-      <header className="dark:bg-black dark:bg-gray-300/10 fixed grid grid-cols-3 w-screen py-3 px-4 justify-between bg-gray-300/10 backdrop-blur-[3px] border-b border-gray-500 shadow-lg">
+      <header className="dark:bg-black dark:bg-gray-300/10 fixed grid grid-cols-3 w-screen py-1.5 px-3 justify-between bg-gray-300/10 backdrop-blur-[3px] border-b border-gray-500 shadow">
         <h1 className="dark:text-white text-xl font-medium uppercase cursor-default">
           ⚔️ TypeDex
         </h1>
@@ -95,7 +95,7 @@ function App() {
           {darkMode ? "☀️" : "🌙"}
         </button>
       </header>
-      <section className="dark:text-white content pt-20 max-w-[70ch] flex flex-col items-center">
+      <section className="dark:text-white content pt-16 max-w-[70ch] flex flex-col items-center">
         <Viewport
           oppImgSrc={oppImgSrc}
           oppName={oppName}
