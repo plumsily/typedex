@@ -81,7 +81,7 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, oppWeakness }) => {
 
   if (oppName) {
     return (
-      <div className="flex flex-col justify-center p-6 bg-yellow-200/10 dark:bg-gray-500/10 backdrop-blur-[2px] border border-gray-600 w-[70ch]">
+      <div className="flex flex-col justify-center p-1.5 bg-yellow-200/10 dark:bg-gray-500/10 backdrop-blur-[2px] border border-gray-600 w-[70ch]">
         <div className="flex flex-row justify-between">
           <a
             href={`https://bulbapedia.bulbagarden.net/wiki/${oppName}_(Pok%C3%A9mon)`}
@@ -94,7 +94,7 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, oppWeakness }) => {
             {oppTypeList}
           </ul>
         </div>
-        <div className="flex gap-6">
+        <div className="flex gap-1.5">
           <img
             className="border border-gray-600 drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
             src={oppImgSrc}
