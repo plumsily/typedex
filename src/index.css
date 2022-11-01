@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  box-sizing: border-box;
+}
 html{
   /* background: linear-gradient(160deg,rgb(243, 74, 74),rgb(220,38,38)); */
   /* background: lightgray; */
@@ -9,7 +12,6 @@ html{
   /* background: linear-gradient(180deg,rgba(255,255,255,0),rgba(200,200,200,0.6)), url("./Assets/pattern.svg"); */
   font-size: 1.25em;
 }
-
 body {
   font-family: 'Rubik', sans-serif;
   -webkit-font-smoothing: antialiased;

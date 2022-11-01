@@ -1,17 +1,17 @@
-.viewport-enter, .viewport-appear {
+.default-enter, .default-appear {
     opacity: 0;
     scale: 0.98;
 }
-.viewport-enter-active, .viewport-appear-active {
+.default-enter-active, .default-appear-active {
     opacity: 1;
     scale: 1;
-    transition: all 100ms ease-in-out;
+    transition: all 200ms ease-in-out;
 }
-.viewport-exit {
+.default-exit {
     opacity: 1;
     scale: 1;
 }
-.viewport-exit-active {
+.default-exit-active {
     opacity: 0;
     scale: 0.98;
     transition: all 100ms ease-in-out;

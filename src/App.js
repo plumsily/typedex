@@ -4,15 +4,16 @@ import darkpattern from "./Assets/darkpattern.svg";
 import lightpattern from "./Assets/lightpattern.svg";
 
 import Viewport from "./Components/Viewport";
-import Search from "./Components/Search";
+import Header from "./Components/Header";
+import Default from "./Components/Default";
 
 function App() {
   const inputRef = useRef(null);
   const [darkMode, setDarkMode] = useState(false);
   const [oppName, setOppName] = useState("");
   const [oppImgSrc, setOppImgSrc] = useState("");
-  const [oppTypes, setOppTypes] = useState("");
-  const [oppWeakness, setOppWeakness] = useState({});
+  const [oppTypes, setOppTypes] = useState({});
+  const [loaded, setLoaded] = useState(false);
 
   const getAPI = async (name) => {
     try {
@@ -25,27 +26,33 @@ function App() {
         result1.name.charAt(0).toUpperCase() + result1.name.slice(1);
       setOppName(fixedName);
       setOppImgSrc(result1.sprites.other["official-artwork"]["front_default"]);
-      let tempTypes = [];
-      result1.types.forEach((slot) => {
-        tempTypes.push(slot.type.name);
-        // tempTypes[slot.type.name] = typeColors[slot.type.name];
-      });
-      setOppTypes(tempTypes);
 
-      //get type information
-      const response2 = await fetch(
-        `https://pokeapi.co/api/v2/type/${tempTypes[0]}`
-      );
-      const result2 = await response2.json();
-      setOppWeakness(result2["damage_relations"]);
+      let oppTypeObj = {};
+      result1.types.forEach((slot) => {
+        oppTypeObj[slot.type.name] = {};
+      });
+
+      Object.keys(oppTypeObj).forEach(async (key) => {
+        let response = await fetch(`https://pokeapi.co/api/v2/type/${key}`);
+        let result = await response.json();
+        oppTypeObj[key] = result["damage_relations"];
+      });
+      setOppTypes(oppTypeObj);
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleSearch = (name) => {
+    setLoaded(false);
+    const timer = setTimeout(() => {
+      setLoaded(true);
+    }, 500);
     getAPI(name);
     document.getElementById("search").value = "";
+    return () => {
+      clearTimeout(timer);
+    };
   };
   const handleDark = () => {
     setDarkMode(!darkMode);
@@ -80,29 +87,40 @@ function App() {
     }
   }, []);
 
+  // useEffect(() => {
+  //   setLoaded(false);
+  //   if (Object.keys(oppTypes).length) {
+  //     const timer = setTimeout(() => {
+  //       setLoaded(true);
+  //     }, 500);
+  //     return () => {
+  //       clearTimeout(timer);
+  //     };
+  //   }
+  // }, [oppTypes]);
+
   return (
     <div
       className={`${
         darkMode === true ? "dark" : ""
       } App flex flex-col h-screen items-center`}
     >
-      <header className="dark:bg-black dark:bg-gray-300/10 fixed grid grid-cols-3 w-screen py-1.5 px-3 justify-between bg-gray-300/10 backdrop-blur-[3px] border-b border-gray-500 shadow">
-        <h1 className="dark:text-white text-xl font-medium uppercase cursor-default">
-          ⚔️ TypeDex
-        </h1>
-        <Search inputRef={inputRef} handleSearch={handleSearch} />
-        <button onClick={(event) => handleDark()} className="justify-self-end">
-          {darkMode ? "☀️" : "🌙"}
-        </button>
-      </header>
-      <section className="dark:text-white content pt-16 max-w-[70ch] flex flex-col items-center">
+      <Header
+        inputRef={inputRef}
+        handleSearch={handleSearch}
+        darkMode={darkMode}
+        handleDark={handleDark}
+      />
+      {Object.keys(oppTypes).length ? (
         <Viewport
           oppImgSrc={oppImgSrc}
           oppName={oppName}
           oppTypes={oppTypes}
-          oppWeakness={oppWeakness}
+          loaded={loaded}
         />
-      </section>
+      ) : (
+        <Default />
+      )}
     </div>
   );
 }

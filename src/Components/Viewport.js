@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import { CSSTransition } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import "./Viewport.css";
 
-const Viewport = ({ oppImgSrc, oppName, oppTypes, oppWeakness }) => {
+const Viewport = ({ oppImgSrc, oppName, oppTypes, loaded }) => {
   const typeColors = {
     normal: "rgb(170,170,153)",
     fire: "rgb(255,68,34)",
@@ -24,115 +24,126 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, oppWeakness }) => {
     fairy: "rgb(238,153,238)",
   };
 
+  class Effectivness {
+    constructor(element, list) {
+      this.element = element;
+      this.list = list;
+    }
+    pushAll(val) {
+      this.list.push(val);
+      this.element.push(
+        <li
+          style={{ background: typeColors[val] }}
+          key={val}
+          className="p-1 border border-gray-600 dark:border-gray-800 mb-[-1px]"
+        >
+          {val.toUpperCase()}
+        </li>
+      );
+    }
+  }
+
   let oppTypeList = [];
-  if (oppTypes) {
-    oppTypes.forEach((type) => {
+  const oppSuperEffective = new Effectivness([], []);
+  const oppNotVeryEffective = new Effectivness([], []);
+  const oppNotEffective = new Effectivness([], []);
+
+  if (Object.keys(oppTypes).length) {
+    Object.keys(oppTypes).forEach((key) => {
+      //Show the types of the opponent pokemon
       oppTypeList.push(
         <li
-          style={{ background: typeColors[type] }}
-          key={type}
-          className="text-sm py-1 px-2 border border-gray-600 ml-[-1px]"
+          style={{ background: typeColors[key] }}
+          key={key}
+          className="text-sm py-1 px-3 border border-gray-600 dark:border-gray-800 ml-[-1px]"
         >
-          {type.toUpperCase()}
+          {key.toUpperCase()}
         </li>
       );
+
+      //   Show the weakness of the opponent pokemon
+      if (
+        Object.hasOwn(oppTypes[Object.keys(oppTypes)[0]], "double_damage_from")
+      ) {
+        oppTypes[key]["no_damage_from"].forEach((damage) => {
+          if (!oppNotEffective.list.includes(damage.name)) {
+            oppNotEffective.pushAll(damage.name);
+          }
+        });
+
+        oppTypes[key]["double_damage_from"].forEach((damage) => {
+          if (
+            !oppSuperEffective.list.includes(damage.name) &&
+            !oppNotEffective.list.includes(damage.name)
+          ) {
+            oppSuperEffective.pushAll(damage.name);
+          }
+        });
+
+        oppTypes[key]["half_damage_from"].forEach((damage) => {
+          if (
+            !oppNotVeryEffective.list.includes(damage.name) &&
+            !oppNotEffective.list.includes(damage.name)
+          ) {
+            oppNotVeryEffective.pushAll(damage.name);
+          }
+        });
+      }
     });
   }
 
-  let oppSuperEffective = [];
-  let oppNotVeryEffective = [];
-  let oppNotEffective = [];
-
-  if (oppWeakness["double_damage_from"]) {
-    oppWeakness["double_damage_from"].forEach((type) => {
-      oppSuperEffective.push(
-        <li
-          style={{ background: typeColors[type.name] }}
-          key={type.name}
-          className="p-1 border border-gray-600 mb-[-1px]"
-        >
-          {type.name.toUpperCase()}
-        </li>
-      );
-    });
-    oppWeakness["half_damage_from"].forEach((type) => {
-      oppNotVeryEffective.push(
-        <li
-          style={{ background: typeColors[type.name] }}
-          key={type.name}
-          className="p-1 border border-gray-600 mb-[-1px]"
-        >
-          {type.name.toUpperCase()}
-        </li>
-      );
-    });
-    oppWeakness["no_damage_from"].forEach((type) => {
-      oppNotEffective.push(
-        <li
-          style={{ background: typeColors[type.name] }}
-          key={type.name}
-          className="p-1 border border-gray-600 mb-[-1px]"
-        >
-          {type.name.toUpperCase()}
-        </li>
-      );
-    });
-  }
-
-  if (oppName) {
-    return (
-      <div className="flex flex-col justify-center p-1.5 bg-yellow-200/10 dark:bg-gray-500/10 backdrop-blur-[2px] border border-gray-600 w-[70ch]">
-        <div className="flex flex-row justify-between">
-          <a
-            href={`https://bulbapedia.bulbagarden.net/wiki/${oppName}_(Pok%C3%A9mon)`}
-            className="text-xl dark:bg-black dark:hover:bg-blue-500  px-4 py-0.5 mb-6 w-max hover:bg-blue-500 hover:text-white border bg-yellow-200 border-gray-600"
-            target="_blank"
-          >
-            {oppName.toUpperCase()}
-          </a>
-          <ul className="text-center text-white flex flex-row h-fit">
-            {oppTypeList}
-          </ul>
-        </div>
-        <div className="flex gap-1.5">
-          <img
-            className="border border-gray-600 drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
-            src={oppImgSrc}
-          ></img>
-          <div className="flex flex-col gap-8 text-sm w-full">
-            <div className="flex flex-col gap-4 text-sm w-full">
-              <p>✔️ Super effective types:</p>
-              <ul className="text-center text-white">{oppSuperEffective}</ul>
-            </div>
-            <div className="flex flex-col gap-4 text-sm w-full">
-              <p>🟡 Not very effective types:</p>
-              <ul className="text-center text-white">{oppNotVeryEffective}</ul>
-            </div>
-            <div className="flex flex-col gap-4 text-sm w-full">
-              <p>❌ No effect types:</p>
-              <ul className="text-center text-white">{oppNotEffective}</ul>
+  return (
+    <CSSTransition
+      in={loaded}
+      timeout={{ enter: 100, exit: 100 }}
+      classNames="viewport"
+      appear
+      unmountOnExit
+    >
+      <section className="dark:text-white content pt-16 max-w-[70ch] flex flex-col items-center">
+        <div className="flex flex-col justify-center p-1.5 bg-yellow-200/10 dark:bg-gray-500/10 backdrop-blur-[2px] border border-gray-600 w-[70ch]">
+          <div className="flex flex-row justify-between">
+            <a
+              href={`https://bulbapedia.bulbagarden.net/wiki/${oppName}_(Pok%C3%A9mon)`}
+              className="text-2xl dark:bg-black dark:hover:bg-blue-500  px-2.5 py-0.5 mb-1.5 w-max hover:bg-blue-500 hover:text-white border bg-yellow-200 border-gray-600"
+              target="_blank"
+            >
+              {oppName.toUpperCase()}
+            </a>
+            <ul className="text-center text-white flex flex-row h-fit">
+              {oppTypeList}
+            </ul>
+          </div>
+          <div className="flex gap-1.5 pb-[1px]">
+            <img
+              className="h-max self-start border border-gray-600 drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+              src={oppImgSrc}
+            ></img>
+            <div className="flex flex-col gap-6 text-sm w-full">
+              <div className="flex flex-col gap-1.5">
+                <p>✔️ Super effective types:</p>
+                <ul className="text-center text-white">
+                  {oppSuperEffective.element}
+                </ul>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <p>🟡 Not very effective types:</p>
+                <ul className="text-center text-white">
+                  {oppNotVeryEffective.element}
+                </ul>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <p>❌ No effect types:</p>
+                <ul className="text-center text-white">
+                  {oppNotEffective.element}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="flex flex-col justify-center items-center bg-gray-300/20 dark:bg-gray-300/10 backdrop-blur-[2px] border border-gray-600 p-10">
-        <h2 className="text-xl mb-8">
-          The guide to mastering your Pokémon's moveset!
-        </h2>
-        <p>
-          Don't know what the opponent Pokémon's type is? Use the TypeDex to
-          search for your opponent's type weaknesses and check if your moves are
-          going to be super effective!
-        </p>
-        <p className="text-xs mt-10">
-          *Currently does not support mega evolutions or regional forms.
-        </p>
-      </div>
-    );
-  }
+      </section>
+    </CSSTransition>
+  );
 };
 
 export default Viewport;
