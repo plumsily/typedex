@@ -8,27 +8,32 @@ import Header from "./Components/Header";
 import Default from "./Components/Default";
 
 function App() {
-  const inputRef = useRef(null);
+  const searchInputRef = useRef(null);
+  const moveInputRef = useRef(null);
   const [darkMode, setDarkMode] = useState(false);
   const [oppName, setOppName] = useState("");
   const [oppImgSrc, setOppImgSrc] = useState("");
   const [oppTypes, setOppTypes] = useState({});
   const [loaded, setLoaded] = useState(false);
+  const [moveType, setMoveType] = useState([]);
+  const [loadedMove, setLoadedMove] = useState(false);
 
   const getAPI = async (name) => {
     try {
       //get Opponent pokemon info
-      const response1 = await fetch(
+      const responseName = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${name}`
       );
-      const result1 = await response1.json();
+      const resultName = await responseName.json();
       let fixedName =
-        result1.name.charAt(0).toUpperCase() + result1.name.slice(1);
+        resultName.name.charAt(0).toUpperCase() + resultName.name.slice(1);
       setOppName(fixedName);
-      setOppImgSrc(result1.sprites.other["official-artwork"]["front_default"]);
+      setOppImgSrc(
+        resultName.sprites.other["official-artwork"]["front_default"]
+      );
 
       let oppTypeObj = {};
-      result1.types.forEach((slot) => {
+      resultName.types.forEach((slot) => {
         oppTypeObj[slot.type.name] = {};
       });
 
@@ -43,17 +48,42 @@ function App() {
     }
   };
 
+  const getMove = async (move) => {
+    try {
+      const responseMove = await fetch(
+        `https://pokeapi.co/api/v2/move/${move}`
+      );
+      const resultMove = await responseMove.json();
+      setMoveType([resultMove.type.name, resultMove["damage_class"].name]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSearch = (name) => {
     setLoaded(false);
     const timer = setTimeout(() => {
       setLoaded(true);
     }, 500);
     getAPI(name);
+    setMoveType([]);
     document.getElementById("search").value = "";
     return () => {
       clearTimeout(timer);
     };
   };
+
+  const handleMove = (move) => {
+    setLoadedMove(false);
+    const timerMove = setTimeout(() => {
+      setLoadedMove(true);
+    }, 100);
+    getMove(move);
+    return () => {
+      clearTimeout(timerMove);
+    };
+  };
+
   const handleDark = () => {
     setDarkMode(!darkMode);
     if (!darkMode) {
@@ -106,17 +136,21 @@ function App() {
       } App flex flex-col h-screen items-center`}
     >
       <Header
-        inputRef={inputRef}
+        inputRef={searchInputRef}
         handleSearch={handleSearch}
         darkMode={darkMode}
         handleDark={handleDark}
       />
       {Object.keys(oppTypes).length ? (
         <Viewport
+          inputRef={moveInputRef}
           oppImgSrc={oppImgSrc}
           oppName={oppName}
           oppTypes={oppTypes}
           loaded={loaded}
+          handleMove={handleMove}
+          moveType={moveType}
+          loadedMove={loadedMove}
         />
       ) : (
         <Default />

@@ -2,7 +2,16 @@ import React, { useEffect, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import "./Viewport.css";
 
-const Viewport = ({ oppImgSrc, oppName, oppTypes, loaded }) => {
+const Viewport = ({
+  inputRef,
+  oppImgSrc,
+  oppName,
+  oppTypes,
+  loaded,
+  handleMove,
+  moveType,
+  loadedMove,
+}) => {
   const typeColors = {
     normal: "rgb(170,170,153)",
     fire: "rgb(255,68,34)",
@@ -115,7 +124,7 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, loaded }) => {
           <div className="flex flex-row justify-between">
             <a
               href={`https://bulbapedia.bulbagarden.net/wiki/${oppName}_(Pok%C3%A9mon)`}
-              className="text-2xl dark:bg-transparent dark:hover:bg-cyan-500 px-2.5 py-0.5 mb-5 w-max hover:bg-black hover:text-white border bg-yellow-200 border-gray-600 transition-all"
+              className="text-2xl dark:bg-transparent dark:hover:bg-cyan-500 px-2.5 py-0.5 mb-4 w-max hover:bg-black hover:text-white border bg-yellow-200 border-gray-600 transition-all"
               target="_blank"
             >
               {oppName.toUpperCase()}
@@ -150,6 +159,65 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, loaded }) => {
               </div>
             </div>
           </div>
+          <div className="dark:text-white flex flex-row justify-self-center">
+            <input
+              type="search"
+              placeholder="Check your move against this Pokémon!"
+              name="move"
+              id="move"
+              ref={inputRef}
+              onKeyPress={(event) => {
+                if (event.key === "Enter") {
+                  handleMove(
+                    inputRef.current.value.toLowerCase().replace(/\s/, "-"),
+                    "+"
+                  );
+                }
+              }}
+              className="dark:text-white bg-white dark:bg-transparent py-1 px-2 text-center text-sm w-5/6 border border-gray-600"
+            ></input>
+            <button
+              onClick={(event) =>
+                handleMove(
+                  inputRef.current.value.toLowerCase().replace(/\s/, "-"),
+                  "+"
+                )
+              }
+              className="w-1/6 border text-sm border-gray-600 ml-[-1px] transition-all dark:hover:bg-cyan-500 hover:text-white hover:bg-black"
+            >
+              Search
+            </button>
+          </div>
+          {moveType.length ? (
+            <CSSTransition
+              in={loadedMove}
+              timeout={{ enter: 200 }}
+              classNames="move"
+              unmountOnExit
+            >
+              <div className="flex flex-row gap-1.5 mt-1.5">
+                <span className="w-[475px] p-1 border border-gray-600 self-center text-center text-sm">
+                  {moveType[1] != "status"
+                    ? oppSuperEffective.list.includes(moveType[0])
+                      ? "✔️ It's super effective!"
+                      : oppNotVeryEffective.list.includes(moveType[0])
+                      ? "🟡 It's not very effective..."
+                      : oppNotEffective.list.includes(moveType[0])
+                      ? "❌ It has no effect."
+                      : "It has normal damage."
+                    : "This is a status effect move."}
+                </span>
+                <span
+                  style={{ background: typeColors[moveType[0]] }}
+                  className="w-[389.5px] p-1 border border-gray-800 mb-[-1px] text-white text-sm text-center"
+                >
+                  {moveType[0].toUpperCase()}
+                </span>
+              </div>
+            </CSSTransition>
+          ) : (
+            <></>
+          )}
         </div>
       </section>
     </CSSTransition>
