@@ -20,11 +20,11 @@ const Search = ({ inputRef, handleSearch }) => {
             handleSearch(inputRef.current.value.toLowerCase());
           }
         }}
-        className="dark:text-white dark:bg-black px-2 text-center text-sm w-5/6 border border-gray-500"
+        className="dark:text-white dark:bg-black px-2 text-center text-sm w-5/6 border border-gray-600"
       ></input>
       <button
         onClick={(event) => handleSearch(inputRef.current.value.toLowerCase())}
-        className="w-1/6 border text-sm border-gray-500 ml-[-1px] hover:bg-blue-500 hover:text-white"
+        className="w-1/6 border text-sm border-gray-600 ml-[-1px] transition-all dark:hover:bg-cyan-500 hover:text-white hover:bg-black"
       >
         Search
       </button>

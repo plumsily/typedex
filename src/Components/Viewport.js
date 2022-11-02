@@ -29,17 +29,19 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, loaded }) => {
       this.element = element;
       this.list = list;
     }
-    pushAll(val) {
-      this.list.push(val);
+    pushElem(val) {
       this.element.push(
         <li
           style={{ background: typeColors[val] }}
           key={val}
-          className="p-1 border border-gray-600 dark:border-gray-800 mb-[-1px]"
+          className="p-1 border border-gray-800 mb-[-1px]"
         >
           {val.toUpperCase()}
         </li>
       );
+    }
+    pushList(val) {
+      this.list.push(val);
     }
   }
 
@@ -55,57 +57,65 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, loaded }) => {
         <li
           style={{ background: typeColors[key] }}
           key={key}
-          className="text-sm py-1 px-3 border border-gray-600 dark:border-gray-800 ml-[-1px]"
+          className="text-sm py-1 px-3 border border-gray-800 ml-[-1px]"
         >
           {key.toUpperCase()}
         </li>
       );
 
-      //   Show the weakness of the opponent pokemon
       if (
         Object.hasOwn(oppTypes[Object.keys(oppTypes)[0]], "double_damage_from")
       ) {
         oppTypes[key]["no_damage_from"].forEach((damage) => {
-          if (!oppNotEffective.list.includes(damage.name)) {
-            oppNotEffective.pushAll(damage.name);
-          }
+          oppNotEffective.pushList(damage.name);
         });
-
-        oppTypes[key]["double_damage_from"].forEach((damage) => {
-          if (
-            !oppSuperEffective.list.includes(damage.name) &&
-            !oppNotEffective.list.includes(damage.name)
-          ) {
-            oppSuperEffective.pushAll(damage.name);
-          }
-        });
-
         oppTypes[key]["half_damage_from"].forEach((damage) => {
-          if (
-            !oppNotVeryEffective.list.includes(damage.name) &&
-            !oppNotEffective.list.includes(damage.name)
-          ) {
-            oppNotVeryEffective.pushAll(damage.name);
-          }
+          oppNotVeryEffective.pushList(damage.name);
+        });
+        oppTypes[key]["double_damage_from"].forEach((damage) => {
+          oppSuperEffective.pushList(damage.name);
         });
       }
+    });
+
+    const tempSuper = oppSuperEffective.list.filter(
+      (type) =>
+        !oppNotEffective.list.includes(type) &&
+        !oppNotVeryEffective.list.includes(type)
+    );
+    const tempNotVery = oppNotVeryEffective.list.filter(
+      (type) =>
+        !oppNotEffective.list.includes(type) &&
+        !oppSuperEffective.list.includes(type)
+    );
+    oppSuperEffective.list = [...new Set(tempSuper)];
+    oppNotVeryEffective.list = [...new Set(tempNotVery)];
+
+    oppNotEffective.list.forEach((type) => {
+      oppNotEffective.pushElem(type);
+    });
+    oppNotVeryEffective.list.forEach((type) => {
+      oppNotVeryEffective.pushElem(type);
+    });
+    oppSuperEffective.list.forEach((type) => {
+      oppSuperEffective.pushElem(type);
     });
   }
 
   return (
     <CSSTransition
       in={loaded}
-      timeout={{ enter: 100, exit: 100 }}
+      timeout={{ enter: 100 }}
       classNames="viewport"
       appear
       unmountOnExit
     >
       <section className="dark:text-white content pt-16 max-w-[70ch] flex flex-col items-center">
-        <div className="flex flex-col justify-center p-1.5 bg-yellow-200/10 dark:bg-gray-500/10 backdrop-blur-[2px] border border-gray-600 w-[70ch]">
+        <div className="flex flex-col justify-center p-1.5 bg-yellow-200/10 dark:bg-gray-400/10 backdrop-blur-[2px] border border-gray-600 w-[70ch]">
           <div className="flex flex-row justify-between">
             <a
               href={`https://bulbapedia.bulbagarden.net/wiki/${oppName}_(Pok%C3%A9mon)`}
-              className="text-2xl dark:bg-black dark:hover:bg-blue-500  px-2.5 py-0.5 mb-1.5 w-max hover:bg-blue-500 hover:text-white border bg-yellow-200 border-gray-600"
+              className="text-2xl dark:bg-transparent dark:hover:bg-cyan-500 px-2.5 py-0.5 mb-5 w-max hover:bg-black hover:text-white border bg-yellow-200 border-gray-600 transition-all"
               target="_blank"
             >
               {oppName.toUpperCase()}
@@ -114,9 +124,9 @@ const Viewport = ({ oppImgSrc, oppName, oppTypes, loaded }) => {
               {oppTypeList}
             </ul>
           </div>
-          <div className="flex gap-1.5 pb-[1px]">
+          <div className="flex gap-1.5 pb-[50px]">
             <img
-              className="h-max self-start border border-gray-600 drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+              className="h-max self-center drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]"
               src={oppImgSrc}
             ></img>
             <div className="flex flex-col gap-6 text-sm w-full">

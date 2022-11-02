@@ -14,5 +14,5 @@
 .viewport-exit-active {
     opacity: 0;
     scale: 0.98;
-    transition: all 100ms ease-in-out;
+    transition: all 50ms ease-in-out;
 }
