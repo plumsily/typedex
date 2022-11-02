@@ -57,6 +57,7 @@ function App() {
       setMoveType([resultMove.type.name, resultMove["damage_class"].name]);
     } catch (error) {
       console.log(error);
+      setMoveType(["Move does not exist!", "Error", "Check"]);
     }
   };
 

@@ -197,21 +197,32 @@ const Viewport = ({
             >
               <div className="flex flex-row gap-1.5 mt-1.5">
                 <span className="w-[475px] p-1 border border-gray-600 self-center text-center text-sm">
-                  {moveType[1] != "status"
-                    ? oppSuperEffective.list.includes(moveType[0])
-                      ? "✔️ It's super effective!"
-                      : oppNotVeryEffective.list.includes(moveType[0])
-                      ? "🟡 It's not very effective..."
-                      : oppNotEffective.list.includes(moveType[0])
-                      ? "❌ It has no effect."
-                      : "It has normal damage."
-                    : "This is a status effect move."}
+                  {moveType.length !== 3
+                    ? moveType[1] != "status"
+                      ? oppSuperEffective.list.includes(moveType[0])
+                        ? "✔️ It's super effective!"
+                        : oppNotVeryEffective.list.includes(moveType[0])
+                        ? "🟡 It's not very effective..."
+                        : oppNotEffective.list.includes(moveType[0])
+                        ? "❌ It has no effect."
+                        : "It has normal damage."
+                      : "This is a status effect move."
+                    : moveType[0]}
                 </span>
                 <span
-                  style={{ background: typeColors[moveType[0]] }}
-                  className="w-[389.5px] p-1 border border-gray-800 mb-[-1px] text-white text-sm text-center"
+                  style={{
+                    background:
+                      moveType.length !== 3
+                        ? typeColors[moveType[0]]
+                        : "transparent",
+                  }}
+                  className={`w-[389.5px] p-1 border border-gray-600 mb-[-1px] ${
+                    moveType.length !== 3 ? "text-white" : "text-black"
+                  } dark:text-white text-sm text-center`}
                 >
-                  {moveType[0].toUpperCase()}
+                  {moveType.length !== 3
+                    ? moveType[0].toUpperCase()
+                    : moveType[1].toUpperCase()}
                 </span>
               </div>
             </CSSTransition>
