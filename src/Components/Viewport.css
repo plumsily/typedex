@@ -30,7 +30,7 @@
 .move-enter-active, .move-appear-active {
     opacity: 1;
     scale: 1;
-    transition: all 200ms ease-in-out;
+    transition: all 100ms ease-in-out;
 }
 .move-exit {
     opacity: 1;

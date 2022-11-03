@@ -7,13 +7,14 @@ const Viewport = ({
   oppImgSrc,
   oppName,
   oppTypes,
+  stats,
   loaded,
   handleMove,
   moveName,
   moveType,
   loadedMove,
 }) => {
-  const typeColors = {
+  const colorMap = {
     normal: "rgb(170,170,153)",
     fire: "rgb(255,68,34)",
     water: "rgb(51,153,255)",
@@ -32,6 +33,9 @@ const Viewport = ({
     dark: "rgb(119,85,68)",
     steel: "rgb(170,170,187)",
     fairy: "rgb(238,153,238)",
+    physical: "rgb(12,110,97)",
+    special: "rgb(12,74,110)",
+    status: "rgb(140,136,140)",
   };
 
   class Effectivness {
@@ -42,7 +46,7 @@ const Viewport = ({
     pushElem(val) {
       this.element.push(
         <li
-          style={{ background: typeColors[val] }}
+          style={{ background: colorMap[val] }}
           key={val}
           className="p-1 border border-gray-800 mb-[-1px]"
         >
@@ -65,9 +69,9 @@ const Viewport = ({
       //Show the types of the opponent pokemon
       oppTypeList.push(
         <li
-          style={{ background: typeColors[key] }}
+          style={{ background: colorMap[key] }}
           key={key}
-          className="text-sm py-1 px-3 border border-gray-800 ml-[-1px]"
+          className="text-sm py-1 px-3 border border-gray-800 ml-[-1px] w-full"
         >
           {key.toUpperCase()}
         </li>
@@ -111,6 +115,15 @@ const Viewport = ({
       oppSuperEffective.pushElem(type);
     });
   }
+  //   console.log(stats.ratio);
+  if (stats.ratio && loaded) {
+    setTimeout(() => {
+      document.getElementById("defense-stat").style.width = `${stats.ratio}%`;
+      document.getElementById("sp-defense-stat").style.width = `${
+        100 - stats.ratio
+      }%`;
+    }, 100);
+  }
 
   return (
     <CSSTransition
@@ -122,21 +135,21 @@ const Viewport = ({
     >
       <section className="dark:text-white content pt-16 flex flex-col items-center">
         <div className="flex flex-col justify-center p-1.5 bg-yellow-200/10 dark:bg-gray-400/10 backdrop-blur-[2px] border border-gray-600 w-[70ch]">
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-row justify-between mb-6">
             <a
               href={`https://bulbapedia.bulbagarden.net/wiki/${oppName}_(Pok%C3%A9mon)`}
-              className="text-2xl dark:bg-transparent dark:hover:bg-cyan-500 px-2.5 py-0.5 mb-4 w-max hover:bg-black hover:text-white border bg-yellow-200 border-gray-600 transition-all"
+              className="text-2xl dark:bg-transparent dark:hover:bg-cyan-500 px-2.5 py-0.5 w-max hover:bg-black hover:text-white border bg-yellow-200 border-gray-600 transition-all"
               target="_blank"
             >
               {oppName.toUpperCase()}
             </a>
-            <ul className="text-center text-white flex flex-row h-fit">
+            <ul className="text-center text-white flex flex-row h-fit w-[287px]">
               {oppTypeList}
             </ul>
           </div>
-          <div className="flex gap-6 pb-[50px]">
+          <div className="flex gap-14 mb-8">
             <img
-              className="self-center drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]"
+              className="ml-8 self-center drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]"
               src={oppImgSrc}
               width="475"
               height="475"
@@ -159,6 +172,25 @@ const Viewport = ({
                 <ul className="text-center text-white">
                   {oppNotEffective.element}
                 </ul>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <p>🛡️ Defense / Special Defense:</p>
+                <div className="flex flex-row text-center text-white w-full">
+                  <span
+                    id="defense-stat"
+                    style={{ background: colorMap["physical"] }}
+                    className={`text-sm py-1 px-3 border border-gray-800 ml-[-1px]`}
+                  >
+                    {stats.defense}
+                  </span>
+                  <span
+                    id="sp-defense-stat"
+                    style={{ background: colorMap["special"] }}
+                    className={`text-sm py-1 px-3 border border-gray-800 ml-[-1px]`}
+                  >
+                    {stats["special-defense"]}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -194,13 +226,13 @@ const Viewport = ({
           {moveType.length ? (
             <CSSTransition
               in={loadedMove}
-              timeout={{ enter: 200 }}
+              timeout={{ enter: 100 }}
               classNames="move"
               appear
               unmountOnExit
             >
               <div className="flex flex-row gap-1.5 mt-1.5">
-                <span className="w-[499px] p-1 border border-gray-600 self-center text-center text-sm">
+                <span className="grow p-1 border border-gray-600 self-center text-center text-sm">
                   {moveType.length !== 3
                     ? moveType[1] != "status"
                       ? oppSuperEffective.list.includes(moveType[0])
@@ -213,21 +245,33 @@ const Viewport = ({
                       : `${moveName} is a status effect move.`
                     : moveType[0]}
                 </span>
-                <span
-                  style={{
-                    background:
-                      moveType.length !== 3
-                        ? typeColors[moveType[0]]
-                        : "transparent",
-                  }}
-                  className={`grow p-1 border border-gray-600 mb-[-1px] ${
-                    moveType.length !== 3 ? "text-white" : "text-black"
-                  } dark:text-white text-sm text-center`}
-                >
-                  {moveType.length !== 3
-                    ? moveType[0].toUpperCase()
-                    : moveType[1].toUpperCase()}
-                </span>
+                <div className="text-center text-white flex flex-row h-fit w-[287px]">
+                  <span
+                    style={{
+                      background:
+                        moveType.length !== 3
+                          ? colorMap[moveType[0]]
+                          : "transparent",
+                    }}
+                    className={`grow p-1 border border-gray-800 ${
+                      moveType.length !== 3 ? "text-white" : "text-black"
+                    } dark:text-white text-sm text-center`}
+                  >
+                    {moveType.length !== 3
+                      ? moveType[0].toUpperCase()
+                      : moveType[1].toUpperCase()}
+                  </span>
+                  <span
+                    style={{ background: colorMap[moveType[1]] }}
+                    className={`w-[146.328px] text-sm py-1 px-3 border border-gray-800 ml-[-1px] ${
+                      moveType.length !== 3 ? "text-white" : "text-black"
+                    } dark:text-white`}
+                  >
+                    {moveType.length !== 3
+                      ? moveType[1].toUpperCase()
+                      : moveType[1].toUpperCase()}
+                  </span>
+                </div>
               </div>
             </CSSTransition>
           ) : (

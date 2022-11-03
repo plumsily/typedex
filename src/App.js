@@ -17,6 +17,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const [moveName, setMoveName] = useState("");
   const [moveType, setMoveType] = useState([]);
+  const [stats, setStats] = useState({});
   const [loadedMove, setLoadedMove] = useState(false);
 
   const getAPI = async (name) => {
@@ -37,6 +38,22 @@ function App() {
       resultName.types.forEach((slot) => {
         oppTypeObj[slot.type.name] = {};
       });
+
+      let tempStats = {};
+      resultName.stats.forEach((stats) => {
+        if (
+          stats.stat.name == "defense" ||
+          stats.stat.name == "special-defense"
+        ) {
+          tempStats[stats.stat.name] = stats.base_stat;
+        }
+      });
+      tempStats.ratio = Math.round(
+        (tempStats["defense"] /
+          (tempStats["defense"] + tempStats["special-defense"])) *
+          100
+      );
+      setStats(tempStats);
 
       Object.keys(oppTypeObj).forEach(async (key) => {
         let response = await fetch(`https://pokeapi.co/api/v2/type/${key}`);
@@ -80,7 +97,7 @@ function App() {
     getMove(move);
     const timerMove = setTimeout(() => {
       setLoadedMove(true);
-    }, 200);
+    }, 300);
     setMoveName(
       document
         .getElementById("move")
@@ -142,12 +159,13 @@ function App() {
         darkMode={darkMode}
         handleDark={handleDark}
       />
-      {Object.keys(oppTypes).length ? (
+      {stats.ratio ? (
         <Viewport
           inputRef={moveInputRef}
           oppImgSrc={oppImgSrc}
           oppName={oppName}
           oppTypes={oppTypes}
+          stats={stats}
           loaded={loaded}
           handleMove={handleMove}
           moveName={moveName}
