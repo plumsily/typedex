@@ -39,5 +39,5 @@
 .move-exit-active {
     opacity: 0;
     scale: 0.98;
-    transition: all 50ms ease-in-out;
+    transition: all 0ms ease-in-out;
 }

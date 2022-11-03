@@ -15,6 +15,7 @@ function App() {
   const [oppImgSrc, setOppImgSrc] = useState("");
   const [oppTypes, setOppTypes] = useState({});
   const [loaded, setLoaded] = useState(false);
+  const [moveName, setMoveName] = useState("");
   const [moveType, setMoveType] = useState([]);
   const [loadedMove, setLoadedMove] = useState(false);
 
@@ -76,10 +77,21 @@ function App() {
 
   const handleMove = (move) => {
     setLoadedMove(false);
+    getMove(move);
     const timerMove = setTimeout(() => {
       setLoadedMove(true);
-    }, 100);
-    getMove(move);
+    }, 200);
+    setMoveName(
+      document
+        .getElementById("move")
+        .value.toLowerCase()
+        .split(" ")
+        .map((word) => {
+          return word[0].toUpperCase() + word.slice(1);
+        })
+        .join(" ")
+    );
+    document.getElementById("move").value = "";
     return () => {
       clearTimeout(timerMove);
     };
@@ -118,18 +130,6 @@ function App() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   setLoaded(false);
-  //   if (Object.keys(oppTypes).length) {
-  //     const timer = setTimeout(() => {
-  //       setLoaded(true);
-  //     }, 500);
-  //     return () => {
-  //       clearTimeout(timer);
-  //     };
-  //   }
-  // }, [oppTypes]);
-
   return (
     <div
       className={`${
@@ -150,6 +150,7 @@ function App() {
           oppTypes={oppTypes}
           loaded={loaded}
           handleMove={handleMove}
+          moveName={moveName}
           moveType={moveType}
           loadedMove={loadedMove}
         />

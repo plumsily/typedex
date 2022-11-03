@@ -9,6 +9,7 @@ const Viewport = ({
   oppTypes,
   loaded,
   handleMove,
+  moveName,
   moveType,
   loadedMove,
 }) => {
@@ -119,7 +120,7 @@ const Viewport = ({
       appear
       unmountOnExit
     >
-      <section className="dark:text-white content pt-16 max-w-[70ch] flex flex-col items-center">
+      <section className="dark:text-white content pt-16 flex flex-col items-center">
         <div className="flex flex-col justify-center p-1.5 bg-yellow-200/10 dark:bg-gray-400/10 backdrop-blur-[2px] border border-gray-600 w-[70ch]">
           <div className="flex flex-row justify-between">
             <a
@@ -133,10 +134,12 @@ const Viewport = ({
               {oppTypeList}
             </ul>
           </div>
-          <div className="flex gap-1.5 pb-[50px]">
+          <div className="flex gap-6 pb-[50px]">
             <img
-              className="h-max self-center drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]"
+              className="self-center drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]"
               src={oppImgSrc}
+              width="475"
+              height="475"
             ></img>
             <div className="flex flex-col gap-6 text-sm w-full">
               <div className="flex flex-col gap-1.5">
@@ -193,20 +196,21 @@ const Viewport = ({
               in={loadedMove}
               timeout={{ enter: 200 }}
               classNames="move"
+              appear
               unmountOnExit
             >
               <div className="flex flex-row gap-1.5 mt-1.5">
-                <span className="w-[475px] p-1 border border-gray-600 self-center text-center text-sm">
+                <span className="w-[499px] p-1 border border-gray-600 self-center text-center text-sm">
                   {moveType.length !== 3
                     ? moveType[1] != "status"
                       ? oppSuperEffective.list.includes(moveType[0])
-                        ? "✔️ It's super effective!"
+                        ? `✔️ ${moveName} is super effective!`
                         : oppNotVeryEffective.list.includes(moveType[0])
-                        ? "🟡 It's not very effective..."
+                        ? `🟡 ${moveName} is not very effective...`
                         : oppNotEffective.list.includes(moveType[0])
-                        ? "❌ It has no effect."
-                        : "It has normal damage."
-                      : "This is a status effect move."
+                        ? `❌ ${moveName} has no effect.`
+                        : `${moveName} has normal damage.`
+                      : `${moveName} is a status effect move.`
                     : moveType[0]}
                 </span>
                 <span
@@ -216,7 +220,7 @@ const Viewport = ({
                         ? typeColors[moveType[0]]
                         : "transparent",
                   }}
-                  className={`w-[389.5px] p-1 border border-gray-600 mb-[-1px] ${
+                  className={`grow p-1 border border-gray-600 mb-[-1px] ${
                     moveType.length !== 3 ? "text-white" : "text-black"
                   } dark:text-white text-sm text-center`}
                 >
