@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { CSSTransition } from "react-transition-group";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+
 import "./Viewport.css";
 
 const Viewport = ({
@@ -156,25 +159,39 @@ const Viewport = ({
             ></img>
             <div className="flex flex-col gap-6 text-sm w-full">
               <div className="flex flex-col gap-1.5">
-                <p>✔️ Super effective types:</p>
+                <h2>✔️ Super effective types:</h2>
                 <ul className="text-center text-white">
                   {oppSuperEffective.element}
                 </ul>
               </div>
               <div className="flex flex-col gap-1.5">
-                <p>🟡 Not very effective types:</p>
+                <h2>🟡 Not very effective types:</h2>
                 <ul className="text-center text-white">
                   {oppNotVeryEffective.element}
                 </ul>
               </div>
               <div className="flex flex-col gap-1.5">
-                <p>❌ No effect types:</p>
+                <h2>❌ No effect types:</h2>
                 <ul className="text-center text-white">
                   {oppNotEffective.element}
                 </ul>
               </div>
               <div className="flex flex-col gap-1.5">
-                <p>🛡️ Defense / Special Defense:</p>
+                <h2 className="flex justify-between">
+                  🛡️ Defense / Special Defense:{" "}
+                  <span
+                    className="hovertext mr-0.5 text-gray-800 dark:text-white before:text-white before:bg-gray-800/80 before:border before:border-gray-800"
+                    data-hover={
+                      `- Lower number is better to target.` +
+                      "\r\n" +
+                      "- Physical attacks affect defense stat." +
+                      "\r\n" +
+                      `- Special attacks affect special defense stat.`
+                    }
+                  >
+                    <FontAwesomeIcon icon={faCircleInfo} />
+                  </span>
+                </h2>
                 <div className="flex flex-row text-center text-white w-full">
                   <span
                     id="defense-stat"
@@ -250,7 +267,9 @@ const Viewport = ({
                     style={{
                       background:
                         moveType.length !== 3
-                          ? colorMap[moveType[0]]
+                          ? moveType[1] !== "physical"
+                            ? colorMap[moveType[0]]
+                            : colorMap[moveType[1]]
                           : "transparent",
                     }}
                     className={`grow p-1 border border-gray-800 ${
@@ -258,17 +277,28 @@ const Viewport = ({
                     } dark:text-white text-sm text-center`}
                   >
                     {moveType.length !== 3
-                      ? moveType[0].toUpperCase()
+                      ? moveType[1] !== "physical"
+                        ? moveType[0].toUpperCase()
+                        : moveType[1].toUpperCase()
                       : moveType[1].toUpperCase()}
                   </span>
                   <span
-                    style={{ background: colorMap[moveType[1]] }}
+                    style={{
+                      background:
+                        moveType.length !== 3
+                          ? moveType[1] !== "special"
+                            ? colorMap[moveType[0]]
+                            : colorMap[moveType[1]]
+                          : "transparent",
+                    }}
                     className={`w-[146.328px] text-sm py-1 px-3 border border-gray-800 ml-[-1px] ${
                       moveType.length !== 3 ? "text-white" : "text-black"
                     } dark:text-white`}
                   >
                     {moveType.length !== 3
-                      ? moveType[1].toUpperCase()
+                      ? moveType[1] !== "special"
+                        ? moveType[0].toUpperCase()
+                        : moveType[1].toUpperCase()
                       : moveType[1].toUpperCase()}
                   </span>
                 </div>

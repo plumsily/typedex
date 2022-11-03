@@ -41,3 +41,28 @@
     scale: 0.98;
     transition: all 0ms ease-in-out;
 }
+
+.hovertext {
+    position: relative;
+}
+  
+.hovertext:before {
+    white-space: pre-line;
+    content: attr(data-hover);
+    visibility: hidden;
+    opacity: 0;
+    width: 400px;
+    text-align: start;
+    padding: 5px 10px;
+    transition: opacity 200ms ease-in-out;
+
+    position: absolute;
+    z-index: 1;
+    left: 200%;
+    top: -100%;
+}
+
+.hovertext:hover:before {
+    opacity: 1;
+    visibility: visible;
+}

@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon as solidMoon } from "@fortawesome/free-solid-svg-icons";
+import { faMoon as regularMoon } from "@fortawesome/free-regular-svg-icons";
 
 import Search from "./Search";
 
@@ -12,8 +15,16 @@ const Header = ({ inputRef, handleSearch, darkMode, handleDark }) => {
         ⚔️ TYPEDEX
       </button>
       <Search inputRef={inputRef} handleSearch={handleSearch} />
-      <button onClick={(event) => handleDark()} className="justify-self-end">
-        {darkMode ? "☀️" : "🌙"}
+      <button
+        onClick={(event) => handleDark()}
+        className="justify-self-end dark:text-white"
+      >
+        {/* {darkMode ? "☀️" : "🌙"} */}
+        {darkMode ? (
+          <FontAwesomeIcon icon={solidMoon} />
+        ) : (
+          <FontAwesomeIcon className="mr-[-3px]" icon={regularMoon} />
+        )}
       </button>
     </header>
   );
