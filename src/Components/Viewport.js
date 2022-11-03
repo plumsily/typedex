@@ -150,14 +150,16 @@ const Viewport = ({
               {oppTypeList}
             </ul>
           </div>
-          <div className="flex gap-14 mb-8">
-            <img
-              className="ml-8 self-center drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]"
-              src={oppImgSrc}
-              width="475"
-              height="475"
-            ></img>
-            <div className="flex flex-col gap-6 text-sm w-full">
+          <div className="flex gap-14 mb-7">
+            <figure className="flex self-center ml-8 w-[475px] h-[475px]">
+              <img
+                className="self-center drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]"
+                src={oppImgSrc}
+                width="475"
+                height="475"
+              ></img>
+            </figure>
+            <div className="flex flex-col gap-6 text-sm flex-auto">
               <div className="flex flex-col gap-1.5">
                 <h2>✔️ Super effective types:</h2>
                 <ul className="text-center text-white">

@@ -151,7 +151,7 @@ function App() {
     <div
       className={`${
         darkMode === true ? "dark" : ""
-      } App flex flex-col h-screen items-center`}
+      } App relative flex flex-col h-screen items-center`}
     >
       <Header
         inputRef={searchInputRef}
