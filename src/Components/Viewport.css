@@ -42,40 +42,8 @@
     transition: all 0ms ease-in-out;
 }
 
-/* .hovertext {
-    position: relative;
-}
-  
-.hovertext:before {
-    white-space: pre-line;
-    content: attr(data-hover);
-    visibility: hidden;
-    opacity: 0;
-    width: 250px;
-    text-align: start;
-    padding: 5px 10px;
-    transition: opacity 200ms ease-in-out;
-
-    position: absolute;
-    z-index: 1;
-    right: -4px;
-    top: -140px;
-}
-
-.hovertext:hover:before {
-    opacity: 1;
-    visibility: visible;
-}
-
 #move{
     border-radius: 0;
     -webkit-appearance: none;
     -webkit-border-radius: 0;
 }
-
-@media (min-width: 640px) {
-    .hovertext:before {
-        width: 450px;
-        top: -200%;
-    }
-} */

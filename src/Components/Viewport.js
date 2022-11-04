@@ -124,7 +124,7 @@ const Viewport = ({
       oppSuperEffective.pushElem(type);
     });
   }
-  //   console.log(stats.ratio);
+
   if (stats.ratio && loaded) {
     setTimeout(() => {
       document.getElementById("defense-stat").style.width = `${stats.ratio}%`;
@@ -191,18 +191,6 @@ const Viewport = ({
                   >
                     <FontAwesomeIcon icon={faCircleInfo} />
                   </button>
-                  {/* <span
-                    className="hovertext mr-0.5 text-gray-800 dark:text-white before:text-white before:bg-gray-800/80 before:border before:border-gray-800"
-                    data-hover={
-                      `- Lower number is better to target.` +
-                      "\r\n" +
-                      "- Physical attacks affect defense stat." +
-                      "\r\n" +
-                      `- Special attacks affect special defense stat.`
-                    }
-                  >
-                    <FontAwesomeIcon icon={faCircleInfo} />
-                  </span> */}
                 </h2>
                 <div className="flex flex-row text-center text-white w-full">
                   <span
