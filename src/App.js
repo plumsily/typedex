@@ -5,6 +5,7 @@ import lightpattern from "./Assets/lightpattern.svg";
 import Viewport from "./Components/Viewport";
 import Header from "./Components/Header";
 import Default from "./Components/Default";
+import Info from "./Components/Info";
 
 function App() {
   const searchInputRef = useRef(null);
@@ -18,6 +19,7 @@ function App() {
   const [moveType, setMoveType] = useState([]);
   const [stats, setStats] = useState({});
   const [loadedMove, setLoadedMove] = useState(false);
+  const [loadInfo, setLoadInfo] = useState(false);
 
   const getAPI = async (name) => {
     try {
@@ -128,6 +130,10 @@ function App() {
     }
   };
 
+  const handleInfo = () => {
+    setLoadInfo(!loadInfo);
+  };
+
   useEffect(() => {
     let localDark = localStorage.getItem("darkMode");
     if (localDark) {
@@ -172,10 +178,12 @@ function App() {
           moveName={moveName}
           moveType={moveType}
           loadedMove={loadedMove}
+          handleInfo={handleInfo}
         />
       ) : (
         <Default />
       )}
+      <Info handleInfo={handleInfo} loadInfo={loadInfo} />
     </div>
   );
 }

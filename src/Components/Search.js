@@ -3,7 +3,7 @@ import "./Search.css";
 
 const Search = ({ inputRef, handleSearch }) => {
   return (
-    <div className="row-start-2 sm:row-start-1 col-start-1 sm:col-start-2 dark:text-white flex flex-row sm:justify-self-center lg:w-[70ch] md:w-[50ch] sm:w-[380px] w-full xl:text-base text-xs">
+    <div className="row-start-2 sm:row-start-1 col-start-1 sm:col-start-2 dark:text-white flex flex-row sm:justify-self-center lg:w-[70ch] md:w-[50ch] sm:w-[380px] w-full 2xl:text-base xl:text-sm text-xs">
       <input
         type="search"
         placeholder="Search Pokémon"

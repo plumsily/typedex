@@ -1,0 +1,18 @@
+.info-enter, .info-appear {
+    opacity: 0;
+    scale: 0.98;
+}
+.info-enter-active, .info-appear-active {
+    opacity: 1;
+    scale: 1;
+    transition: all 100ms ease-in-out;
+}
+.info-exit {
+    opacity: 1;
+    scale: 1;
+}
+.info-exit-active {
+    opacity: 0;
+    scale: 0.98;
+    transition: all 100ms ease-in-out;
+}

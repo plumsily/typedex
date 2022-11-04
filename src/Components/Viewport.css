@@ -42,7 +42,7 @@
     transition: all 0ms ease-in-out;
 }
 
-.hovertext {
+/* .hovertext {
     position: relative;
 }
   
@@ -51,7 +51,7 @@
     content: attr(data-hover);
     visibility: hidden;
     opacity: 0;
-    width: 450px;
+    width: 250px;
     text-align: start;
     padding: 5px 10px;
     transition: opacity 200ms ease-in-out;
@@ -59,7 +59,7 @@
     position: absolute;
     z-index: 1;
     right: -4px;
-    top: -5em;
+    top: -140px;
 }
 
 .hovertext:hover:before {
@@ -72,3 +72,10 @@
     -webkit-appearance: none;
     -webkit-border-radius: 0;
 }
+
+@media (min-width: 640px) {
+    .hovertext:before {
+        width: 450px;
+        top: -200%;
+    }
+} */

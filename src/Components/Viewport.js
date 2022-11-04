@@ -16,6 +16,7 @@ const Viewport = ({
   moveName,
   moveType,
   loadedMove,
+  handleInfo,
 }) => {
   const colorMap = {
     normal: "rgb(170,170,153)",
@@ -184,7 +185,13 @@ const Viewport = ({
               <div className="flex flex-col gap-1.5">
                 <h2 className="flex justify-between">
                   🛡️ Defense / Special Defense:{" "}
-                  <span
+                  <button
+                    onClick={(event) => handleInfo()}
+                    className="mr-0.5 text-gray-800 dark:text-white self-start"
+                  >
+                    <FontAwesomeIcon icon={faCircleInfo} />
+                  </button>
+                  {/* <span
                     className="hovertext mr-0.5 text-gray-800 dark:text-white before:text-white before:bg-gray-800/80 before:border before:border-gray-800"
                     data-hover={
                       `- Lower number is better to target.` +
@@ -195,7 +202,7 @@ const Viewport = ({
                     }
                   >
                     <FontAwesomeIcon icon={faCircleInfo} />
-                  </span>
+                  </span> */}
                 </h2>
                 <div className="flex flex-row text-center text-white w-full">
                   <span
