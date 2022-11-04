@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/typedex/static/css/main.49c149c1.css",
-    "main.js": "/typedex/static/js/main.bdcde918.js",
+    "main.css": "/typedex/static/css/main.35d7d167.css",
+    "main.js": "/typedex/static/js/main.3306efc6.js",
     "static/js/787.64e253e8.chunk.js": "/typedex/static/js/787.64e253e8.chunk.js",
     "index.html": "/typedex/index.html",
     "static/media/lightpattern.svg": "/typedex/static/media/lightpattern.b951a866cbacf3d3b2a5d24958ad119f.svg",
     "static/media/darkpattern.svg": "/typedex/static/media/darkpattern.60793e3ec3310c2e9bd3f16a4c8bcffa.svg",
-    "main.49c149c1.css.map": "/typedex/static/css/main.49c149c1.css.map",
-    "main.bdcde918.js.map": "/typedex/static/js/main.bdcde918.js.map",
+    "main.35d7d167.css.map": "/typedex/static/css/main.35d7d167.css.map",
+    "main.3306efc6.js.map": "/typedex/static/js/main.3306efc6.js.map",
     "787.64e253e8.chunk.js.map": "/typedex/static/js/787.64e253e8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.49c149c1.css",
-    "static/js/main.bdcde918.js"
+    "static/css/main.35d7d167.css",
+    "static/js/main.3306efc6.js"
   ]
 }
