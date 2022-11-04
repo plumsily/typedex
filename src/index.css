@@ -6,7 +6,6 @@
   box-sizing: border-box;
 }
 html{
-
   font-size: 1.25em;
 }
 body {
@@ -21,4 +20,8 @@ input {
   border-radius: 0;
   -webkit-appearance: none;
   -webkit-border-radius: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

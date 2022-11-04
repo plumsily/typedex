@@ -31,7 +31,7 @@ const Search = ({ inputRef, handleSearch }) => {
               .join("")
           )
         }
-        className="md:w-1/6 w-1/4 border border-gray-600 ml-[-1px] transition-all dark:hover:bg-cyan-500 hover:text-white hover:bg-black"
+        className="md:w-1/6 w-1/4 border border-gray-600 border-l-0 transition-all dark:hover:bg-cyan-500 hover:text-white hover:bg-black"
       >
         Search
       </button>

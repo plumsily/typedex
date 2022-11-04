@@ -17,113 +17,118 @@ const Viewport = ({
   moveType,
   loadedMove,
   handleInfo,
+  colorMap,
+  oppSuperEffective,
+  oppNotVeryEffective,
+  oppNotEffective,
+  oppTypeList,
 }) => {
-  const colorMap = {
-    normal: "rgb(170,170,153)",
-    fire: "rgb(255,68,34)",
-    water: "rgb(51,153,255)",
-    electric: "rgb(255,204,51)",
-    grass: "rgb(119,204,85)",
-    ice: "rgb(102,204,255)",
-    fighting: "rgb(187,85,68)",
-    poison: "rgb(170,85,153)",
-    ground: "rgb(221,187,85)",
-    flying: "rgb(136,153,255)",
-    psychic: "rgb(255,85,153)",
-    bug: "rgb(170,187,34)",
-    rock: "rgb(187,170,102)",
-    ghost: "rgb(102,102,187)",
-    dragon: "rgb(119,102,238)",
-    dark: "rgb(119,85,68)",
-    steel: "rgb(170,170,187)",
-    fairy: "rgb(238,153,238)",
-    physical: "rgb(12,110,97)",
-    special: "rgb(12,74,110)",
-    status: "rgb(140,136,140)",
-  };
+  //   const colorMap = {
+  //     normal: "rgb(170,170,153)",
+  //     fire: "rgb(255,68,34)",
+  //     water: "rgb(51,153,255)",
+  //     electric: "rgb(255,204,51)",
+  //     grass: "rgb(119,204,85)",
+  //     ice: "rgb(102,204,255)",
+  //     fighting: "rgb(187,85,68)",
+  //     poison: "rgb(170,85,153)",
+  //     ground: "rgb(221,187,85)",
+  //     flying: "rgb(136,153,255)",
+  //     psychic: "rgb(255,85,153)",
+  //     bug: "rgb(170,187,34)",
+  //     rock: "rgb(187,170,102)",
+  //     ghost: "rgb(102,102,187)",
+  //     dragon: "rgb(119,102,238)",
+  //     dark: "rgb(119,85,68)",
+  //     steel: "rgb(170,170,187)",
+  //     fairy: "rgb(238,153,238)",
+  //     physical: "rgb(12,110,97)",
+  //     special: "rgb(12,74,110)",
+  //     status: "rgb(140,136,140)",
+  //   };
 
-  const moveEffect = useRef(null);
-  useEffect(() => {
-    moveEffect.current?.scrollIntoView({ behavior: "smooth" });
-  });
+  //   //   const moveEffect = useRef(null);
+  //   //   useEffect(() => {
+  //   //     moveEffect.current?.scrollIntoView({ behavior: "smooth" });
+  //   //   });
 
-  class Effectivness {
-    constructor(element, list) {
-      this.element = element;
-      this.list = list;
-    }
-    pushElem(val) {
-      this.element.push(
-        <li
-          style={{ background: colorMap[val] }}
-          key={val}
-          className="p-1 border border-gray-800 mb-[-1px]"
-        >
-          {val.toUpperCase()}
-        </li>
-      );
-    }
-    pushList(val) {
-      this.list.push(val);
-    }
-  }
+  //   class Effectivness {
+  //     constructor(element, list) {
+  //       this.element = element;
+  //       this.list = list;
+  //     }
+  //     pushElem(val) {
+  //       this.element.push(
+  //         <li
+  //           style={{ background: colorMap[val] }}
+  //           key={val}
+  //           className="p-1 border border-gray-800 mb-[-1px]"
+  //         >
+  //           {val.toUpperCase()}
+  //         </li>
+  //       );
+  //     }
+  //     pushList(val) {
+  //       this.list.push(val);
+  //     }
+  //   }
 
-  let oppTypeList = [];
-  const oppSuperEffective = new Effectivness([], []);
-  const oppNotVeryEffective = new Effectivness([], []);
-  const oppNotEffective = new Effectivness([], []);
+  //   let oppTypeList = [];
+  //   const oppSuperEffective = new Effectivness([], []);
+  //   const oppNotVeryEffective = new Effectivness([], []);
+  //   const oppNotEffective = new Effectivness([], []);
 
-  if (Object.keys(oppTypes).length) {
-    Object.keys(oppTypes).forEach((key) => {
-      //Show the types of the opponent pokemon
-      oppTypeList.push(
-        <li
-          style={{ background: colorMap[key] }}
-          key={key}
-          className="py-1 px-3 border border-gray-800 ml-[-1px] w-full"
-        >
-          {key.toUpperCase()}
-        </li>
-      );
+  //   if (Object.keys(oppTypes).length) {
+  //     Object.keys(oppTypes).forEach((key) => {
+  //       //Show the types of the opponent pokemon
+  //       oppTypeList.push(
+  //         <li
+  //           style={{ background: colorMap[key] }}
+  //           key={key}
+  //           className="py-1 px-3 border border-gray-800 ml-[-1px] w-full"
+  //         >
+  //           {key.toUpperCase()}
+  //         </li>
+  //       );
 
-      if (
-        Object.hasOwn(oppTypes[Object.keys(oppTypes)[0]], "double_damage_from")
-      ) {
-        oppTypes[key]["no_damage_from"].forEach((damage) => {
-          oppNotEffective.pushList(damage.name);
-        });
-        oppTypes[key]["half_damage_from"].forEach((damage) => {
-          oppNotVeryEffective.pushList(damage.name);
-        });
-        oppTypes[key]["double_damage_from"].forEach((damage) => {
-          oppSuperEffective.pushList(damage.name);
-        });
-      }
-    });
+  //       if (
+  //         Object.hasOwn(oppTypes[Object.keys(oppTypes)[0]], "double_damage_from")
+  //       ) {
+  //         oppTypes[key]["no_damage_from"].forEach((damage) => {
+  //           oppNotEffective.pushList(damage.name);
+  //         });
+  //         oppTypes[key]["half_damage_from"].forEach((damage) => {
+  //           oppNotVeryEffective.pushList(damage.name);
+  //         });
+  //         oppTypes[key]["double_damage_from"].forEach((damage) => {
+  //           oppSuperEffective.pushList(damage.name);
+  //         });
+  //       }
+  //     });
 
-    const tempSuper = oppSuperEffective.list.filter(
-      (type) =>
-        !oppNotEffective.list.includes(type) &&
-        !oppNotVeryEffective.list.includes(type)
-    );
-    const tempNotVery = oppNotVeryEffective.list.filter(
-      (type) =>
-        !oppNotEffective.list.includes(type) &&
-        !oppSuperEffective.list.includes(type)
-    );
-    oppSuperEffective.list = [...new Set(tempSuper)];
-    oppNotVeryEffective.list = [...new Set(tempNotVery)];
+  //     const tempSuper = oppSuperEffective.list.filter(
+  //       (type) =>
+  //         !oppNotEffective.list.includes(type) &&
+  //         !oppNotVeryEffective.list.includes(type)
+  //     );
+  //     const tempNotVery = oppNotVeryEffective.list.filter(
+  //       (type) =>
+  //         !oppNotEffective.list.includes(type) &&
+  //         !oppSuperEffective.list.includes(type)
+  //     );
+  //     oppSuperEffective.list = [...new Set(tempSuper)];
+  //     oppNotVeryEffective.list = [...new Set(tempNotVery)];
 
-    oppNotEffective.list.forEach((type) => {
-      oppNotEffective.pushElem(type);
-    });
-    oppNotVeryEffective.list.forEach((type) => {
-      oppNotVeryEffective.pushElem(type);
-    });
-    oppSuperEffective.list.forEach((type) => {
-      oppSuperEffective.pushElem(type);
-    });
-  }
+  //     oppNotEffective.list.forEach((type) => {
+  //       oppNotEffective.pushElem(type);
+  //     });
+  //     oppNotVeryEffective.list.forEach((type) => {
+  //       oppNotVeryEffective.pushElem(type);
+  //     });
+  //     oppSuperEffective.list.forEach((type) => {
+  //       oppSuperEffective.pushElem(type);
+  //     });
+  //   }
 
   if (stats.ratio && loaded) {
     setTimeout(() => {
@@ -211,7 +216,7 @@ const Viewport = ({
               </div>
             </div>
           </div>
-          <div className="sm:order-0 order-last mt-1.5 sm:mt-0 dark:text-white flex flex-col gap-1.5 sm:gap-0 sm:flex-row justify-self-center">
+          <div className="order-last mt-1.5 dark:text-white flex flex-col gap-1.5 sm:gap-0 sm:flex-row justify-self-center">
             <input
               type="search"
               placeholder="Check your move against this Pokémon!"
@@ -243,7 +248,7 @@ const Viewport = ({
                   "+"
                 )
               }
-              className="xl:w-1/6 w-full py-2 sm:py-0 sm:w-[92.5312px] border border-gray-600 sm:ml-[-1px] transition-all bg-yellow-200 dark:bg-black sm:bg-transparent dark:hover:bg-cyan-500 hover:text-white hover:bg-black"
+              className="xl:w-1/6 w-full py-2 sm:py-0 sm:w-[92.5312px] border border-gray-600 sm:ml-[-1px] transition-all bg-black dark:bg-cyan-500 text-white sm:text-black sm:bg-transparent dark:hover:bg-cyan-500 hover:text-white hover:bg-black sm:dark:text-white sm:dark:bg-transparent"
             >
               Search
             </button>
@@ -257,10 +262,10 @@ const Viewport = ({
               unmountOnExit
             >
               <div
-                ref={moveEffect}
-                className="order-0 sm:order-last flex flex-col sm:flex-row gap-1.5 sm:mt-1.5"
+                // ref={moveEffect}
+                className="order-0 flex flex-col sm:flex-row gap-1.5 sm:mt-1.5"
               >
-                <span className="order-last sm:order-0 w-full sm:w-auto sm:grow py-1 border border-gray-600 self-center text-center">
+                <span className="order-last sm:order-0 w-full sm:w-auto sm:grow sm:py-1 py-2 border border-gray-600 self-center text-center">
                   {moveType.length !== 3
                     ? moveType[1] != "status"
                       ? oppSuperEffective.list.includes(moveType[0])
