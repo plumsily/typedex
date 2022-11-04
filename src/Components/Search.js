@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
-// import { CSSTransition } from "react-transition-group";
+import React from "react";
 import "./Search.css";
 
 const Search = ({ inputRef, handleSearch }) => {
   return (
-    //   <div className="flex flex-col justify-center items-center p-4 bg-gray-400/60 rounded-lg">
-    //     <h2 className="">{oppName}</h2>
-    //     <img className="" src={oppImgSrc}></img>
-    //   </div>
-    <div className="dark:text-white flex flex-row justify-self-center w-[70ch]">
+    <div className="row-start-2 sm:row-start-1 col-start-1 sm:col-start-2 dark:text-white flex flex-row sm:justify-self-center lg:w-[70ch] md:w-[50ch] sm:w-[380px] w-full xl:text-base text-xs">
       <input
         type="search"
         placeholder="Search Pokémon"
@@ -20,11 +15,11 @@ const Search = ({ inputRef, handleSearch }) => {
             handleSearch(inputRef.current.value.toLowerCase());
           }
         }}
-        className="dark:text-white dark:bg-black px-2 text-center text-sm w-5/6 border border-gray-600"
+        className="dark:text-white dark:bg-black sm:py-1 py-2 px-2 text-center md:w-5/6 w-3/4 border border-gray-600"
       ></input>
       <button
         onClick={(event) => handleSearch(inputRef.current.value.toLowerCase())}
-        className="w-1/6 border text-sm border-gray-600 ml-[-1px] transition-all dark:hover:bg-cyan-500 hover:text-white hover:bg-black"
+        className="md:w-1/6 w-1/4 border border-gray-600 ml-[-1px] transition-all dark:hover:bg-cyan-500 hover:text-white hover:bg-black"
       >
         Search
       </button>

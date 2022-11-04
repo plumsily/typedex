@@ -51,15 +51,15 @@
     content: attr(data-hover);
     visibility: hidden;
     opacity: 0;
-    width: 400px;
+    width: 450px;
     text-align: start;
     padding: 5px 10px;
     transition: opacity 200ms ease-in-out;
 
     position: absolute;
     z-index: 1;
-    left: 200%;
-    top: -100%;
+    right: -4px;
+    top: -5em;
 }
 
 .hovertext:hover:before {

@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-import "./App.css";
 import darkpattern from "./Assets/darkpattern.svg";
 import lightpattern from "./Assets/lightpattern.svg";
 
@@ -151,7 +150,7 @@ function App() {
     <div
       className={`${
         darkMode === true ? "dark" : ""
-      } App relative flex flex-col h-screen items-center`}
+      } App relative flex flex-col w-screen items-center`}
     >
       <Header
         inputRef={searchInputRef}

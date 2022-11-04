@@ -7,23 +7,22 @@ import Search from "./Search";
 
 const Header = ({ inputRef, handleSearch, darkMode, handleDark }) => {
   return (
-    <header className="dark:bg-transparent fixed grid grid-cols-3 w-screen py-1.5 px-3 justify-between bg-gray-300/10 backdrop-blur-[3px] border-b border-gray-600 z-10">
+    <header className="-mt-2 sm:mt-0 dark:bg-transparent fixed grid grid-cols-1 grid-rows-2 sm:grid-rows-1 sm:grid-cols-3 w-full sm:py-1.5 sm:px-3 p-1.5 justify-between bg-gray-300/10 backdrop-blur-[3px] border-b border-gray-600 z-10">
       <button
         onClick={(event) => window.location.reload()}
-        className="w-max dark:text-white text-xl font-medium"
+        className="row-start-1 col-start-1 w-max text-left xl:text-xl md:text-base sm:text-sm text-base dark:text-white font-medium"
       >
         ⚔️ TYPEDEX
       </button>
       <Search inputRef={inputRef} handleSearch={handleSearch} />
       <button
         onClick={(event) => handleDark()}
-        className="justify-self-end dark:text-white"
+        className="row-start-1 col-start-1 sm:col-start-3 justify-self-end dark:text-white"
       >
-        {/* {darkMode ? "☀️" : "🌙"} */}
         {darkMode ? (
-          <FontAwesomeIcon icon={solidMoon} />
+          <FontAwesomeIcon className="mr-1 sm:mr-0" icon={solidMoon} />
         ) : (
-          <FontAwesomeIcon className="mr-[-3px]" icon={regularMoon} />
+          <FontAwesomeIcon className="m-auto sm:mr-[-3px]" icon={regularMoon} />
         )}
       </button>
     </header>

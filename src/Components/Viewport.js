@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
@@ -41,6 +41,11 @@ const Viewport = ({
     status: "rgb(140,136,140)",
   };
 
+  const moveEffect = useRef(null);
+  useEffect(() => {
+    moveEffect.current?.scrollIntoView({ behavior: "smooth" });
+  });
+
   class Effectivness {
     constructor(element, list) {
       this.element = element;
@@ -74,7 +79,7 @@ const Viewport = ({
         <li
           style={{ background: colorMap[key] }}
           key={key}
-          className="text-sm py-1 px-3 border border-gray-800 ml-[-1px] w-full"
+          className="py-1 px-3 border border-gray-800 ml-[-1px] w-full"
         >
           {key.toUpperCase()}
         </li>
@@ -136,30 +141,28 @@ const Viewport = ({
       appear
       unmountOnExit
     >
-      <section className="dark:text-white content pt-16 flex flex-col items-center">
-        <div className="flex flex-col justify-center p-1.5 bg-yellow-200/10 dark:bg-gray-400/10 backdrop-blur-[2px] border border-gray-600 w-[70ch]">
-          <div className="flex flex-row justify-between mb-6">
+      <section className="dark:text-white content pt-20 sm:pt-16 flex flex-col items-center 2xl:text-base xl:text-sm text-xs mb-1.5 w-screen p-1.5 sm:p-0">
+        <div className="flex flex-col justify-center p-1.5 bg-yellow-200/10 dark:bg-gray-400/10 backdrop-blur-[2px] border border-gray-600 sm:w-[70ch]">
+          <div className="flex sm:flex-row gap-1.5 justify-between mb-6 flex-col">
             <a
               href={`https://bulbapedia.bulbagarden.net/wiki/${oppName}_(Pok%C3%A9mon)`}
-              className="text-2xl dark:bg-transparent dark:hover:bg-cyan-500 px-2.5 py-0.5 w-max hover:bg-black hover:text-white border bg-yellow-200 border-gray-600 transition-all"
+              className="xl:text-2xl text-lg dark:bg-transparent dark:hover:bg-cyan-500 px-2.5 py-0.5 w-full sm:w-max text-center hover:bg-black hover:text-white border bg-yellow-200 border-gray-600 transition-all"
               target="_blank"
             >
               {oppName.toUpperCase()}
             </a>
-            <ul className="text-center text-white flex flex-row h-fit w-[287px]">
+            <ul className="text-center text-white flex flex-row h-fit w-full sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px]">
               {oppTypeList}
             </ul>
           </div>
-          <div className="flex gap-14 mb-7">
-            <figure className="flex self-center ml-8 w-[475px] h-[475px]">
+          <div className="flex flex-col sm:flex-row sm:gap-14 gap-6 mb-7">
+            <figure className="flex self-center w-full sm:ml-8 sm:w-[475px] sm:h-[475px]">
               <img
                 className="self-center drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]"
                 src={oppImgSrc}
-                width="475"
-                height="475"
               ></img>
             </figure>
-            <div className="flex flex-col gap-6 text-sm flex-auto">
+            <div className="flex flex-col gap-6 flex-auto">
               <div className="flex flex-col gap-1.5">
                 <h2>✔️ Super effective types:</h2>
                 <ul className="text-center text-white">
@@ -198,14 +201,14 @@ const Viewport = ({
                   <span
                     id="defense-stat"
                     style={{ background: colorMap["physical"] }}
-                    className={`text-sm py-1 px-3 border border-gray-800 ml-[-1px]`}
+                    className={`py-1 px-3 border border-gray-800 ml-[-1px]`}
                   >
                     {stats.defense}
                   </span>
                   <span
                     id="sp-defense-stat"
                     style={{ background: colorMap["special"] }}
-                    className={`text-sm py-1 px-3 border border-gray-800 ml-[-1px]`}
+                    className={`py-1 px-3 border border-gray-800 ml-[-1px]`}
                   >
                     {stats["special-defense"]}
                   </span>
@@ -213,7 +216,7 @@ const Viewport = ({
               </div>
             </div>
           </div>
-          <div className="dark:text-white flex flex-row justify-self-center">
+          <div className="sm:order-0 order-last mt-1.5 sm:mt-0 dark:text-white flex flex-col gap-1.5 sm:gap-0 sm:flex-row justify-self-center">
             <input
               type="search"
               placeholder="Check your move against this Pokémon!"
@@ -228,7 +231,7 @@ const Viewport = ({
                   );
                 }
               }}
-              className="dark:text-white bg-white dark:bg-transparent py-1 px-2 text-center text-sm w-5/6 border border-gray-600"
+              className="dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-1 px-2 text-center xl:w-5/6 border border-gray-600"
             ></input>
             <button
               onClick={(event) =>
@@ -237,7 +240,7 @@ const Viewport = ({
                   "+"
                 )
               }
-              className="w-1/6 border text-sm border-gray-600 ml-[-1px] transition-all dark:hover:bg-cyan-500 hover:text-white hover:bg-black"
+              className="xl:w-1/6 w-full py-2 sm:py-0 sm:w-[92.5312px] border border-gray-600 sm:ml-[-1px] transition-all bg-yellow-200 dark:bg-black sm:bg-transparent dark:hover:bg-cyan-500 hover:text-white hover:bg-black"
             >
               Search
             </button>
@@ -250,8 +253,11 @@ const Viewport = ({
               appear
               unmountOnExit
             >
-              <div className="flex flex-row gap-1.5 mt-1.5">
-                <span className="grow p-1 border border-gray-600 self-center text-center text-sm">
+              <div
+                ref={moveEffect}
+                className="order-0 sm:order-last flex flex-col sm:flex-row gap-1.5 sm:mt-1.5"
+              >
+                <span className="order-last sm:order-0 w-full sm:w-auto sm:grow py-1 border border-gray-600 self-center text-center">
                   {moveType.length !== 3
                     ? moveType[1] != "status"
                       ? oppSuperEffective.list.includes(moveType[0])
@@ -264,7 +270,7 @@ const Viewport = ({
                       : `${moveName} is a status effect move.`
                     : moveType[0]}
                 </span>
-                <div className="text-center text-white flex flex-row h-fit w-[287px]">
+                <div className="order-0 sm:order-last text-center text-white flex flex-row h-fit w-full sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px]">
                   <span
                     style={{
                       background:
@@ -274,9 +280,9 @@ const Viewport = ({
                             : colorMap[moveType[1]]
                           : "transparent",
                     }}
-                    className={`grow p-1 border border-gray-800 ${
+                    className={`w-1/2 sm:w-auto sm:grow p-1 border border-gray-800 ${
                       moveType.length !== 3 ? "text-white" : "text-black"
-                    } dark:text-white text-sm text-center`}
+                    } dark:text-white text-center`}
                   >
                     {moveType.length !== 3
                       ? moveType[1] !== "physical"
@@ -293,7 +299,7 @@ const Viewport = ({
                             : colorMap[moveType[1]]
                           : "transparent",
                     }}
-                    className={`w-[146.328px] text-sm py-1 px-3 border border-gray-800 ml-[-1px] ${
+                    className={`w-1/2 xl:w-[126.812px] 2xl:w-[146.328px] py-1 px-3 border border-gray-800 ml-[-1px] ${
                       moveType.length !== 3 ? "text-white" : "text-black"
                     } dark:text-white`}
                   >

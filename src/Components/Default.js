@@ -11,12 +11,12 @@ const Default = () => {
       appear
       unmountOnExit
     >
-      <section className="dark:text-white content pt-16 max-w-[70ch] flex flex-col items-center">
-        <div className="flex flex-col justify-center items-center bg-gray-300/20 dark:bg-gray-300/10 backdrop-blur-[2px] border border-gray-600 p-8">
-          <h2 className="text-xl font-medium mb-8">
+      <section className="dark:text-white content pt-20 sm:pt-16 flex flex-col items-center xl:text-base text-xs w-screen px-1.5 sm:px-0">
+        <div className="flex flex-col justify-center items-center bg-gray-300/20 dark:bg-gray-300/10 backdrop-blur-[2px] border border-gray-600 sm:p-4 px-3 pb-3 pt-2 lg:w-[70ch] md:w-[50ch]">
+          <h2 className="text-base sm:text-xl font-medium mb-8 uppercase text-center">
             Master your Pokémon's moveset!
           </h2>
-          <p className="text-base text-center">
+          <p className="text-sm sm:text-base text-left sm:text-center">
             Not sure if your move will affect the opponent's Pokémon? Use the
             TypeDex to search for your opponent's type weaknesses! Never miss a
             super effective hit!
