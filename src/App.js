@@ -101,6 +101,8 @@ function App() {
       document
         .getElementById("move")
         .value.toLowerCase()
+        .match(/\w+\s?\D?\w+/gm)
+        .join("")
         .split(" ")
         .map((word) => {
           return word[0].toUpperCase() + word.slice(1);

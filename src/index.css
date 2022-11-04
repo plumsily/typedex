@@ -16,3 +16,9 @@ body {
   margin: auto;
   line-height: 1.75;
 }
+
+input {
+  border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}

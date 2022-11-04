@@ -141,7 +141,7 @@ const Viewport = ({
       appear
       unmountOnExit
     >
-      <section className="dark:text-white content pt-20 sm:pt-16 flex flex-col items-center 2xl:text-base xl:text-sm text-xs mb-1.5 w-screen p-1.5 sm:p-0">
+      <section className="dark:text-white content pt-[5.5rem] sm:pt-16 flex flex-col items-center 2xl:text-base xl:text-sm text-xs mb-1.5 w-screen p-1.5 sm:p-0">
         <div className="flex flex-col justify-center p-1.5 bg-yellow-200/10 dark:bg-gray-400/10 backdrop-blur-[2px] border border-gray-600 sm:w-[70ch]">
           <div className="flex sm:flex-row gap-1.5 justify-between mb-6 flex-col">
             <a
@@ -226,17 +226,25 @@ const Viewport = ({
               onKeyPress={(event) => {
                 if (event.key === "Enter") {
                   handleMove(
-                    inputRef.current.value.toLowerCase().replace(/\s/, "-"),
+                    inputRef.current.value
+                      .toLowerCase()
+                      .match(/\w+\s?\D?\w+/gm)
+                      .join("")
+                      .replace(/\s/, "-"),
                     "+"
                   );
                 }
               }}
-              className="dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-1 px-2 text-center xl:w-5/6 border border-gray-600"
+              className="rounded-none dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-1 px-2 text-center xl:w-5/6 border border-gray-600"
             ></input>
             <button
               onClick={(event) =>
                 handleMove(
-                  inputRef.current.value.toLowerCase().replace(/\s/, "-"),
+                  inputRef.current.value
+                    .toLowerCase()
+                    .match(/\w+\s?\D?\w+/gm)
+                    .join("")
+                    .replace(/\s/, "-"),
                   "+"
                 )
               }

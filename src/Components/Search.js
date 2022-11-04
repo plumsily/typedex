@@ -12,13 +12,25 @@ const Search = ({ inputRef, handleSearch }) => {
         ref={inputRef}
         onKeyPress={(event) => {
           if (event.key === "Enter") {
-            handleSearch(inputRef.current.value.toLowerCase());
+            handleSearch(
+              inputRef.current.value
+                .toLowerCase()
+                .match(/\w+\s?\D?\w+/gm)
+                .join("")
+            );
           }
         }}
-        className="dark:text-white dark:bg-black sm:py-1 py-2 px-2 text-center md:w-5/6 w-3/4 border border-gray-600"
+        className="rounded-none dark:text-white dark:bg-black sm:py-1 py-2 px-2 text-center md:w-5/6 w-3/4 border border-gray-600"
       ></input>
       <button
-        onClick={(event) => handleSearch(inputRef.current.value.toLowerCase())}
+        onClick={(event) =>
+          handleSearch(
+            inputRef.current.value
+              .toLowerCase()
+              .match(/\w+\s?\D?\w+/gm)
+              .join("")
+          )
+        }
         className="md:w-1/6 w-1/4 border border-gray-600 ml-[-1px] transition-all dark:hover:bg-cyan-500 hover:text-white hover:bg-black"
       >
         Search
