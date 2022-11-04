@@ -1,70 +1,139 @@
-# Getting Started with Create React App
+<a name="readme-top"></a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://plumsily.github.io/typedex/">⚔️
+  </a>
+<h3 align="center">TypeDex</h3>
 
-## Available Scripts
+  <p align="center">
+    TypeDex serves to be a handy Pokémon battle companion that can instantly provide type weaknesses of any Pokémon that you encounter on your journey! TypeDex can also search any move against the selected Pokémon to check for effectiveness! 
+    <br />
+    <br />
+    <a href="https://plumsily.github.io/typedex/"">View it live here!</a>
+  </p>
+</div>
 
-In the project directory, you can run:
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built with:</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <!-- <li><a href="#roadmap">Roadmap</a></li> -->
+    <!-- <li><a href="#optimizations">Optimizations</a></li> -->
+    <li><a href="#lessons-learned">Lessons Learned</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-### `npm start`
+<!-- ABOUT THE PROJECT -->
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## About The Project
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![alt tag](./src/Assets/typedex_recording.gif)
 
-### `npm test`
+TypeDex is an app inspired by the original PokéDex but with additional features related to Pokémon battling. No longer will you need to parse through lines of text on an online wiki or scan an 18x18 type chart to find out if a move will be super effective. Features include:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Super effective, not very effective, no effect types
+- Defense and Special Defense stats displayed for damage typing
+- Move checker
+  - Effectiveness
+  - Damage type (physical vs special)
+- Integration with Bulbapedia for full information on selected Pokémon
+- Dark mode
 
-### `npm run build`
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Built With
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React
+- HTML
+- CSS, Tailwind
+- JavaScript
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Built using create-react-app, TypeDex takes full advantage of functional components to dynamically adjust the UI for each search. The search input is forwarded to an API that serves all type weaknesses for that Pokémon. The same API provides information related to any move searched as well. The Defense / Special Defense sizes for each Pokémon are proprotional to their base stat values. This allows the user to quickly ascertain which stat is more difficult to target by it's relative size. Dark mode toggling is saved via localstorage.
 
-### `npm run eject`
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<!-- USAGE EXAMPLES -->
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+If the Pokémon exists or is inputted correctly, TypeDex will serve the official artwork of the Pokémon as well as all of it's type matchings. Click the Pokémon's name to be redirected to Bulbapedia's wiki page for that Pokémon.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<img src="src/Assets/screenshot1.png">
+<br>
 
-## Learn More
+When a Pokémon is displayed, the option to search a move is provided below. If the move exists or is inputted correctly, TypeDex will check that move's type matching to the Pokémon if it is applicable. Additionally, the damage type will be displayed to indicate which defense stat the move will affect. (Special moves affect Special Defense vs. Physical moves affect Defense).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<img src="src/Assets/screenshot2.png">
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Dark mode can be toggled via the moon button on the header. This mode is saved in your browser via localstorage.
 
-### Code Splitting
+<img src="src/Assets/screenshot3.png">
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<img src="src/Assets/screenshot4.png">
 
-### Analyzing the Bundle Size
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<!-- Optimizations
 
-### Making a Progressive Web App
+## Optimizations
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+You don't have to include this section but interviewers *love* that you can not only deliver a final product that looks great but also functions efficiently. Did you write something then refactor it later and the result was 5x faster than the original implementation? Did you cache your assets? Things that you write in this section are **GREAT** to bring up in interviews and you can use this section as reference when studying for technical interviews! -->
 
-### Advanced Configuration
+<!-- ROADMAP
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Roadmap
 
-### Deployment
+- [x] 2022 race schedule info and track layout
+  - [x] Background wallpaper shuffling
+  - [x] Countdown for next upcoming race
+  - [x] Automatic display of next upcoming race info
+- [x] History bar to access past races of the season
+  - [x] Shuffling button
+    - [x] Active by default at end of season to cycle all races
+- [ ] Chrome extension store approval
+- [ ] 2023 race schedule assets for Firebase
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+See the [open issues](https://github.com/plumsily/f1-new-tab/issues) for a full list of proposed features (and known issues).
 
-### `npm run build` fails to minify
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Lessons Learned:
+
+This App was a great opportunity to incorporate localstorage to save dark mode preferences. Tailwind also makes it easy to integrate dark mode CSS classes. Using ternary operators inside styles was also a huge game-changer in dynamically changing the UI depending on JS variables or React states. Chaining API calls and updating React states before component rendering was a great lesson in managing state changes.
+
+<!-- ACKNOWLEDGEMENTS -->
+
+## Acknowledgements
+
+<a href="https://pokeapi.co/">PokéAPI</a> for all Pokémon searches!
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+
+## Contact
+
+Justin Lee - [@plumsily](https://twitter.com/plumsily)
+
+<!-- Take a look at these couple examples that I have in my own portfolio:
+
+**F1 New Tab:** https://github.com/alecortega/f1-new-tab
+
+**Sculptd:** https://github.com/alecortega/twitter-battle
+
+**Patch Panel:** https://github.com/alecortega/patch-panel -->
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
