@@ -16,10 +16,10 @@ const Default = () => {
           <h2 className="text-xl font-medium mb-8">
             Master your Pokémon's moveset!
           </h2>
-          <p className="text-base">
-            Not sure if your Pokémon's move will be able to defeat the opponent?
-            Use the TypeDex to search for your opponent's type weaknesses! Never
-            miss a super effective hit!
+          <p className="text-base text-center">
+            Not sure if your move will affect the opponent's Pokémon? Use the
+            TypeDex to search for your opponent's type weaknesses! Never miss a
+            super effective hit!
           </p>
           <p className="text-xs mt-10">
             *Currently does not support mega evolutions or regional forms.
