@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/typedex/static/css/main.4c53963f.css",
+    "main.js": "/typedex/static/js/main.2ba3da5f.js",
+    "static/js/787.64e253e8.chunk.js": "/typedex/static/js/787.64e253e8.chunk.js",
+    "index.html": "/typedex/index.html",
+    "static/media/lightpattern.svg": "/typedex/static/media/lightpattern.b951a866cbacf3d3b2a5d24958ad119f.svg",
+    "static/media/darkpattern.svg": "/typedex/static/media/darkpattern.60793e3ec3310c2e9bd3f16a4c8bcffa.svg",
+    "main.4c53963f.css.map": "/typedex/static/css/main.4c53963f.css.map",
+    "main.2ba3da5f.js.map": "/typedex/static/js/main.2ba3da5f.js.map",
+    "787.64e253e8.chunk.js.map": "/typedex/static/js/787.64e253e8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4c53963f.css",
+    "static/js/main.2ba3da5f.js"
+  ]
+}
