@@ -20,8 +20,8 @@ const Party = ({ loaded, stats, inputRef }) => {
         appear
         unmountOnExit
       >
-        <div className="flex flex-col gap-1.5 bg-gray-300/10 dark:bg-gray-300/10 backdrop-blur-[2px] border border-gray-600 p-1.5 w-full sm:w-[70ch]">
-          <h2 className="xl:text-2xl text-lg uppercase text-center dark:text-white h-fit w-full sm:w-max px-2.5 py-0.5 border border-gray-600">
+        <div className="flex flex-col gap-1.5 bg-gray-300/10 dark:bg-gray-400/5 backdrop-blur-[2px] border border-gray-600 p-1.5 w-full sm:w-[70ch]">
+          <h2 className="xl:text-2xl text-lg uppercase text-center bg-gray-400/10 dark:bg-gray-600/20 dark:text-white h-fit w-full sm:w-max px-2.5 py-0.5 border border-gray-600">
             Party
           </h2>
           <div className="mt-0 dark:text-white flex flex-col gap-1.5 sm:gap-0 sm:flex-row justify-self-center">
@@ -43,7 +43,7 @@ const Party = ({ loaded, stats, inputRef }) => {
               //     );
               //   }
               // }}
-              className="rounded-none dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-1 px-2 text-center xl:w-5/6 border border-gray-600"
+              className="focus:outline focus:outline-2 dark:focus:outline-purple-400 focus:-outline-offset-[3px] focus:outline-[rgba(199,252,134,1)] rounded-none dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-1 px-2 text-center xl:w-5/6 border border-gray-600"
             ></input>
             <button
               // onClick={(event) =>
@@ -56,7 +56,7 @@ const Party = ({ loaded, stats, inputRef }) => {
               //     "+"
               //   )
               // }
-              className="xl:w-1/6 w-full py-2 sm:py-0 sm:w-[92.5312px] border border-gray-600 sm:ml-[-1px] transition-all bg-black dark:bg-cyan-500 text-white sm:text-black sm:dark:text-white sm:dark:bg-transparent sm:bg-transparent dark:hover:bg-cyan-500 hover:text-white hover:bg-black"
+              className="xl:w-1/6 w-full py-2 sm:py-0 sm:w-[92.5312px] border border-gray-600 sm:ml-[-1px] transition-all bg-[rgba(199,252,134,0.7)] dark:bg-purple-400/70 sm:dark:text-white  dark:hover:bg-purple-400 hover:text-white hover:bg-black"
             >
               Add
             </button>

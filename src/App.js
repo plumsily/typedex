@@ -276,7 +276,7 @@ function App() {
         darkMode={darkMode}
         handleDark={handleDark}
       />
-      {stats.ratio ? (
+      {oppSuperEffective.element && oppName ? (
         <Viewport
           inputRef={moveInputRef}
           oppImgSrc={oppImgSrc}

@@ -12,7 +12,7 @@ const Info = ({ handleInfo, loadInfo }) => {
       appear
       unmountOnExit
     >
-      <div className="absolute h-full sm:h-screen w-screen top-0 left-0 dark:text-white dark:bg-black/70 bg-gray-100/50 backdrop-blur z-10 flex flex-col 2xl:text-lg xl:text-base text-xs justify-end sm:justify-center">
+      <div className="absolute h-full sm:h-screen w-screen top-0 left-0 dark:text-white dark:bg-black/80 bg-gray-100/80 backdrop-blur z-10 flex flex-col 2xl:text-lg xl:text-base text-xs justify-end sm:justify-center">
         <div className="flex flex-col gap-2 sm:m-auto mx-auto pb-20 px-6 sm:px-0 sm:pb-0 sm:w-[60ch]">
           <ul className="2xl:text-xl xl:text-lg text-sm mb-2 font-medium">
             Pokémon Stats: Defense vs Special Defense
@@ -40,7 +40,7 @@ const Info = ({ handleInfo, loadInfo }) => {
           </li>
           <button
             onClick={(event) => handleInfo()}
-            className="mt-4 dark:text-white p-2 border border-gray-600 dark:hover:bg-cyan-500 hover:text-white hover:bg-black"
+            className="mt-4 dark:text-white p-2 border border-gray-600 dark:hover:bg-purple-400 hover:text-white hover:bg-black"
           >
             Close
           </button>
