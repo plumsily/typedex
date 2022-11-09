@@ -3,7 +3,7 @@ import "./Search.css";
 
 const Search = ({ inputRef, handleSearch }) => {
   return (
-    <div className="row-start-2 sm:row-start-1 col-start-1 sm:col-start-2 dark:text-white flex flex-row sm:justify-self-center lg:w-[70ch] md:w-[50ch] sm:w-[380px] w-full 2xl:text-base xl:text-sm text-xs">
+    <div className="row-start-2 sm:row-start-1 col-start-1 sm:col-start-2 dark:text-white flex flex-row sm:justify-self-center lg:w-[70ch] md:w-[50ch] sm:w-[380px] w-full 2xl:text-base xl:text-sm text-xs -mr-[1px]">
       <input
         type="search"
         placeholder="Search Pokémon"
@@ -20,7 +20,7 @@ const Search = ({ inputRef, handleSearch }) => {
             );
           }
         }}
-        className="focus:outline focus:outline-2 dark:focus:outline-purple-400 focus:-outline-offset-[3px] focus:outline-[rgba(199,252,134,1)] rounded-none dark:text-white dark:bg-black/80 bg-white/80 sm:py-1 py-2 px-2 text-center md:w-5/6 w-3/4 border border-gray-600"
+        className="dark:focus:bg-black focus:bg-white focus:outline focus:outline-2 dark:focus:outline-purple-400 focus:-outline-offset-[3px] focus:outline-[rgba(192,252,132,1)] rounded-none dark:text-white dark:bg-black/60 bg-white/60 sm:py-0.5 py-2 px-2 text-center md:w-5/6 w-3/4 border border-gray-600"
       ></input>
       <button
         onClick={(event) =>
@@ -31,7 +31,7 @@ const Search = ({ inputRef, handleSearch }) => {
               .join("")
           )
         }
-        className="bg-[rgba(199,252,134,0.7)] dark:bg-purple-400/70 md:w-1/6 w-1/4 border border-gray-600 border-l-0 transition-all dark:hover:bg-purple-400 hover:text-white hover:bg-black"
+        className="bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/70 md:w-1/6 w-1/4 border border-gray-600 border-l-0 transition-all dark:hover:bg-purple-400 hover:text-white hover:bg-black"
       >
         Search
       </button>

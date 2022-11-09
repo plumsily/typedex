@@ -147,12 +147,12 @@ const Viewport = ({
       appear
       unmountOnExit
     >
-      <section className="dark:text-white content pt-[5.1rem] sm:pt-[3.3rem] flex flex-col items-center 2xl:text-base xl:text-sm text-xs mb-1.5 w-screen p-1.5 sm:p-0">
+      <section className="dark:text-white content pt-[5.1rem] sm:pt-[3rem] flex flex-col items-center 2xl:text-base xl:text-sm text-xs mb-1.5 w-screen p-1.5 sm:p-0">
         <div className="flex flex-col justify-center p-1.5 bg-gray-300/10 dark:bg-gray-400/5 backdrop-blur-[2px] border border-gray-600 sm:w-[70ch]">
           <div className="flex sm:flex-row gap-1.5 justify-between mb-6 flex-col">
             <a
               href={`https://bulbapedia.bulbagarden.net/wiki/${oppName}_(Pok%C3%A9mon)`}
-              className="xl:text-2xl text-lg dark:bg-purple-400/70 dark:hover:bg-purple-400 px-2.5 py-0.5 w-full sm:w-max text-center hover:bg-black hover:text-white border bg-[rgba(199,252,134,0.7)] border-gray-600 transition-all"
+              className="xl:text-2xl text-lg dark:bg-purple-400/70 dark:hover:bg-purple-400 px-2.5 py-0.5 w-full sm:w-max text-center hover:bg-black hover:text-white border bg-[rgba(192,252,132,0.7)] border-gray-600 transition-all"
               target="_blank"
             >
               {oppName.toUpperCase()}
@@ -235,7 +235,7 @@ const Viewport = ({
                   );
                 }
               }}
-              className="focus:outline focus:outline-2 dark:focus:outline-purple-400 focus:-outline-offset-[3px] focus:outline-[rgba(199,252,134,1)] rounded-none dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-1 px-2 text-center xl:w-5/6 border border-gray-600"
+              className="focus:outline focus:outline-2 dark:focus:outline-purple-400 focus:-outline-offset-[3px] focus:outline-[rgba(192,252,132,1)] rounded-none dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-0.5 px-2 text-center xl:w-5/6 border border-gray-600"
             ></input>
             <button
               onClick={(event) =>
@@ -248,7 +248,7 @@ const Viewport = ({
                   "+"
                 )
               }
-              className="xl:w-1/6 w-full py-2 sm:py-0 sm:w-[92.5312px] border border-gray-600 sm:ml-[-1px] transition-all bg-[rgba(199,252,134,0.7)] dark:bg-purple-400/70 sm:text-black dark:hover:bg-purple-400 hover:text-white hover:bg-black dark:text-white"
+              className="xl:w-1/6 w-full py-2 sm:py-0 sm:w-[92.5312px] border border-gray-600 sm:ml-[-1px] transition-all bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/70 sm:text-black dark:hover:bg-purple-400 hover:text-white hover:bg-black dark:text-white"
             >
               Search
             </button>
@@ -265,7 +265,7 @@ const Viewport = ({
                 // ref={moveEffect}
                 className="order-0 flex flex-col sm:flex-row gap-1.5 sm:mt-1.5"
               >
-                <span className="effect order-last sm:order-0 w-full sm:w-auto sm:grow sm:py-1 py-2 border border-gray-600 self-center text-center outline outline-2 dark:outline-purple-400 -outline-offset-[3px] outline-[rgba(199,252,134,1)]">
+                <span className="effect order-last sm:order-0 w-full sm:w-auto sm:grow sm:py-1 py-2 border border-gray-600 self-center text-center outline outline-2 dark:outline-purple-400 -outline-offset-[3px] outline-[rgba(192,252,132,1)]">
                   {moveType.length !== 3
                     ? moveType[1] != "status"
                       ? oppSuperEffective.list.includes(moveType[0])

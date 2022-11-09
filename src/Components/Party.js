@@ -43,7 +43,7 @@ const Party = ({ loaded, stats, inputRef }) => {
               //     );
               //   }
               // }}
-              className="focus:outline focus:outline-2 dark:focus:outline-purple-400 focus:-outline-offset-[3px] focus:outline-[rgba(199,252,134,1)] rounded-none dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-1 px-2 text-center xl:w-5/6 border border-gray-600"
+              className="focus:outline focus:outline-2 dark:focus:outline-purple-400 focus:-outline-offset-[3px] focus:outline-[rgba(192,252,132,1)] rounded-none dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-0.5 px-2 text-center xl:w-5/6 border border-gray-600"
             ></input>
             <button
               // onClick={(event) =>
