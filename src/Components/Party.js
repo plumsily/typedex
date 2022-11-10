@@ -2,7 +2,64 @@ import React from "react";
 import { CSSTransition } from "react-transition-group";
 import "./Party.css";
 
-const Party = ({ loaded, stats, inputRef }) => {
+const Party = ({
+  loaded,
+  stats,
+  inputRef,
+  party,
+  handleParty,
+  handleDeleteParty,
+  colorMap,
+}) => {
+  let partyList = [];
+  if (Object.keys(party).length) {
+    Object.keys(party).forEach((pokemon) => {
+      let partyType = [];
+      Object.keys(party[pokemon]["damage_relations"]).forEach((type) => {
+        partyType.push(
+          <span
+            style={{ background: colorMap[type] }}
+            key={type}
+            className="text-white py-1 px-3 border border-gray-800 ml-[-1px] w-full"
+          >
+            {type.toUpperCase()}
+          </span>
+        );
+      });
+      partyList.push(
+        <li
+          // style={{ background: colorMap[key] }}
+          key={pokemon}
+          className="border border-gray-800 w-full flex flex-col p-1.5 gap-1.5"
+        >
+          <div className="flex flex-row">
+            <span className="uppercase border border-r-0 border-gray-600 py-1 text-center grow">
+              {party[pokemon].name}
+            </span>
+            <button
+              value={pokemon}
+              onClick={(event) => {
+                handleDeleteParty(pokemon);
+              }}
+              className="w-[40px] sm:w-[42px] border border-gray-600 transition-all bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/70 sm:text-black dark:hover:bg-purple-400 hover:text-white hover:bg-black dark:text-white"
+            >
+              X
+            </button>
+            {/* <div className="flex flex-row">{partyType}</div> */}
+          </div>
+          <img
+            className="h-max w-max self-center"
+            src={party[pokemon].sprite}
+          ></img>
+
+          {/* <button className="w-14 h-14 sm:w-[97px] sm:h-[97px] border-l border-gray-600 transition-all bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/70 sm:text-black dark:hover:bg-purple-400 hover:text-white hover:bg-black dark:text-white">
+            X
+          </button> */}
+        </li>
+      );
+    });
+  }
+
   return (
     <section
       className={`${
@@ -21,41 +78,40 @@ const Party = ({ loaded, stats, inputRef }) => {
         unmountOnExit
       >
         <div className="flex flex-col gap-1.5 bg-gray-300/10 dark:bg-gray-400/5 backdrop-blur-[2px] border border-gray-600 p-1.5 w-full sm:w-[70ch]">
-          <h2 className="xl:text-2xl text-lg uppercase text-center bg-gray-400/10 dark:bg-gray-600/20 dark:text-white h-fit w-full sm:w-max px-2.5 py-0.5 border border-gray-600">
+          <h2 className="xl:text-2xl text-lg uppercase text-center dark:text-white h-fit w-full sm:w-max px-2.5 py-0.5 border border-gray-600">
             Party
           </h2>
+          <ul className="2xl:text-base xl:text-sm text-xs grid grid-cols-2 grid-rows-auto grid-flow-column gap-1.5">
+            {partyList}
+          </ul>
           <div className="mt-0 dark:text-white flex flex-col gap-1.5 sm:gap-0 sm:flex-row justify-self-center">
             <input
               type="search"
-              placeholder="Add your Pokémon in your party!"
+              placeholder="Add the Pokémon in your party!"
               name="party"
               id="party"
               ref={inputRef}
-              // onKeyPress={(event) => {
-              //   if (event.key === "Enter") {
-              //     handleMove(
-              //       inputRef.current.value
-              //         .toLowerCase()
-              //         .match(/\w+\s?\D?\w+/gm)
-              //         .join("")
-              //         .replace(/\s/, "-"),
-              //       "+"
-              //     );
-              //   }
-              // }}
+              onKeyPress={(event) => {
+                if (event.key === "Enter") {
+                  handleParty(
+                    inputRef.current.value
+                      .toLowerCase()
+                      .match(/\w+\s?\D?\w+/gm)
+                      .join("")
+                  );
+                }
+              }}
               className="focus:outline focus:outline-2 dark:focus:outline-purple-400 focus:-outline-offset-[3px] focus:outline-[rgba(192,252,132,1)] rounded-none dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-0.5 px-2 text-center xl:w-5/6 border border-gray-600"
             ></input>
             <button
-              // onClick={(event) =>
-              //   handleMove(
-              //     inputRef.current.value
-              //       .toLowerCase()
-              //       .match(/\w+\s?\D?\w+/gm)
-              //       .join("")
-              //       .replace(/\s/, "-"),
-              //     "+"
-              //   )
-              // }
+              onClick={(event) =>
+                handleParty(
+                  inputRef.current.value
+                    .toLowerCase()
+                    .match(/\w+\s?\D?\w+/gm)
+                    .join("")
+                )
+              }
               className="xl:w-1/6 w-full py-2 sm:py-0 sm:w-[92.5312px] border border-gray-600 sm:ml-[-1px] transition-all bg-[rgba(199,252,134,0.7)] dark:bg-purple-400/70 sm:dark:text-white  dark:hover:bg-purple-400 hover:text-white hover:bg-black"
             >
               Add

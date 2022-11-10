@@ -69,6 +69,52 @@ function App() {
       console.log(error);
     }
   };
+  const getParty = async (name) => {
+    try {
+      //get Party pokemon info
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+      const result = await response.json();
+      let partyObj = {};
+      partyObj[result.name] = {};
+      let fixedName =
+        result.name.charAt(0).toUpperCase() + result.name.slice(1);
+      partyObj[result.name]["name"] = fixedName;
+      partyObj[result.name]["sprite"] = result["sprites"]["front_default"];
+
+      let partyTypeObj = {};
+      result.types.forEach((slot) => {
+        partyTypeObj[slot.type.name] = {};
+      });
+
+      // let tempStats = {};
+      // resultName.stats.forEach((stats) => {
+      //   if (
+      //     stats.stat.name == "defense" ||
+      //     stats.stat.name == "special-defense"
+      //   ) {
+      //     tempStats[stats.stat.name] = stats.base_stat;
+      //   }
+      // });
+      // tempStats.ratio = Math.round(
+      //   (tempStats["defense"] /
+      //     (tempStats["defense"] + tempStats["special-defense"])) *
+      //     100
+      // );
+      // setStats(tempStats);
+
+      Object.keys(partyTypeObj).forEach(async (key) => {
+        let responseDamage = await fetch(
+          `https://pokeapi.co/api/v2/type/${key}`
+        );
+        let resultDamage = await responseDamage.json();
+        partyTypeObj[key] = resultDamage["damage_relations"];
+      });
+      partyObj[result.name]["damage_relations"] = partyTypeObj;
+      setParty((party) => ({ ...party, ...partyObj }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getMove = async (move) => {
     try {
@@ -137,8 +183,39 @@ function App() {
     setLoadInfo(!loadInfo);
   };
 
+  const handleParty = (name) => {
+    if (Object.keys(party).length < 6) {
+      getParty(name);
+      if (localStorage.getItem("party")) {
+        let storedParty = JSON.parse(localStorage.getItem("party"));
+        let updatedParty = [...storedParty, name];
+        localStorage.setItem("party", JSON.stringify(updatedParty));
+      } else {
+        let storedParty = JSON.stringify([name]);
+        localStorage.setItem("party", storedParty);
+      }
+    }
+    document.getElementById("party").value = "";
+  };
+
+  const handleDeleteParty = (name) => {
+    let storedParty = JSON.parse(localStorage.getItem("party"));
+    let updatedParty = storedParty.filter(
+      (pokemon) => pokemon != name.toLowerCase()
+    );
+    localStorage.setItem("party", JSON.stringify(updatedParty));
+    delete party[name];
+    setParty({ ...party });
+  };
+
   useEffect(() => {
     let localDark = localStorage.getItem("darkMode");
+    if (localStorage.getItem("party")) {
+      let storedParty = JSON.parse(localStorage.getItem("party"));
+      storedParty.forEach((pokemon) => {
+        getParty(pokemon);
+      });
+    }
     if (localDark) {
       if (localDark === "on") {
         setDarkMode(true);
@@ -276,29 +353,41 @@ function App() {
         darkMode={darkMode}
         handleDark={handleDark}
       />
-      {oppSuperEffective.element && oppName ? (
-        <Viewport
-          inputRef={moveInputRef}
-          oppImgSrc={oppImgSrc}
-          oppName={oppName}
-          oppTypes={oppTypes}
-          stats={stats}
-          loaded={loaded}
-          handleMove={handleMove}
-          moveName={moveName}
-          moveType={moveType}
-          loadedMove={loadedMove}
-          handleInfo={handleInfo}
-          colorMap={colorMap}
-          oppSuperEffective={oppSuperEffective}
-          oppNotVeryEffective={oppNotVeryEffective}
-          oppNotEffective={oppNotEffective}
-          oppTypeList={oppTypeList}
-        />
+      {oppName ? (
+        loaded ? (
+          <Viewport
+            inputRef={moveInputRef}
+            oppImgSrc={oppImgSrc}
+            oppName={oppName}
+            oppTypes={oppTypes}
+            stats={stats}
+            loaded={loaded}
+            handleMove={handleMove}
+            moveName={moveName}
+            moveType={moveType}
+            loadedMove={loadedMove}
+            handleInfo={handleInfo}
+            colorMap={colorMap}
+            oppSuperEffective={oppSuperEffective}
+            oppNotVeryEffective={oppNotVeryEffective}
+            oppNotEffective={oppNotEffective}
+            oppTypeList={oppTypeList}
+          />
+        ) : (
+          <></>
+        )
       ) : (
         <Default />
       )}
-      <Party loaded={loaded} stats={stats} inputRef={partyInputRef} />
+      <Party
+        loaded={loaded}
+        stats={stats}
+        inputRef={partyInputRef}
+        party={party}
+        handleParty={handleParty}
+        handleDeleteParty={handleDeleteParty}
+        colorMap={colorMap}
+      />
       <Info handleInfo={handleInfo} loadInfo={loadInfo} />
     </div>
   );
