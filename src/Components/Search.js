@@ -20,7 +20,7 @@ const Search = ({ inputRef, handleSearch }) => {
             );
           }
         }}
-        className="dark:focus:bg-black focus:bg-white focus:outline focus:outline-2 dark:focus:outline-purple-400 focus:-outline-offset-[3px] focus:outline-[rgba(192,252,132,1)] rounded-none dark:text-white dark:bg-black/60 bg-white/60 sm:py-0.5 py-2 px-2 text-center md:w-5/6 w-3/4 border border-gray-600"
+        className="dark:focus:bg-black focus:bg-white focus:outline focus:outline-2 dark:focus:outline-purple-400/80 focus:-outline-offset-[3px] focus:outline-[rgba(192,252,132,1)] rounded-none dark:text-white dark:bg-black/60 bg-white/60 sm:py-0.5 py-2 px-2 text-center md:w-5/6 w-3/4 border border-gray-500 dark:border-gray-700"
       ></input>
       <button
         onClick={(event) =>
@@ -31,7 +31,7 @@ const Search = ({ inputRef, handleSearch }) => {
               .join("")
           )
         }
-        className="bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/70 md:w-1/6 w-1/4 border border-gray-600 border-l-0 transition-all dark:hover:bg-purple-400 hover:text-white hover:bg-black"
+        className="bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/10 md:w-1/6 w-1/4 border border-gray-500 dark:border-gray-700 border-l-0 transition-all dark:hover:bg-purple-400 hover:text-white hover:bg-black"
       >
         Search
       </button>

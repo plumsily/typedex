@@ -23,6 +23,69 @@ function App() {
   const [loadedMove, setLoadedMove] = useState(false);
   const [loadInfo, setLoadInfo] = useState(false);
   const [party, setParty] = useState({});
+  const [partyLoad, setPartyLoad] = useState(false);
+
+  const colorMap = {
+    normal: "rgba(170,170,153,0.9)",
+    fire: "rgba(255,68,34,0.9)",
+    water: "rgba(51,153,255,0.9)",
+    electric: "rgba(255,204,51,0.9)",
+    grass: "rgba(119,204,85,0.9)",
+    ice: "rgba(102,204,255,0.9)",
+    fighting: "rgba(187,85,68,0.9)",
+    poison: "rgba(170,85,153,0.9)",
+    ground: "rgba(221,187,85,0.9)",
+    flying: "rgba(136,153,255,0.9)",
+    psychic: "rgba(255,85,153,0.9)",
+    bug: "rgba(170,187,34,0.9)",
+    rock: "rgba(187,170,102,0.9)",
+    ghost: "rgba(102,102,187,0.9)",
+    dragon: "rgba(119,102,238,0.9)",
+    dark: "rgba(119,85,68,0.9)",
+    steel: "rgba(170,170,187,0.9)",
+    fairy: "rgba(238,153,238,0.9)",
+    physical: "rgba(12,110,97,0.9)",
+    special: "rgba(12,74,110,0.9)",
+    status: "rgba(140,136,140,0.9)",
+  };
+
+  class Effectiveness {
+    constructor(element, list, set) {
+      this.element = element;
+      this.list = list;
+      this.set = set;
+    }
+    pushElem(val) {
+      this.element.push(
+        <li
+          style={{ background: colorMap[val] }}
+          key={val}
+          className="p-1 border border-gray-700 mb-[-1px]"
+        >
+          {val.toUpperCase()}
+        </li>
+      );
+    }
+    pushList(val) {
+      this.list.push(val);
+    }
+    setMatch(val) {
+      this.set.push(val);
+    }
+    reset() {
+      this.element = [];
+      this.list = [];
+      this.set = [];
+    }
+  }
+  let oppTypeList = [];
+  const oppSuperEffective = new Effectiveness([], [], []);
+  const oppNotVeryEffective = new Effectiveness([], [], []);
+  const oppNotEffective = new Effectiveness([], [], []);
+
+  const partySuperEffective = new Effectiveness([], [], []);
+  const partyNotVeryEffective = new Effectiveness([], [], []);
+  const partyNotEffective = new Effectiveness([], [], []);
 
   const getAPI = async (name) => {
     try {
@@ -86,22 +149,6 @@ function App() {
         partyTypeObj[slot.type.name] = {};
       });
 
-      // let tempStats = {};
-      // resultName.stats.forEach((stats) => {
-      //   if (
-      //     stats.stat.name == "defense" ||
-      //     stats.stat.name == "special-defense"
-      //   ) {
-      //     tempStats[stats.stat.name] = stats.base_stat;
-      //   }
-      // });
-      // tempStats.ratio = Math.round(
-      //   (tempStats["defense"] /
-      //     (tempStats["defense"] + tempStats["special-defense"])) *
-      //     100
-      // );
-      // setStats(tempStats);
-
       Object.keys(partyTypeObj).forEach(async (key) => {
         let responseDamage = await fetch(
           `https://pokeapi.co/api/v2/type/${key}`
@@ -110,7 +157,11 @@ function App() {
         partyTypeObj[key] = resultDamage["damage_relations"];
       });
       partyObj[result.name]["damage_relations"] = partyTypeObj;
+
+      partyObj[result.name]["matchup"] = 0;
+
       setParty((party) => ({ ...party, ...partyObj }));
+      setPartyLoad(!partyLoad);
     } catch (error) {
       console.log(error);
     }
@@ -234,112 +285,360 @@ function App() {
     }
   }, []);
 
-  const colorMap = {
-    normal: "rgb(170,170,153)",
-    fire: "rgb(255,68,34)",
-    water: "rgb(51,153,255)",
-    electric: "rgb(255,204,51)",
-    grass: "rgb(119,204,85)",
-    ice: "rgb(102,204,255)",
-    fighting: "rgb(187,85,68)",
-    poison: "rgb(170,85,153)",
-    ground: "rgb(221,187,85)",
-    flying: "rgb(136,153,255)",
-    psychic: "rgb(255,85,153)",
-    bug: "rgb(170,187,34)",
-    rock: "rgb(187,170,102)",
-    ghost: "rgb(102,102,187)",
-    dragon: "rgb(119,102,238)",
-    dark: "rgb(119,85,68)",
-    steel: "rgb(170,170,187)",
-    fairy: "rgb(238,153,238)",
-    physical: "rgb(12,110,97)",
-    special: "rgb(12,74,110)",
-    status: "rgb(140,136,140)",
-  };
-
-  //   const moveEffect = useRef(null);
-  //   useEffect(() => {
-  //     moveEffect.current?.scrollIntoView({ behavior: "smooth" });
-  //   });
-
-  class Effectivness {
-    constructor(element, list) {
-      this.element = element;
-      this.list = list;
-    }
-    pushElem(val) {
-      this.element.push(
-        <li
-          style={{ background: colorMap[val] }}
-          key={val}
-          className="p-1 border border-gray-800 mb-[-1px]"
-        >
-          {val.toUpperCase()}
-        </li>
-      );
-    }
-    pushList(val) {
-      this.list.push(val);
-    }
-  }
-
-  let oppTypeList = [];
-  const oppSuperEffective = new Effectivness([], []);
-  const oppNotVeryEffective = new Effectivness([], []);
-  const oppNotEffective = new Effectivness([], []);
-
-  if (Object.keys(oppTypes).length) {
-    Object.keys(oppTypes).forEach((key) => {
-      //Show the types of the opponent pokemon
-      oppTypeList.push(
-        <li
-          style={{ background: colorMap[key] }}
-          key={key}
-          className="py-1 px-3 border border-gray-800 ml-[-1px] w-full"
-        >
-          {key.toUpperCase()}
-        </li>
-      );
-
-      if (
-        Object.hasOwn(oppTypes[Object.keys(oppTypes)[0]], "double_damage_from")
-      ) {
-        oppTypes[key]["no_damage_from"].forEach((damage) => {
-          oppNotEffective.pushList(damage.name);
+  //parameter types will be an object of type names and their corresponding damage relations for each party pokemon
+  const assignEffectiveness = (
+    types,
+    relation,
+    notEffective,
+    notVeryEffective,
+    superEffective
+  ) => {
+    Object.keys(types).forEach((key) => {
+      if (relation === "opp") {
+        oppTypeList.push(
+          <li
+            style={{ background: colorMap[key] }}
+            key={key}
+            className="py-1 px-3 border border-gray-700 ml-[-1px] w-full"
+          >
+            {key.toUpperCase()}
+          </li>
+        );
+      }
+      if (Object.hasOwn(types[Object.keys(types)[0]], "double_damage_from")) {
+        types[key]["no_damage_from"].forEach((damage) => {
+          notEffective.pushList(damage.name);
         });
-        oppTypes[key]["half_damage_from"].forEach((damage) => {
-          oppNotVeryEffective.pushList(damage.name);
+        types[key]["half_damage_from"].forEach((damage) => {
+          notVeryEffective.pushList(damage.name);
         });
-        oppTypes[key]["double_damage_from"].forEach((damage) => {
-          oppSuperEffective.pushList(damage.name);
+        types[key]["double_damage_from"].forEach((damage) => {
+          superEffective.pushList(damage.name);
         });
       }
     });
 
-    const tempSuper = oppSuperEffective.list.filter(
+    const tempSuper = superEffective.list.filter(
       (type) =>
-        !oppNotEffective.list.includes(type) &&
-        !oppNotVeryEffective.list.includes(type)
+        !notEffective.list.includes(type) &&
+        !notVeryEffective.list.includes(type)
     );
-    const tempNotVery = oppNotVeryEffective.list.filter(
+    const tempNotVery = notVeryEffective.list.filter(
       (type) =>
-        !oppNotEffective.list.includes(type) &&
-        !oppSuperEffective.list.includes(type)
+        !notEffective.list.includes(type) && !superEffective.list.includes(type)
     );
-    oppSuperEffective.list = [...new Set(tempSuper)];
-    oppNotVeryEffective.list = [...new Set(tempNotVery)];
+    superEffective.list = [...new Set(tempSuper)];
+    notVeryEffective.list = [...new Set(tempNotVery)];
 
-    oppNotEffective.list.forEach((type) => {
-      oppNotEffective.pushElem(type);
-    });
-    oppNotVeryEffective.list.forEach((type) => {
-      oppNotVeryEffective.pushElem(type);
-    });
-    oppSuperEffective.list.forEach((type) => {
-      oppSuperEffective.pushElem(type);
-    });
+    if (relation === "party") {
+      notEffective.list.forEach((type) => {
+        notEffective.setMatch(type);
+      });
+      notVeryEffective.list.forEach((type) => {
+        notVeryEffective.setMatch(type);
+      });
+      superEffective.list.forEach((type) => {
+        superEffective.setMatch(type);
+      });
+    } else {
+      notEffective.list.forEach((type) => {
+        notEffective.pushElem(type);
+        notEffective.setMatch(type);
+      });
+      notVeryEffective.list.forEach((type) => {
+        notVeryEffective.pushElem(type);
+        notVeryEffective.setMatch(type);
+      });
+      superEffective.list.forEach((type) => {
+        superEffective.pushElem(type);
+        superEffective.setMatch(type);
+      });
+    }
+  };
+
+  if (Object.keys(oppTypes).length) {
+    assignEffectiveness(
+      oppTypes,
+      "opp",
+      oppNotEffective,
+      oppNotVeryEffective,
+      oppSuperEffective
+    );
   }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (Object.keys(oppTypes).length) {
+        // assignEffectiveness(
+        //   oppTypes,
+        //   "opp",
+        //   oppNotEffective,
+        //   oppNotVeryEffective,
+        //   oppSuperEffective
+        // );
+        // console.log(
+        //   "inside useffect" + oppTypes["steel"]["double_damage_from"][0]["name"]
+        // );
+        if (Object.keys(party).length) {
+          Object.keys(party).forEach((pokemon) => {
+            let counter = 0;
+            partyNotEffective.reset();
+            partyNotVeryEffective.reset();
+            partySuperEffective.reset();
+            assignEffectiveness(
+              party[pokemon]["damage_relations"],
+              "party",
+              partyNotEffective,
+              partyNotVeryEffective,
+              partySuperEffective
+            );
+
+            //Checks party effectiveness against opponent type - does not need to iterate through each of the party pokemon's type.
+            if (Object.keys(oppTypes).length < 2) {
+              if (partySuperEffective.set.includes(Object.keys(oppTypes)[0])) {
+                counter -= 3;
+                console.log("subtracted 3 " + counter + " ");
+              }
+              if (partyNotEffective.set.includes(Object.keys(oppTypes)[0])) {
+                counter += 2;
+                console.log("added 2 " + counter + " ");
+              }
+              if (
+                partyNotVeryEffective.set.includes(Object.keys(oppTypes)[0])
+              ) {
+                counter += 1;
+                console.log("added 1 " + counter + " ");
+              }
+            } else {
+              if (
+                partySuperEffective.set.includes(Object.keys(oppTypes)[0]) ||
+                partySuperEffective.set.includes(Object.keys(oppTypes)[1])
+              ) {
+                counter -= 3;
+                console.log("subtracted 3 " + counter + " ");
+              }
+              if (
+                partyNotEffective.set.includes(Object.keys(oppTypes)[0]) ||
+                partyNotEffective.set.includes(Object.keys(oppTypes)[1])
+              ) {
+                counter += 2;
+                console.log("added 2 " + counter + " ");
+              }
+              if (
+                partyNotVeryEffective.set.includes(Object.keys(oppTypes)[0]) ||
+                partyNotVeryEffective.set.includes(Object.keys(oppTypes)[1])
+              ) {
+                counter += 1;
+                console.log("added 1 " + counter + " ");
+              }
+            }
+
+            Object.keys(party[pokemon]["damage_relations"]).forEach((type) => {
+              if (Object.keys(oppTypes).length < 2) {
+                if (oppSuperEffective.set.includes(type)) {
+                  counter += 3;
+                  console.log("added 3 " + counter + " " + type);
+                }
+                if (
+                  oppNotEffective.set.includes(type)
+                  // || partySuperEffective.set.includes(Object.keys(oppTypes)[0]
+                ) {
+                  counter -= 3;
+                  console.log("subtracted 3 " + counter + " " + type);
+                }
+                if (oppNotVeryEffective.set.includes(type)) {
+                  counter -= 1;
+                  console.log("subtracted 1 " + counter + " " + type);
+                }
+                // if (partyNotEffective.set.includes(Object.keys(oppTypes)[0])) {
+                //   counter += 2;
+                //   console.log("added 2 " + counter + " " + type);
+                // }
+                // if (
+                //   partyNotVeryEffective.set.includes(Object.keys(oppTypes)[0])
+                // ) {
+                //   counter += 1;
+                //   console.log("added 1 " + counter + " " + type);
+                // }
+              } else {
+                if (oppSuperEffective.set.includes(type)) {
+                  counter += 3;
+                  console.log("added 3 " + counter + " " + type);
+                }
+                if (
+                  oppNotEffective.set.includes(type)
+                  // || partySuperEffective.set.includes(Object.keys(oppTypes)[0]) ||
+                  // partySuperEffective.set.includes(Object.keys(oppTypes)[1])
+                ) {
+                  counter -= 3;
+                  console.log("subtracted 3 " + counter + " " + type);
+                }
+                if (oppNotVeryEffective.set.includes(type)) {
+                  counter -= 1;
+                  console.log("subtracted 1 " + counter + " " + type);
+                }
+                // if (
+                //   partyNotEffective.set.includes(Object.keys(oppTypes)[0]) ||
+                //   partyNotEffective.set.includes(Object.keys(oppTypes)[1])
+                // ) {
+                //   counter += 2;
+                //   console.log("added 2 " + counter + " " + type);
+                // }
+                // if (
+                //   partyNotVeryEffective.set.includes(
+                //     Object.keys(oppTypes)[0]
+                //   ) ||
+                //   partyNotVeryEffective.set.includes(Object.keys(oppTypes)[1])
+                // ) {
+                //   counter += 1;
+                //   console.log("added 1 " + counter + " " + type);
+                // }
+              }
+            });
+            console.log(pokemon + counter);
+            party[pokemon].matchup = counter;
+            setParty({ ...party });
+          });
+        }
+      }
+    }, 300);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [loaded, partyLoad]);
+
+  // if (Object.keys(oppTypes).length) {
+  //   assignEffectiveness(
+  //     oppTypes,
+  //     "opp",
+  //     oppNotEffective,
+  //     oppNotVeryEffective,
+  //     oppSuperEffective
+  //   );
+
+  //   if (Object.keys(party).length) {
+  //     Object.keys(party).forEach((pokemon) => {
+  //       let counter = 0;
+  //       partyNotEffective.reset();
+  //       partyNotVeryEffective.reset();
+  //       partySuperEffective.reset();
+  //       assignEffectiveness(
+  //         party[pokemon]["damage_relations"],
+  //         "party",
+  //         partyNotEffective,
+  //         partyNotVeryEffective,
+  //         partySuperEffective
+  //       );
+  //       Object.keys(party[pokemon]["damage_relations"]).forEach((type) => {
+  //         if (Object.keys(oppTypes).length < 2) {
+  //           if (oppSuperEffective.set.includes(type)) {
+  //             counter += 3;
+  //           }
+  //           if (
+  //             oppNotEffective.set.includes(type) ||
+  //             partySuperEffective.set.includes(Object.keys(oppTypes)[0])
+  //           ) {
+  //             counter -= 3;
+  //           }
+  //           if (oppNotVeryEffective.set.includes(type)) {
+  //             counter -= 1;
+  //           }
+  //           if (partyNotEffective.set.includes(Object.keys(oppTypes)[0])) {
+  //             counter += 2;
+  //           }
+  //           if (partyNotVeryEffective.set.includes(Object.keys(oppTypes)[0])) {
+  //             counter += 1;
+  //           }
+  //         } else {
+  //           if (oppSuperEffective.set.includes(type)) {
+  //             counter += 3;
+  //             console.log("added 3 " + counter + " " + type);
+  //           }
+  //           if (
+  //             oppNotEffective.set.includes(type) ||
+  //             partySuperEffective.set.includes(Object.keys(oppTypes)[0]) ||
+  //             partySuperEffective.set.includes(Object.keys(oppTypes)[1])
+  //           ) {
+  //             counter -= 3;
+  //             console.log("subtracted 3 " + counter + " " + type);
+  //           }
+  //           if (oppNotVeryEffective.set.includes(type)) {
+  //             counter -= 1;
+  //             console.log("subtracted 1 " + counter + " " + type);
+  //           }
+  //           if (
+  //             partyNotEffective.set.includes(Object.keys(oppTypes)[0]) ||
+  //             partyNotEffective.set.includes(Object.keys(oppTypes)[1])
+  //           ) {
+  //             counter += 2;
+  //             console.log("added 2 " + counter + " " + type);
+  //           }
+  //           if (
+  //             partyNotVeryEffective.set.includes(Object.keys(oppTypes)[0]) ||
+  //             partyNotVeryEffective.set.includes(Object.keys(oppTypes)[1])
+  //           ) {
+  //             counter += 1;
+  //             console.log("added 1 " + counter + " " + type);
+  //           }
+  //         }
+  //       });
+  //       console.log(pokemon + counter);
+  //       party[pokemon].matchup = counter;
+  //     });
+  //   }
+  // }
+
+  // if (Object.keys(oppTypes).length) {
+  //   Object.keys(oppTypes).forEach((key) => {
+  //     //Show the types of the opponent pokemon
+  //     oppTypeList.push(
+  //       <li
+  //         style={{ background: colorMap[key] }}
+  //         key={key}
+  //         className="py-1 px-3 border border-gray-700 ml-[-1px] w-full"
+  //       >
+  //         {key.toUpperCase()}
+  //       </li>
+  //     );
+
+  //     if (
+  //       Object.hasOwn(oppTypes[Object.keys(oppTypes)[0]], "double_damage_from")
+  //     ) {
+  //       oppTypes[key]["no_damage_from"].forEach((damage) => {
+  //         oppNotEffective.pushList(damage.name);
+  //       });
+  //       oppTypes[key]["half_damage_from"].forEach((damage) => {
+  //         oppNotVeryEffective.pushList(damage.name);
+  //       });
+  //       oppTypes[key]["double_damage_from"].forEach((damage) => {
+  //         oppSuperEffective.pushList(damage.name);
+  //       });
+  //     }
+  //   });
+
+  //   const tempSuper = oppSuperEffective.list.filter(
+  //     (type) =>
+  //       !oppNotEffective.list.includes(type) &&
+  //       !oppNotVeryEffective.list.includes(type)
+  //   );
+  //   const tempNotVery = oppNotVeryEffective.list.filter(
+  //     (type) =>
+  //       !oppNotEffective.list.includes(type) &&
+  //       !oppSuperEffective.list.includes(type)
+  //   );
+  //   oppSuperEffective.list = [...new Set(tempSuper)];
+  //   oppNotVeryEffective.list = [...new Set(tempNotVery)];
+
+  //   oppNotEffective.list.forEach((type) => {
+  //     oppNotEffective.pushElem(type);
+  //   });
+  //   oppNotVeryEffective.list.forEach((type) => {
+  //     oppNotVeryEffective.pushElem(type);
+  //   });
+  //   oppSuperEffective.list.forEach((type) => {
+  //     oppSuperEffective.pushElem(type);
+  //   });
+  // }
 
   return (
     <div
@@ -388,6 +687,7 @@ function App() {
         handleDeleteParty={handleDeleteParty}
         colorMap={colorMap}
       />
+      <span className="text-xs text-gray-400 mb-1">Created by plumsily</span>
       <Info handleInfo={handleInfo} loadInfo={loadInfo} />
     </div>
   );
