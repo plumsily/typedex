@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { CSSTransition } from "react-transition-group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
@@ -23,113 +23,6 @@ const Viewport = ({
   oppNotEffective,
   oppTypeList,
 }) => {
-  //   const colorMap = {
-  //     normal: "rgb(170,170,153)",
-  //     fire: "rgb(255,68,34)",
-  //     water: "rgb(51,153,255)",
-  //     electric: "rgb(255,204,51)",
-  //     grass: "rgb(119,204,85)",
-  //     ice: "rgb(102,204,255)",
-  //     fighting: "rgb(187,85,68)",
-  //     poison: "rgb(170,85,153)",
-  //     ground: "rgb(221,187,85)",
-  //     flying: "rgb(136,153,255)",
-  //     psychic: "rgb(255,85,153)",
-  //     bug: "rgb(170,187,34)",
-  //     rock: "rgb(187,170,102)",
-  //     ghost: "rgb(102,102,187)",
-  //     dragon: "rgb(119,102,238)",
-  //     dark: "rgb(119,85,68)",
-  //     steel: "rgb(170,170,187)",
-  //     fairy: "rgb(238,153,238)",
-  //     physical: "rgb(12,110,97)",
-  //     special: "rgb(12,74,110)",
-  //     status: "rgb(140,136,140)",
-  //   };
-
-  //   //   const moveEffect = useRef(null);
-  //   //   useEffect(() => {
-  //   //     moveEffect.current?.scrollIntoView({ behavior: "smooth" });
-  //   //   });
-
-  //   class Effectivness {
-  //     constructor(element, list) {
-  //       this.element = element;
-  //       this.list = list;
-  //     }
-  //     pushElem(val) {
-  //       this.element.push(
-  //         <li
-  //           style={{ background: colorMap[val] }}
-  //           key={val}
-  //           className="p-1 border border-gray-800 mb-[-1px]"
-  //         >
-  //           {val.toUpperCase()}
-  //         </li>
-  //       );
-  //     }
-  //     pushList(val) {
-  //       this.list.push(val);
-  //     }
-  //   }
-
-  //   let oppTypeList = [];
-  //   const oppSuperEffective = new Effectivness([], []);
-  //   const oppNotVeryEffective = new Effectivness([], []);
-  //   const oppNotEffective = new Effectivness([], []);
-
-  //   if (Object.keys(oppTypes).length) {
-  //     Object.keys(oppTypes).forEach((key) => {
-  //       //Show the types of the opponent pokemon
-  //       oppTypeList.push(
-  //         <li
-  //           style={{ background: colorMap[key] }}
-  //           key={key}
-  //           className="py-1 px-3 border border-gray-800 ml-[-1px] w-full"
-  //         >
-  //           {key.toUpperCase()}
-  //         </li>
-  //       );
-
-  //       if (
-  //         Object.hasOwn(oppTypes[Object.keys(oppTypes)[0]], "double_damage_from")
-  //       ) {
-  //         oppTypes[key]["no_damage_from"].forEach((damage) => {
-  //           oppNotEffective.pushList(damage.name);
-  //         });
-  //         oppTypes[key]["half_damage_from"].forEach((damage) => {
-  //           oppNotVeryEffective.pushList(damage.name);
-  //         });
-  //         oppTypes[key]["double_damage_from"].forEach((damage) => {
-  //           oppSuperEffective.pushList(damage.name);
-  //         });
-  //       }
-  //     });
-
-  //     const tempSuper = oppSuperEffective.list.filter(
-  //       (type) =>
-  //         !oppNotEffective.list.includes(type) &&
-  //         !oppNotVeryEffective.list.includes(type)
-  //     );
-  //     const tempNotVery = oppNotVeryEffective.list.filter(
-  //       (type) =>
-  //         !oppNotEffective.list.includes(type) &&
-  //         !oppSuperEffective.list.includes(type)
-  //     );
-  //     oppSuperEffective.list = [...new Set(tempSuper)];
-  //     oppNotVeryEffective.list = [...new Set(tempNotVery)];
-
-  //     oppNotEffective.list.forEach((type) => {
-  //       oppNotEffective.pushElem(type);
-  //     });
-  //     oppNotVeryEffective.list.forEach((type) => {
-  //       oppNotVeryEffective.pushElem(type);
-  //     });
-  //     oppSuperEffective.list.forEach((type) => {
-  //       oppSuperEffective.pushElem(type);
-  //     });
-  //   }
-
   if (stats.ratio && loaded) {
     setTimeout(() => {
       document.getElementById("defense-stat").style.width = `${stats.ratio}%`;
@@ -152,10 +45,14 @@ const Viewport = ({
           <div className="flex sm:flex-row gap-1.5 justify-between mb-6 flex-col">
             <a
               href={`https://bulbapedia.bulbagarden.net/wiki/${oppName}_(Pok%C3%A9mon)`}
-              className="xl:text-2xl text-lg dark:bg-purple-400/10 dark:hover:bg-purple-400 px-2.5 py-0.5 w-full sm:w-max text-center hover:bg-black hover:text-white border bg-[rgba(192,252,132,0.7)] border-gray-500 dark:border-gray-700 transition-all"
+              className="xl:text-2xl text-lg dark:bg-purple-400/10 dark:hover:bg-purple-400 px-2.5 py-0.5 w-full sm:w-max text-center hover:bg-black hover:text-white border bg-[rgba(192,252,132,0.7)] border-gray-500 dark:border-gray-700 transition-all flex flex-row justify-center sm:justify-start"
               target="_blank"
             >
               {oppName.toUpperCase()}
+              <FontAwesomeIcon
+                className="sm:text-sm text-xs ml-1.5 self-center"
+                icon={faCircleInfo}
+              />
             </a>
             <ul className="text-center text-white flex flex-row h-fit w-full sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px]">
               {oppTypeList}
@@ -194,7 +91,10 @@ const Viewport = ({
                     onClick={(event) => handleInfo()}
                     className="mr-0.5 text-gray-800 dark:text-white self-start"
                   >
-                    <FontAwesomeIcon icon={faCircleInfo} />
+                    <FontAwesomeIcon
+                      className="hover:text-[rgba(192,252,132,1)] dark:hover:text-purple-400 transition-all"
+                      icon={faCircleInfo}
+                    />
                   </button>
                 </h2>
                 <div className="flex flex-row text-center text-white w-full">
@@ -261,10 +161,7 @@ const Viewport = ({
               appear
               unmountOnExit
             >
-              <div
-                // ref={moveEffect}
-                className="order-0 flex flex-col sm:flex-row gap-1.5"
-              >
+              <div className="order-0 flex flex-col sm:flex-row gap-1.5">
                 <span className="effect order-last sm:order-0 w-full sm:w-auto sm:grow sm:py-1 py-2 border border-gray-600 self-center text-center outline outline-2 dark:outline-purple-400/80 -outline-offset-[3px] outline-[rgba(192,252,132,1)]">
                   {moveType.length !== 3
                     ? moveType[1] != "status"

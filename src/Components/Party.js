@@ -1,5 +1,7 @@
 import React from "react";
 import { CSSTransition } from "react-transition-group";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import "./Party.css";
 
 const Party = ({
@@ -9,23 +11,11 @@ const Party = ({
   party,
   handleParty,
   handleDeleteParty,
-  colorMap,
+  handlePartyInfo,
 }) => {
   let partyList = [];
   if (Object.keys(party).length) {
     Object.keys(party).forEach((pokemon) => {
-      // let partyType = [];
-      // Object.keys(party[pokemon]["damage_relations"]).forEach((type) => {
-      //   partyType.push(
-      //     <span
-      //       style={{ background: colorMap[type] }}
-      //       key={type}
-      //       className="text-white py-1 px-3 border border-gray-800 ml-[-1px] w-full"
-      //     >
-      //       {type.toUpperCase()}
-      //     </span>
-      //   );
-      // });
       partyList.push(
         <li
           key={pokemon}
@@ -35,12 +25,12 @@ const Party = ({
             <span
               className={`${
                 party[pokemon]["matchup"] < 0
-                  ? "bg-red-400/60"
+                  ? "bg-red-500/30 dark:bg-red-500/40"
                   : party[pokemon]["matchup"] == 0
                   ? "bg-transparent"
                   : party[pokemon]["matchup"] < 3
-                  ? "bg-green-500/20"
-                  : "bg-green-400/60"
+                  ? "bg-green-500/20 dark:bg-green-500/50"
+                  : "bg-blue-400/50 dark:bg-blue-400/70"
               } uppercase border border-r-0 border-gray-500 dark:border-gray-700 py-1 text-center grow`}
             >
               {party[pokemon].name}
@@ -50,20 +40,15 @@ const Party = ({
               onClick={(event) => {
                 handleDeleteParty(pokemon);
               }}
-              className="w-[35px] sm:w-[42px] border border-gray-500 dark:border-gray-700 transition-all bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/10 sm:text-black dark:hover:bg-purple-400 hover:text-white hover:bg-black dark:text-white"
+              className="w-[32px] sm:w-[42px] border border-gray-500 dark:border-gray-700 transition-all bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/10 sm:text-black dark:hover:bg-purple-400 hover:text-white hover:bg-black dark:text-white"
             >
               X
             </button>
-            {/* <div className="flex flex-row">{partyType}</div> */}
           </div>
           <img
             className="h-max w-max self-center drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
             src={party[pokemon].sprite}
           ></img>
-
-          {/* <button className="w-14 h-14 sm:w-[97px] sm:h-[97px] border-l border-gray-600 transition-all bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/70 sm:text-black dark:hover:bg-purple-400 hover:text-white hover:bg-black dark:text-white">
-            X
-          </button> */}
         </li>
       );
     });
@@ -87,9 +72,16 @@ const Party = ({
         unmountOnExit
       >
         <div className="flex flex-col gap-1.5 bg-gray-300/10 dark:bg-gray-400/5 backdrop-blur-[2px] border border-gray-400 dark:border-gray-800 p-1.5 w-full sm:w-[70ch]">
-          <h2 className="xl:text-2xl text-lg uppercase text-center dark:text-white h-fit w-full sm:w-max px-2.5 py-0.5 border border-gray-500 dark:border-gray-700">
+          <button
+            onClick={(event) => handlePartyInfo()}
+            className="xl:text-2xl text-lg uppercase text-center dark:text-white h-fit w-full sm:w-max px-2.5 py-0.5 border border-gray-500 dark:border-gray-700 dark:bg-purple-400/10 dark:hover:bg-purple-400 hover:bg-black hover:text-white  transition-all flex flex-row justify-center sm:justify-start"
+          >
             Party
-          </h2>
+            <FontAwesomeIcon
+              className="sm:text-sm text-xs ml-1.5 self-center"
+              icon={faCircleInfo}
+            />
+          </button>
           <ul className="2xl:text-base xl:text-sm text-xs grid grid-cols-2 grid-rows-auto grid-flow-column gap-1.5">
             {partyList}
           </ul>

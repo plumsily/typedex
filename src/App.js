@@ -1,4 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+
 import darkpattern from "./Assets/darkpattern.svg";
 import lightpattern from "./Assets/lightpattern.svg";
 
@@ -7,6 +10,7 @@ import Header from "./Components/Header";
 import Default from "./Components/Default";
 import Info from "./Components/Info";
 import Party from "./Components/Party";
+import PartyInfo from "./Components/PartyInfo";
 
 function App() {
   const searchInputRef = useRef(null);
@@ -24,6 +28,7 @@ function App() {
   const [loadInfo, setLoadInfo] = useState(false);
   const [party, setParty] = useState({});
   const [partyLoad, setPartyLoad] = useState(false);
+  const [partyLoadInfo, setPartyLoadInfo] = useState(false);
 
   const colorMap = {
     normal: "rgba(170,170,153,0.9)",
@@ -232,6 +237,9 @@ function App() {
 
   const handleInfo = () => {
     setLoadInfo(!loadInfo);
+  };
+  const handlePartyInfo = () => {
+    setPartyLoadInfo(!partyLoadInfo);
   };
 
   const handleParty = (name) => {
@@ -494,10 +502,24 @@ function App() {
         party={party}
         handleParty={handleParty}
         handleDeleteParty={handleDeleteParty}
-        colorMap={colorMap}
+        handlePartyInfo={handlePartyInfo}
       />
-      <span className="text-xs text-gray-400 mb-1">Created by plumsily</span>
+      <a
+        href="https://github.com/plumsily"
+        target="_blank"
+        className="text-xs text-gray-400 mb-1 flex flex-row justify-center"
+      >
+        Created by plumsily
+        <FontAwesomeIcon
+          className="text-[12px] ml-1.5 self-center"
+          icon={faCircleInfo}
+        />
+      </a>
       <Info handleInfo={handleInfo} loadInfo={loadInfo} />
+      <PartyInfo
+        handlePartyInfo={handlePartyInfo}
+        partyLoadInfo={partyLoadInfo}
+      />
     </div>
   );
 }

@@ -12,31 +12,29 @@ const Info = ({ handleInfo, loadInfo }) => {
       appear
       unmountOnExit
     >
-      <div className="absolute h-full sm:h-screen w-screen top-0 left-0 dark:text-white dark:bg-black/80 bg-gray-100/80 backdrop-blur z-10 flex flex-col 2xl:text-lg xl:text-base text-xs justify-end sm:justify-center">
-        <div className="flex flex-col gap-2 sm:m-auto mx-auto pb-20 px-6 sm:px-0 sm:pb-0 sm:w-[60ch]">
+      <div className="fixed h-screen sm:h-screen w-screen top-0 left-0 dark:text-white dark:bg-black/80 bg-gray-100/80 backdrop-blur z-10 flex flex-col 2xl:text-lg xl:text-base text-xs justify-end sm:justify-center font-light">
+        <div className="flex flex-col gap-2 sm:m-auto mx-auto px-5 sm:px-0 sm:pb-0 sm:w-[60ch] pb-20">
           <ul className="2xl:text-xl xl:text-lg text-sm mb-2 font-medium">
-            Pokémon Stats: Defense vs Special Defense
+            Pokémon Defensive Stats: Defense vs Special Defense
           </ul>
           <li>
             The Defense stat, or informally Physical Defense, partly determines
-            how much damage a Pokémon receives when it is hit with a physical
+            how much damage a Pokémon receives when it is hit with a Physical
             move.
           </li>
           <li>
             The Special Defense stat, or Sp. Def for short, partly determines
-            how much damage a Pokémon receives when it is hit with a special
+            how much damage a Pokémon receives when it is hit with a Special
             move.
           </li>
           <li>
-            Thus, it is useful to know if the move's damage type is Physical or
-            Special since, depending on the opponent's stats, it can make one
-            move more advantageous than another.
+            Therefore, depending on the opponent's defensive stats, Physical or
+            Special moves can have more impact the other!
           </li>
           <li>
             TypeDex displays the opponent Pokémon's Defense to Special Defense
-            stats as a ratio, where the base stat value is also shown. Look for
-            a shorter, smaller stat value to target, and select a move that can
-            hit that stat. The smaller the value, the better!
+            stats as a ratio. Look for the shorter, smaller stat, and check if
+            your move is in the same category!
           </li>
           <button
             onClick={(event) => handleInfo()}
