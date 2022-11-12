@@ -29,6 +29,7 @@ function App() {
   const [party, setParty] = useState({});
   const [partyLoad, setPartyLoad] = useState(false);
   const [partyLoadInfo, setPartyLoadInfo] = useState(false);
+  const [error, setError] = useState(false);
 
   const colorMap = {
     normal: "rgba(170,170,153,0.9)",
@@ -133,8 +134,15 @@ function App() {
         oppTypeObj[key] = result["damage_relations"];
       });
       setOppTypes(oppTypeObj);
+      setError(false);
+      document.getElementById("search").value = "";
     } catch (error) {
       console.log(error);
+      setError(true);
+      let wrongName = document.getElementById("search").value;
+      document.getElementById(
+        "search"
+      ).value = `${wrongName} doesn't exist or is misspelled.`;
     }
   };
   const getParty = async (name) => {
@@ -167,8 +175,15 @@ function App() {
 
       setParty((party) => ({ ...party, ...partyObj }));
       setPartyLoad(!partyLoad);
+      setError(false);
+      document.getElementById("party").value = "";
     } catch (error) {
+      setError(true);
       console.log(error);
+      let wrongName = document.getElementById("party").value;
+      document.getElementById(
+        "party"
+      ).value = `${wrongName} doesn't exist or is misspelled.`;
     }
   };
 
@@ -192,7 +207,6 @@ function App() {
     }, 500);
     getAPI(name);
     setMoveType([]);
-    document.getElementById("search").value = "";
     return () => {
       clearTimeout(timer);
     };
@@ -254,7 +268,6 @@ function App() {
         localStorage.setItem("party", storedParty);
       }
     }
-    document.getElementById("party").value = "";
   };
 
   const handleDeleteParty = (name) => {

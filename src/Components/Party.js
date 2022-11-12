@@ -19,20 +19,18 @@ const Party = ({
       partyList.push(
         <li
           key={pokemon}
-          className="border border-gray-400 dark:border-gray-800 w-full flex flex-col p-1.5 gap-1.5"
+          className={`${
+            party[pokemon]["matchup"] < 0
+              ? "bg-gradient-to-t via-transparent from-red-500/20"
+              : party[pokemon]["matchup"] == 0
+              ? "bg-transparent"
+              : party[pokemon]["matchup"] < 3
+              ? "bg-gradient-to-t via-transparent from-green-500/30"
+              : "bg-gradient-to-t via-transparent from-blue-400/30"
+          } border border-gray-400 dark:border-gray-800 w-full flex flex-col p-1.5 gap-1.5`}
         >
           <div className="flex flex-row">
-            <span
-              className={`${
-                party[pokemon]["matchup"] < 0
-                  ? "bg-red-500/30 dark:bg-red-500/40"
-                  : party[pokemon]["matchup"] == 0
-                  ? "bg-transparent"
-                  : party[pokemon]["matchup"] < 3
-                  ? "bg-green-500/20 dark:bg-green-500/50"
-                  : "bg-blue-400/50 dark:bg-blue-400/70"
-              } uppercase border border-r-0 border-gray-500 dark:border-gray-700 py-1 text-center grow`}
-            >
+            <span className="uppercase border border-r-0 border-gray-500 dark:border-gray-700 py-1 text-center grow">
               {party[pokemon].name}
             </span>
             <button
@@ -46,7 +44,7 @@ const Party = ({
             </button>
           </div>
           <img
-            className="h-max w-max self-center drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+            className="h-max w-max self-center drop-shadow-lg dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
             src={party[pokemon].sprite}
           ></img>
         </li>
@@ -113,7 +111,7 @@ const Party = ({
                     .join("")
                 )
               }
-              className="xl:w-1/6 w-full py-2 sm:py-0 sm:w-[92.5312px] border border-gray-500 dark:border-gray-700 sm:ml-[-1px] transition-all bg-[rgba(199,252,134,0.7)] dark:bg-purple-400/10 sm:dark:text-white  dark:hover:bg-purple-400 hover:text-white hover:bg-black"
+              className="uppercase xl:w-1/6 w-full py-2 sm:py-0 sm:w-[92.5312px] border border-gray-500 dark:border-gray-700 sm:ml-[-1px] transition-all bg-[rgba(199,252,134,0.7)] dark:bg-purple-400/10 sm:dark:text-white  dark:hover:bg-purple-400 hover:text-white hover:bg-black"
             >
               Add
             </button>

@@ -135,7 +135,7 @@ const Viewport = ({
                   );
                 }
               }}
-              className="focus:outline focus:outline-2 dark:focus:outline-purple-400 focus:-outline-offset-[3px] focus:outline-[rgba(192,252,132,1)] rounded-none dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-0.5 px-2 text-center xl:w-5/6 border border-gray-500 dark:border-gray-700"
+              className="focus:outline focus:outline-2 dark:focus:outline-purple-400 focus:-outline-offset-[3px] focus:outline-[rgba(192,252,132,1)] rounded-none dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-0.5 px-2 text-center sm:w-4/6 border border-gray-500 dark:border-gray-700"
             ></input>
             <button
               onClick={(event) =>
@@ -148,9 +148,9 @@ const Viewport = ({
                   "+"
                 )
               }
-              className="xl:w-1/6 w-full py-2 sm:py-0 sm:w-[92.5312px] border border-gray-600 sm:ml-[-1px] transition-all bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/10 sm:text-black dark:hover:bg-purple-400 hover:text-white hover:bg-black dark:text-white"
+              className="sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px] w-full py-2 sm:py-0 border border-gray-600 sm:ml-[-1px] transition-all bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/10 sm:text-black dark:hover:bg-purple-400 hover:text-white hover:bg-black dark:text-white uppercase"
             >
-              Search
+              Search Move
             </button>
           </div>
           {moveType.length ? (
