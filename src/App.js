@@ -507,7 +507,7 @@ function App() {
       <a
         href="https://github.com/plumsily"
         target="_blank"
-        className="text-xs text-gray-400 mb-1 flex flex-row justify-center"
+        className="text-xs text-gray-400 mb-4 flex flex-row justify-center"
       >
         Created by plumsily
         <FontAwesomeIcon

@@ -12,8 +12,8 @@ const Info = ({ handleInfo, loadInfo }) => {
       appear
       unmountOnExit
     >
-      <div className="fixed h-screen sm:h-screen w-screen top-0 left-0 dark:text-white dark:bg-black/80 bg-gray-100/80 backdrop-blur z-10 flex flex-col 2xl:text-lg xl:text-base text-xs justify-end sm:justify-center font-light">
-        <div className="flex flex-col gap-2 sm:m-auto mx-auto px-5 sm:px-0 sm:pb-0 sm:w-[60ch] pb-20">
+      <div className="fixed h-screen sm:h-screen w-screen top-0 left-0 dark:text-white dark:bg-black/80 bg-gray-100/80 backdrop-blur z-10 flex flex-col 2xl:text-lg xl:text-base text-xs justify-center font-light">
+        <div className="flex flex-col gap-2 sm:m-auto mx-auto px-5 sm:px-0 sm:pb-0 sm:w-[60ch]">
           <ul className="2xl:text-xl xl:text-lg text-sm mb-2 font-medium">
             Pokémon Defensive Stats: Defense vs Special Defense
           </ul>
