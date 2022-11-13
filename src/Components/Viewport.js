@@ -68,19 +68,19 @@ const Viewport = ({
             <div className="flex flex-col gap-6 flex-auto">
               <div className="flex flex-col gap-1.5">
                 <h2>✔️ Super effective types:</h2>
-                <ul className="text-center text-white divide-y">
+                <ul className="text-center text-white">
                   {oppSuperEffective.element}
                 </ul>
               </div>
               <div className="flex flex-col gap-1.5">
                 <h2>🟡 Not very effective types:</h2>
-                <ul className="text-center text-white divide-y">
+                <ul className="text-center text-white">
                   {oppNotVeryEffective.element}
                 </ul>
               </div>
               <div className="flex flex-col gap-1.5">
                 <h2>❌ No effect types:</h2>
-                <ul className="text-center text-white divide-y">
+                <ul className="text-center text-white">
                   {oppNotEffective.element}
                 </ul>
               </div>
@@ -97,7 +97,7 @@ const Viewport = ({
                     />
                   </button>
                 </h2>
-                <div className="flex flex-row text-center text-white w-full divide-x">
+                <div className="flex flex-row text-center text-white w-full">
                   <span
                     id="defense-stat"
                     style={{ background: colorMap["physical"] }}
@@ -108,7 +108,7 @@ const Viewport = ({
                   <span
                     id="sp-defense-stat"
                     style={{ background: colorMap["special"] }}
-                    className={`py-1 px-3 border border-gray-700`}
+                    className={`py-1 px-3 border border-l-0 border-gray-700`}
                   >
                     {stats["special-defense"]}
                   </span>
@@ -175,7 +175,7 @@ const Viewport = ({
                       : `${moveName} is a status effect move.`
                     : moveType[0]}
                 </span>
-                <div className="order-0 sm:order-last text-center text-white flex flex-row h-fit w-full sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px] divide-x">
+                <div className="order-0 sm:order-last text-center text-white flex flex-row h-fit w-full sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px]">
                   <span
                     style={{
                       background:
@@ -185,7 +185,7 @@ const Viewport = ({
                             : colorMap[moveType[1]]
                           : "transparent",
                     }}
-                    className={`w-1/2 sm:w-auto sm:grow p-1 border border-gray-800 ${
+                    className={`w-1/2 sm:w-auto sm:grow p-1 border border-t-0 border-gray-800 ${
                       moveType.length !== 3 ? "text-white" : "text-black"
                     } dark:text-white text-center`}
                   >
@@ -204,7 +204,7 @@ const Viewport = ({
                             : colorMap[moveType[1]]
                           : "transparent",
                     }}
-                    className={`w-1/2 xl:w-[126.812px] 2xl:w-[146.328px] py-1 px-3 border border-gray-800  ${
+                    className={`w-1/2 xl:w-[126.812px] 2xl:w-[146.328px] py-1 px-3 border border-t-0 border-l-0 border-gray-800  ${
                       moveType.length !== 3 ? "text-white" : "text-black"
                     } dark:text-white`}
                   >
