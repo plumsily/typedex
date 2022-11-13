@@ -54,11 +54,11 @@ const Viewport = ({
               />
               {oppName.toUpperCase()}
             </a>
-            <ul className="text-center text-white flex flex-row h-fit shrink sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px] self-start sm:self-start">
+            <ul className="text-center text-white flex flex-row h-fit shrink sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px] self-start sm:self-start divide-x">
               {oppTypeList}
             </ul>
           </div>
-          <div className="flex flex-col sm:flex-row sm:gap-14 gap-6 mb-1.5">
+          <div className="flex flex-col sm:flex-row sm:gap-14 gap-6 ">
             <figure className="flex self-center w-full sm:ml-8 sm:w-[475px] sm:h-[475px]">
               <img
                 className="self-center drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
@@ -68,19 +68,19 @@ const Viewport = ({
             <div className="flex flex-col gap-6 flex-auto">
               <div className="flex flex-col gap-1.5">
                 <h2>✔️ Super effective types:</h2>
-                <ul className="text-center text-white">
+                <ul className="text-center text-white divide-y">
                   {oppSuperEffective.element}
                 </ul>
               </div>
               <div className="flex flex-col gap-1.5">
                 <h2>🟡 Not very effective types:</h2>
-                <ul className="text-center text-white">
+                <ul className="text-center text-white divide-y">
                   {oppNotVeryEffective.element}
                 </ul>
               </div>
               <div className="flex flex-col gap-1.5">
                 <h2>❌ No effect types:</h2>
-                <ul className="text-center text-white">
+                <ul className="text-center text-white divide-y">
                   {oppNotEffective.element}
                 </ul>
               </div>
@@ -97,18 +97,18 @@ const Viewport = ({
                     />
                   </button>
                 </h2>
-                <div className="flex flex-row text-center text-white w-full">
+                <div className="flex flex-row text-center text-white w-full divide-x">
                   <span
                     id="defense-stat"
                     style={{ background: colorMap["physical"] }}
-                    className={`py-1 px-3 border border-gray-700 ml-[-1px]`}
+                    className={`py-1 px-3 border border-gray-700`}
                   >
                     {stats.defense}
                   </span>
                   <span
                     id="sp-defense-stat"
                     style={{ background: colorMap["special"] }}
-                    className={`py-1 px-3 border border-gray-700 ml-[-1px]`}
+                    className={`py-1 px-3 border border-gray-700`}
                   >
                     {stats["special-defense"]}
                   </span>
@@ -175,7 +175,7 @@ const Viewport = ({
                       : `${moveName} is a status effect move.`
                     : moveType[0]}
                 </span>
-                <div className="order-0 sm:order-last text-center text-white flex flex-row h-fit w-full sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px]">
+                <div className="order-0 sm:order-last text-center text-white flex flex-row h-fit w-full sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px] divide-x">
                   <span
                     style={{
                       background:
@@ -204,7 +204,7 @@ const Viewport = ({
                             : colorMap[moveType[1]]
                           : "transparent",
                     }}
-                    className={`w-1/2 xl:w-[126.812px] 2xl:w-[146.328px] py-1 px-3 border border-gray-800 ml-[-1px] ${
+                    className={`w-1/2 xl:w-[126.812px] 2xl:w-[146.328px] py-1 px-3 border border-gray-800  ${
                       moveType.length !== 3 ? "text-white" : "text-black"
                     } dark:text-white`}
                   >
