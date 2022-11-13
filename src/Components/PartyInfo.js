@@ -73,7 +73,7 @@ const PartyInfo = ({ handlePartyInfo, partyLoadInfo }) => {
           </li>
           <button
             onClick={(event) => handlePartyInfo()}
-            className="mt-4 dark:text-white p-2 border border-gray-600 dark:hover:bg-purple-400 hover:text-white hover:bg-black"
+            className="mt-4 dark:text-white p-2 border border-gray-600 dark:hover:bg-purple-400 hover:text-white hover:bg-black transition-all"
           >
             Close
           </button>

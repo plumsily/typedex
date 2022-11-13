@@ -41,27 +41,27 @@ const Viewport = ({
       unmountOnExit
     >
       <section className="dark:text-white content pt-[5.1rem] sm:pt-[3.5rem] flex flex-col items-center 2xl:text-base xl:text-sm text-xs mb-1.5 w-screen p-1.5 sm:p-0">
-        <div className="flex flex-col justify-center p-1.5 bg-gray-300/10 dark:bg-gray-400/5 backdrop-blur-[2px] border border-gray-400 dark:border-gray-800 sm:w-[70ch]">
-          <div className="flex sm:flex-row gap-1.5 justify-between mb-6 flex-col">
+        <div className="flex flex-col justify-center p-1.5 bg-gradient-to-t from-gray-300/20 dark:from-gray-800/40 backdrop-blur-[2.5px] border border-gray-400 dark:border-gray-800 sm:w-[70ch]">
+          <div className="flex sm:flex-row sm:gap-3 gap-2 justify-between mb-6 flex-row">
             <a
               href={`https://bulbapedia.bulbagarden.net/wiki/${oppName}_(Pok%C3%A9mon)`}
-              className="xl:text-2xl text-lg dark:bg-purple-400/10 dark:hover:bg-purple-400 px-2.5 py-0.5 w-full sm:w-max text-center hover:bg-black hover:text-white border bg-[rgba(192,252,132,0.7)] border-gray-500 dark:border-gray-700 transition-all flex flex-row justify-center sm:justify-start"
+              className="xl:text-3xl text-xl  dark:hover:bg-purple-400 w-full px-1 py-0 sm:py-0.5 sm:px-2 sm:w-max text-center hover:bg-black hover:text-white border-0 border-gray-500 dark:border-gray-700 transition-all flex flex-row justify-start sm:justify-start"
               target="_blank"
             >
-              {oppName.toUpperCase()}
               <FontAwesomeIcon
-                className="sm:text-sm text-xs ml-1.5 self-center"
+                className="sm:text-sm text-xs mr-1.5 self-center"
                 icon={faCircleInfo}
               />
+              {oppName.toUpperCase()}
             </a>
-            <ul className="text-center text-white flex flex-row h-fit w-full sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px]">
+            <ul className="text-center text-white flex flex-row h-fit shrink sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px] self-start sm:self-start">
               {oppTypeList}
             </ul>
           </div>
           <div className="flex flex-col sm:flex-row sm:gap-14 gap-6 mb-1.5">
             <figure className="flex self-center w-full sm:ml-8 sm:w-[475px] sm:h-[475px]">
               <img
-                className="self-center drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]"
+                className="self-center drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
                 src={oppImgSrc}
               ></img>
             </figure>
@@ -119,7 +119,7 @@ const Viewport = ({
           <div className="mt-7 order-last dark:text-white flex flex-col gap-1.5 sm:gap-0 sm:flex-row justify-self-center">
             <input
               type="search"
-              placeholder="Check your move against this Pokémon!"
+              placeholder="Search a move against this Pokémon!"
               name="move"
               id="move"
               ref={inputRef}
@@ -148,7 +148,7 @@ const Viewport = ({
                   "+"
                 )
               }
-              className="sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px] w-full py-2 sm:py-0 border border-gray-600 sm:ml-[-1px] transition-all bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/10 sm:text-black dark:hover:bg-purple-400 hover:text-white hover:bg-black dark:text-white uppercase"
+              className="sm:w-[173.922px] xl:w-[231.929px] 2xl:w-[295.125px] w-full py-2 sm:py-0 border border-gray-600 sm:ml-[-1px] transition-all bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/20 sm:text-black dark:hover:bg-purple-400 hover:text-white hover:bg-black dark:text-white uppercase"
             >
               Search Move
             </button>

@@ -38,7 +38,7 @@ const Info = ({ handleInfo, loadInfo }) => {
           </li>
           <button
             onClick={(event) => handleInfo()}
-            className="mt-4 dark:text-white p-2 border border-gray-600 dark:hover:bg-purple-400 hover:text-white hover:bg-black"
+            className="mt-4 dark:text-white p-2 border border-gray-600 dark:hover:bg-purple-400 hover:text-white hover:bg-black transition-all"
           >
             Close
           </button>
