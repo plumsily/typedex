@@ -23,22 +23,22 @@ const PartyInfo = ({ handlePartyInfo, partyLoadInfo }) => {
             effective, and no effect types into 4 tiers.
           </p>
           <div className="grid grid-cols-4 grid-rows-1 w-full mb-4">
-            <span className="border border-r-0 border-gray-500 dark:border-gray-700 px-1 py-0.5 text-center bg-blue-400/50 dark:bg-blue-400/70">
+            <span className="border border-r-0 border-gray-500 dark:border-gray-700 px-1 py-1 text-center bg-gradient-to-t from-blue-400/40 dark:from-blue-400/70">
               Excellent
             </span>
-            <span className="border border-r-0 border-gray-500 dark:border-gray-700 px-1 py-0.5 text-center bg-green-500/20 dark:bg-green-500/50">
+            <span className="border border-r-0 border-gray-500 dark:border-gray-700 px-1 py-1 text-center from-green-500/30 bg-gradient-to-t dark:from-green-500/50">
               Good
             </span>
-            <span className="border border-gray-500 dark:border-gray-700 px-1 py-0.5 text-center bg-transparent">
+            <span className="border border-gray-500 dark:border-gray-700 px-1 py-1 text-center bg-transparent">
               Normal
             </span>
-            <span className="border border-l-0 border-gray-500 dark:border-gray-700 px-1 py-0.5 text-center bg-red-500/30 dark:bg-red-500/40">
+            <span className="border border-l-0 border-gray-500 dark:border-gray-700 px-1 py-1 text-center bg-gradient-to-t from-red-500/30 dark:from-red-500/40">
               Bad
             </span>
           </div>
           <li>
             An{" "}
-            <span className="border border-gray-500 dark:border-gray-700 px-1 py-0.5 text-center bg-blue-400/50 dark:bg-blue-400/70">
+            <span className="border border-gray-500 dark:border-gray-700 px-1 py-1 text-center bg-gradient-to-t from-blue-400/40 dark:from-blue-400/70">
               Excellent
             </span>{" "}
             matchup is where your Pokémon has at least one super effective type
@@ -46,7 +46,7 @@ const PartyInfo = ({ handlePartyInfo, partyLoadInfo }) => {
           </li>
           <li>
             A{" "}
-            <span className="border border-gray-500 dark:border-gray-700 px-1 py-0.5 text-center bg-green-500/20 dark:bg-green-500/50">
+            <span className="border border-gray-500 dark:border-gray-700 px-1 py-1 text-center from-green-500/30 bg-gradient-to-t dark:from-green-500/50">
               Good
             </span>{" "}
             matchup is where your Pokémon generally has the upper hand. It might
@@ -56,7 +56,7 @@ const PartyInfo = ({ handlePartyInfo, partyLoadInfo }) => {
           </li>
           <li>
             A{" "}
-            <span className="border border-gray-500 dark:border-gray-700 px-1 py-0.5 text-center bg-transparent">
+            <span className="border border-gray-500 dark:border-gray-700 px-1 py-1 text-center bg-transparent">
               Normal
             </span>{" "}
             matchup is where your Pokémon has neither a net advantage nor
@@ -64,22 +64,22 @@ const PartyInfo = ({ handlePartyInfo, partyLoadInfo }) => {
           </li>
           <li>
             A{" "}
-            <span className="border border-gray-500 dark:border-gray-700 px-1 py-0.5 text-center bg-red-500/30 dark:bg-red-500/40">
+            <span className="border border-gray-500 dark:border-gray-700 px-1 py-1 text-center bg-gradient-to-t from-red-500/30 dark:from-red-500/40">
               Bad
             </span>{" "}
             matchup is where your Pokémon will either suffer from super
             effective moves from the opponent or not be able to affect the
             opponent.
           </li>
+          <span className="mt-4 mb-1 text-[12px] text-center">
+            *Party members will be preserved between broswer sessions!
+          </span>
           <button
             onClick={(event) => handlePartyInfo()}
-            className="mt-4 dark:text-white p-2 border border-gray-600 dark:hover:bg-purple-400 hover:text-white hover:bg-black transition-all"
+            className=" dark:text-white p-2 border border-gray-600 dark:hover:bg-purple-400 hover:text-white hover:bg-black transition-all"
           >
             Close
           </button>
-          <span className="text-[12px] text-center">
-            *Party members will be preserved between broswer sessions!
-          </span>
         </div>
       </div>
     </CSSTransition>

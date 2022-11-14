@@ -21,12 +21,12 @@ const Party = ({
           key={pokemon}
           className={`${
             party[pokemon]["matchup"] < 0
-              ? "bg-gradient-to-t via-transparent from-red-500/20"
+              ? "bg-gradient-to-t  from-red-500/20"
               : party[pokemon]["matchup"] == 0
               ? "bg-transparent"
               : party[pokemon]["matchup"] < 3
-              ? "bg-gradient-to-t via-transparent from-green-500/30"
-              : "bg-gradient-to-t via-transparent from-blue-400/30"
+              ? "bg-gradient-to-t from-green-500/30"
+              : "bg-gradient-to-t from-blue-400/30"
           } border border-gray-400 dark:border-gray-800 w-full flex flex-col`}
         >
           <div className="flex flex-row justify-center">
@@ -69,7 +69,7 @@ const Party = ({
         appear
         unmountOnExit
       >
-        <div className="flex flex-col gap-1.5 bg-gradient-to-t from-gray-300/20 dark:from-gray-800/40 backdrop-blur-[2.5px] border border-gray-400 dark:border-gray-800 p-1.5 w-full sm:w-[70ch]">
+        <div className="flex flex-col gap-1.5 bg-gradient-to-t from-gray-300/30 dark:from-gray-800/50 backdrop-blur-[2.5px] border border-gray-400 dark:border-gray-800 p-1.5 w-full sm:w-[70ch]">
           <button
             onClick={(event) => handlePartyInfo()}
             className="xl:text-2xl text-lg uppercase text-center dark:text-white h-fit w-max sm:w-max px-1 sm:px-2 sm:py-0.5 py-0 border-0 border-gray-500 dark:border-gray-700  dark:hover:bg-purple-400 hover:bg-black hover:text-white  transition-all flex flex-row justify-start sm:justify-start"
@@ -100,7 +100,7 @@ const Party = ({
                   );
                 }
               }}
-              className="focus:outline focus:outline-2 dark:focus:outline-purple-400/80 focus:-outline-offset-[3px] focus:outline-[rgba(192,252,132,1)] rounded-none dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-0.5 px-2 text-center xl:w-5/6 border border-gray-500 dark:border-gray-700"
+              className="focus:outline focus:outline-2 dark:focus:outline-purple-400/80 focus:-outline-offset-[3px] focus:outline-[rgba(192,252,132,1)] rounded-none dark:text-white grow py-2 bg-white dark:bg-black sm:py-0.5 px-2 text-center xl:w-5/6 border border-gray-500 dark:border-gray-700"
             ></input>
             <button
               onClick={(event) =>

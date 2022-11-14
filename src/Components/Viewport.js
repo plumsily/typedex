@@ -41,7 +41,7 @@ const Viewport = ({
       unmountOnExit
     >
       <section className="dark:text-white content pt-[5.1rem] sm:pt-[3.5rem] flex flex-col items-center 2xl:text-base xl:text-sm text-xs mb-1.5 w-screen p-1.5 sm:p-0">
-        <div className="flex flex-col justify-center p-1.5 bg-gradient-to-t from-gray-300/20 dark:from-gray-800/40 backdrop-blur-[2.5px] border border-gray-400 dark:border-gray-800 sm:w-[70ch]">
+        <div className="flex flex-col justify-center p-1.5 bg-gradient-to-t from-gray-300/20 dark:from-gray-800/50 backdrop-blur-[2.5px] border border-gray-400 dark:border-gray-800 sm:w-[70ch]">
           <div className="flex sm:flex-row sm:gap-3 gap-2 justify-between mb-6 flex-row">
             <a
               href={`https://bulbapedia.bulbagarden.net/wiki/${oppName}_(Pok%C3%A9mon)`}
@@ -135,7 +135,7 @@ const Viewport = ({
                   );
                 }
               }}
-              className="focus:outline focus:outline-2 dark:focus:outline-purple-400 focus:-outline-offset-[3px] focus:outline-[rgba(192,252,132,1)] rounded-none dark:text-white grow py-2 bg-white dark:bg-transparent sm:py-0.5 px-2 text-center sm:w-4/6 border border-gray-500 dark:border-gray-700"
+              className="focus:outline focus:outline-2 dark:focus:outline-purple-400 focus:-outline-offset-[3px] focus:outline-[rgba(192,252,132,1)] rounded-none dark:text-white grow py-2 bg-white dark:bg-black sm:py-0.5 px-2 text-center sm:w-4/6 border border-gray-500 dark:border-gray-700"
             ></input>
             <button
               onClick={(event) =>

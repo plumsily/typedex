@@ -87,7 +87,7 @@ function App() {
         <li
           style={{ background: colorMap[val] }}
           key={val}
-          className="p-1 border border-gray-700 mb-[-1px]"
+          className="p-1 border border-gray-700 mb-[-1px] dark:grayscale-[30%]"
         >
           {val.toUpperCase()}
         </li>
@@ -341,7 +341,7 @@ function App() {
           <li
             style={{ background: colorMap[key] }}
             key={key}
-            className="py-1 px-3 border border-gray-700 ml-[-1px] w-full"
+            className="py-1 px-3 border border-gray-700 ml-[-1px] w-full dark:grayscale-[30%]"
           >
             {key.toUpperCase()}
           </li>
