@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/typedex/static/css/main.8d5f7b1e.css",
-    "main.js": "/typedex/static/js/main.8ddcfe33.js",
+    "main.css": "/typedex/static/css/main.44bca7e6.css",
+    "main.js": "/typedex/static/js/main.510ac138.js",
     "static/js/787.64e253e8.chunk.js": "/typedex/static/js/787.64e253e8.chunk.js",
     "index.html": "/typedex/index.html",
     "static/media/lightpattern.svg": "/typedex/static/media/lightpattern.b951a866cbacf3d3b2a5d24958ad119f.svg",
     "static/media/darkpattern.svg": "/typedex/static/media/darkpattern.2d490058e20a68e85d6cadbcbd8438ec.svg",
-    "main.8d5f7b1e.css.map": "/typedex/static/css/main.8d5f7b1e.css.map",
-    "main.8ddcfe33.js.map": "/typedex/static/js/main.8ddcfe33.js.map",
+    "main.44bca7e6.css.map": "/typedex/static/css/main.44bca7e6.css.map",
+    "main.510ac138.js.map": "/typedex/static/js/main.510ac138.js.map",
     "787.64e253e8.chunk.js.map": "/typedex/static/js/787.64e253e8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8d5f7b1e.css",
-    "static/js/main.8ddcfe33.js"
+    "static/css/main.44bca7e6.css",
+    "static/js/main.510ac138.js"
   ]
 }
