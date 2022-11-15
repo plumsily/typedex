@@ -39,7 +39,6 @@
 ## About The Project
 
 ![alt tag](./src/Assets/typedex_recording_1.gif)
-![alt tag](./src/Assets/typedex_recording_2.gif)
 
 TypeDex is an app inspired by the original PokéDex but with additional features related to Pokémon battling. No longer will you need to parse through an online wiki or cross reference type charts to find out if a move will be effective against a Pokémon. Features include:
 
@@ -81,16 +80,14 @@ If the Pokémon exists or is inputted correctly, TypeDex will serve the official
 When a Pokémon is displayed, the option to search a move is provided below. If the move exists or is inputted correctly, TypeDex will check that move's type matching to the Pokémon if it is applicable. Additionally, the damage type will be displayed to indicate which defense stat the move will affect. (Special moves affect Special Defense vs. Physical moves affect Defense).
 
 <img src="src/Assets/screenshot2.png">
-<br>
 <img src="src/Assets/screenshot2b.png">
 <br>
 
 Pokémon can be entered into the party UI, which will be preserved between broswer sessions via local storage. The UI will dynamically update the matchup favorability, indicated via colored tiers, against searched Pokémon. This serves to quickly provide high-level typing information when choosing which Pokémon to send out.
 
+![alt tag](./src/Assets/typedex_recording_2.gif)
 <img src="src/Assets/screenshot4.png">
-<br>
 <img src="src/Assets/screenshot5.png">
-<br>
 <img src="src/Assets/screenshot6.png">
 <br>
 
@@ -102,9 +99,7 @@ Dark mode can be toggled via the moon button on the header. This mode is saved i
 Mobile layout is also supported via responsive design.
 
 <img src="src/Assets/screenshot7.png">
-<br>
 <img src="src/Assets/screenshot8.png">
-<br>
 <img src="src/Assets/screenshot9.png">
 <br>
 
