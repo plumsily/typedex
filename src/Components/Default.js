@@ -14,31 +14,40 @@ const Default = () => {
       appear
       unmountOnExit
     >
-      <section className="dark:text-white content pt-[5.1rem] sm:pt-[5rem] flex flex-col items-center 2xl:text-base xl:text-sm text-xs w-screen px-1.5 sm:px-0 sm:mb-6">
+      <section className="dark:text-white content pt-[5.1rem] sm:pt-[4rem] flex flex-col items-center 2xl:text-base xl:text-sm text-xs w-screen px-1.5 sm:px-0 sm:mb-4 mb-2">
         <div className="flex flex-col justify-center sm:w-[70ch] p-1.5 text-center">
           {/* <h2 className="bg-gray-400/10 dark:bg-gray-600/20 backdrop-blur-[3px] xl:text-2xl text-lg uppercase text-center border border-gray-500 dark:border-gray-700 px-2.5 py-2">
             <span>Master Pokémon battling!</span>
           </h2> */}
           <FontAwesomeIcon
-            className="sm:text-xl text-base mt-2 sm:mt-4 self-center"
+            className="sm:text-xl text-base mt-1 sm:mt-0 self-center dark:text-purple-400/80"
             icon={faUpLong}
           />
-          <span className="mt-4 text-lg uppercase">
+          <span className="mt-2 sm:mt-4 text-lg sm:text-2xl uppercase dark:text-purple-400/80">
             Search for the opponent Pokémon here!
           </span>
-          <p className="sm:px-6 px-2 mt-6 sm:mt-10">
-            Use the TypeDex to search for your opponent's type weaknesses! You
-            can also check the type effectiveness and move category of any move
-            against it.
+          <p className="sm:px-6 px-2 mt-4 sm:mt-8">
+            Use the TypeDex to search for your opponent's type weaknesses!{" "}
+            <br></br>TypeDex can also check the type effectiveness and damage
+            category of any move you search against the opponent!{" "}
+            <span className="text-[12px] sm:text-xs px-2 mt-4">
+              *Currently does not support mega evolutions or regional forms.
+            </span>
           </p>
-          <p className="text-xs px-2 mt-2">
-            *Currently does not support mega evolutions or regional forms.
-          </p>
-          <span className="sm:mt-20 mt-14 text-lg uppercase">
+          <hr className="mt-6 sm:mt-10"></hr>
+          <span className="sm:mt-10 mt-6 text-lg sm:text-2xl uppercase dark:text-purple-400/80">
             Want to see how your Pokémon stack up? Add them here!
           </span>
+          <p className="sm:px-6 px-2 sm:mt-8 mt-4">
+            TypeDex can determine if your Pokémon has a favorable type matchup
+            against the opponent.{" "}
+            <span className="text-[12px] sm:text-xs mt-4">
+              *Party is preserved between browser sessions.
+            </span>
+          </p>
+
           <FontAwesomeIcon
-            className="sm:text-xl text-base mt-4 self-center mb-4"
+            className="sm:text-xl text-base mt-4 sm:mt-4 self-center dark:text-purple-400/80"
             icon={faDownLong}
           />
         </div>
