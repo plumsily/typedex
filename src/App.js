@@ -32,27 +32,6 @@ function App() {
   const [error, setError] = useState(false);
 
   const colorMap = {
-    // normal: "linear-gradient(to right,#AAA299 ,rgb(170,170,153)",
-    // fire: "linear-gradient(to right,#FFB322 ,rgb(255,68,34)",
-    // water: "linear-gradient(to right,#3333FF ,rgb(51,153,255)",
-    // electric: "linear-gradient(to right,#CCFF33 ,rgb(255,204,51)",
-    // grass: "linear-gradient(to right,#B3CC55 ,rgb(119,204,85)",
-    // ice: "linear-gradient(to right,#66FFE5 ,rgb(102,204,255)",
-    // fighting: "linear-gradient(to right,#BB446F ,rgb(187,85,68)",
-    // poison: "linear-gradient(to right,#9155AA ,rgb(170,85,153)",
-    // ground: "linear-gradient(to right, #DD7755,rgb(221,187,85))",
-    // flying: "linear-gradient(to right,#88D4FF ,rgb(136,153,255)",
-    // psychic: "linear-gradient(to right,#FF55EE ,rgb(255,85,153)",
-    // bug: "linear-gradient(to right,#BB8022 ,rgb(170,187,34)",
-    // rock: "linear-gradient(to right,#BB8066,rgb(187,170,102))",
-    // ghost: "linear-gradient(to right,#6691BB ,rgb(102,102,187)",
-    // dragon: "linear-gradient(to right,#6699EE ,rgb(119,102,238)",
-    // dark: "linear-gradient(to right,#77444D ,rgb(119,85,68)",
-    // steel: "linear-gradient(to right,#AAB3BB ,rgb(170,170,187)",
-    // fairy: "linear-gradient(to right,#EE99C3 ,rgb(238,153,238)",
-    // physical: "linear-gradient(to right,#0C6E30 ,rgb(12,110,97)",
-    // special: "linear-gradient(to right,#0C6E61 ,rgb(12,74,110)",
-    // status: "linear-gradient(to right,#8A888C ,rgb(140,136,140)",
     normal: "rgba(170,170,153,0.9)",
     fire: "rgba(255,68,34,0.9)",
     water: "rgba(51,153,255,0.9)",
@@ -154,16 +133,15 @@ function App() {
         let result = await response.json();
         oppTypeObj[key] = result["damage_relations"];
       });
+      document.getElementById("search").value = "";
       setOppTypes(oppTypeObj);
       setError(false);
-      document.getElementById("search").value = "";
     } catch (error) {
       console.log(error);
       setError(true);
       let wrongName = document.getElementById("search").value;
-      document.getElementById(
-        "search"
-      ).value = `${wrongName} doesn't exist or is misspelled.`;
+      document.getElementById("search").value = "";
+      alert(wrongName + " doesn't exist or is misspelled.");
     }
   };
   const getParty = async (name) => {
@@ -193,18 +171,24 @@ function App() {
       partyObj[result.name]["damage_relations"] = partyTypeObj;
 
       partyObj[result.name]["matchup"] = 0;
-
+      document.getElementById("party").value = "";
       setParty((party) => ({ ...party, ...partyObj }));
       setPartyLoad(!partyLoad);
       setError(false);
-      document.getElementById("party").value = "";
+      if (localStorage.getItem("party") && !error) {
+        let storedParty = JSON.parse(localStorage.getItem("party"));
+        let updatedParty = [...storedParty, name];
+        localStorage.setItem("party", JSON.stringify(updatedParty));
+      } else {
+        let storedParty = JSON.stringify([name]);
+        localStorage.setItem("party", storedParty);
+      }
     } catch (error) {
       setError(true);
       console.log(error);
       let wrongName = document.getElementById("party").value;
-      document.getElementById(
-        "party"
-      ).value = `${wrongName} doesn't exist or is misspelled.`;
+      document.getElementById("party").value = "";
+      alert(wrongName + " doesn't exist or is misspelled.");
     }
   };
 
@@ -280,14 +264,6 @@ function App() {
   const handleParty = (name) => {
     if (Object.keys(party).length < 6) {
       getParty(name);
-      if (localStorage.getItem("party")) {
-        let storedParty = JSON.parse(localStorage.getItem("party"));
-        let updatedParty = [...storedParty, name];
-        localStorage.setItem("party", JSON.stringify(updatedParty));
-      } else {
-        let storedParty = JSON.stringify([name]);
-        localStorage.setItem("party", storedParty);
-      }
     }
   };
 
@@ -304,6 +280,7 @@ function App() {
   useEffect(() => {
     let localDark = localStorage.getItem("darkMode");
     if (localStorage.getItem("party")) {
+      console.log("working");
       let storedParty = JSON.parse(localStorage.getItem("party"));
       storedParty.forEach((pokemon) => {
         getParty(pokemon);
@@ -325,6 +302,8 @@ function App() {
       document.body.style.backgroundImage = `url(${lightpattern})`;
       document.body.style.backgroundColor = "white";
     }
+    document.getElementById("party").value = "";
+    document.getElementById("search").value = "";
   }, []);
 
   //parameter types will be an object of type names and their corresponding damage relations for each party pokemon
