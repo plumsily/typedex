@@ -38,9 +38,10 @@
 
 ## About The Project
 
-![alt tag](./src/Assets/typedex_recording.gif)
+![alt tag](./src/Assets/typedex_recording_1.gif)
+![alt tag](./src/Assets/typedex_recording_2.gif)
 
-TypeDex is an app inspired by the original PokéDex but with additional features related to Pokémon battling. No longer will you need to parse through lines of text on an online wiki or scan an 18x18 type chart to find out if a move will be super effective. Features include:
+TypeDex is an app inspired by the original PokéDex but with additional features related to Pokémon battling. No longer will you need to parse through an online wiki or cross reference type charts to find out if a move will be effective against a Pokémon. Features include:
 
 - Super effective, not very effective, no effect types
 - Defense and Special Defense stats displayed for damage typing
@@ -49,6 +50,11 @@ TypeDex is an app inspired by the original PokéDex but with additional features
   - Damage type (physical vs special)
 - Integration with Bulbapedia for full information on selected Pokémon
 - Dark mode
+- Party members
+  - Preserved between browser sessions with local storage
+  - Dynamic matchup favorability against selected Pokémon
+- Mobile version
+- Alerts for misspelled or non-existant Pokémon
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -59,7 +65,7 @@ TypeDex is an app inspired by the original PokéDex but with additional features
 - CSS, Tailwind
 - JavaScript
 
-Built using create-react-app, TypeDex takes full advantage of functional components to dynamically adjust the UI for each search. The search input is forwarded to an API that serves all type weaknesses for that Pokémon. The same API provides information related to any move searched as well. The Defense / Special Defense sizes for each Pokémon are proprotional to their base stat values. This allows the user to quickly ascertain which stat is more difficult to target by it's relative size. Dark mode toggling is saved via localstorage.
+Built using React, TypeDex takes full advantage of functional components to dynamically adjust the UI for each search. TypeDex uses an API that serves all known type weaknesses for Pokémon. The same API provides information related to any move as well. The Defense / Special Defense UI for each Pokémon are proprotional to their base stat values. This allows the user to quickly see the strengths and weaknesses of the Pokémon relative to each other. Dark mode preferences and party members are saved via local storage.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -76,13 +82,31 @@ When a Pokémon is displayed, the option to search a move is provided below. If 
 
 <img src="src/Assets/screenshot2.png">
 <br>
+<img src="src/Assets/screenshot2b.png">
+<br>
+
+Pokémon can be entered into the party UI, which will be preserved between broswer sessions via local storage. The UI will dynamically update the matchup favorability, indicated via colored tiers, against searched Pokémon. This serves to quickly provide high-level typing information when choosing which Pokémon to send out.
+
+<img src="src/Assets/screenshot4.png">
+<br>
+<img src="src/Assets/screenshot5.png">
+<br>
+<img src="src/Assets/screenshot6.png">
+<br>
 
 Dark mode can be toggled via the moon button on the header. This mode is saved in your browser via localstorage.
 
 <img src="src/Assets/screenshot3.png">
 <br>
 
-<img src="src/Assets/screenshot4.png">
+Mobile layout is also supported via responsive design.
+
+<img src="src/Assets/screenshot7.png">
+<br>
+<img src="src/Assets/screenshot8.png">
+<br>
+<img src="src/Assets/screenshot9.png">
+<br>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
