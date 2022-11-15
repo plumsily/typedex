@@ -200,7 +200,9 @@ const Viewport = ({
                       background:
                         moveType.length !== 3
                           ? moveType[1] !== "special"
-                            ? colorMap[moveType[0]]
+                            ? moveType[1] !== "status"
+                              ? colorMap[moveType[0]]
+                              : colorMap[moveType[1]]
                             : colorMap[moveType[1]]
                           : "transparent",
                     }}
@@ -210,7 +212,9 @@ const Viewport = ({
                   >
                     {moveType.length !== 3
                       ? moveType[1] !== "special"
-                        ? moveType[0].toUpperCase()
+                        ? moveType[1] !== "status"
+                          ? moveType[0].toUpperCase()
+                          : moveType[1].toUpperCase()
                         : moveType[1].toUpperCase()
                       : moveType[1].toUpperCase()}
                   </span>
