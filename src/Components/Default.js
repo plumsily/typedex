@@ -29,7 +29,7 @@ const Default = () => {
           <p className="sm:px-6 px-2 mt-4 sm:mt-8">
             Use the TypeDex to search for your opponent's type weaknesses!{" "}
             <br></br>TypeDex can also check the type effectiveness and damage
-            category of any move you search against the opponent!{" "}
+            category of any move you search against the opponent! <br></br>
             <span className="text-[12px] sm:text-xs px-2 mt-4">
               *Currently does not support mega evolutions or regional forms.
             </span>
@@ -40,7 +40,7 @@ const Default = () => {
           </span>
           <p className="sm:px-6 px-2 sm:mt-8 mt-4">
             TypeDex can determine if your Pokémon has a favorable type matchup
-            against the opponent.{" "}
+            against the opponent. <br></br>
             <span className="text-[12px] sm:text-xs mt-4">
               *Party is preserved between browser sessions.
             </span>
