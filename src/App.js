@@ -188,9 +188,11 @@ function App() {
       );
       const resultMove = await responseMove.json();
       setMoveType([resultMove.type.name, resultMove["damage_class"].name]);
+      return true;
     } catch (error) {
       console.log(error);
-      setMoveType(["Move does not exist!", "Error", "Check"]);
+      setMoveType([]);
+      return false;
     }
   };
 
@@ -206,12 +208,15 @@ function App() {
     };
   };
 
-  const handleMove = (move) => {
+  const handleMove = async (move) => {
     setLoadedMove(false);
-    getMove(move);
-    const timerMove = setTimeout(() => {
+    const moveState = await getMove(move);
+    if (moveState) {
       setLoadedMove(true);
-    }, 300);
+    } else {
+      alert("Move does not exist or is misspelled!");
+    }
+
     setMoveName(
       document
         .getElementById("move")
@@ -225,9 +230,6 @@ function App() {
         .join(" ")
     );
     document.getElementById("move").value = "";
-    return () => {
-      clearTimeout(timerMove);
-    };
   };
 
   const handleDark = () => {

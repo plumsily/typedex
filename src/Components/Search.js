@@ -31,7 +31,7 @@ const Search = ({ inputRef, handleSearch }) => {
               .join("")
           )
         }
-        className="uppercase bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/20 md:w-1/6 w-1/4 border border-gray-500 dark:border-gray-700 border-l-0 transition-all dark:hover:bg-purple-400 hover:text-white hover:bg-black"
+        className="uppercase bg-[rgba(192,252,132,0.7)] dark:bg-purple-400/30 md:w-1/6 w-1/4 border border-gray-500 dark:border-gray-700 border-l-0 transition-all dark:hover:bg-purple-400 hover:text-white hover:bg-black"
       >
         Search
       </button>
