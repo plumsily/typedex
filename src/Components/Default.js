@@ -20,10 +20,10 @@ const Default = () => {
             <span>Master Pokémon battling!</span>
           </h2> */}
           <FontAwesomeIcon
-            className="sm:text-xl text-base mt-1 sm:mt-0 self-center dark:text-purple-400/80"
+            className="sm:text-xl text-base mt-1 sm:mt-0 self-center "
             icon={faUpLong}
           />
-          <span className="mt-2 sm:mt-4 text-lg sm:text-2xl uppercase dark:text-purple-400/80">
+          <span className="mt-2 sm:mt-4 text-lg sm:text-2xl uppercase ">
             Search for the opponent Pokémon here!
           </span>
           <p className="sm:px-6 px-2 mt-4 sm:mt-8">
@@ -35,7 +35,7 @@ const Default = () => {
             </span>
           </p>
           <hr className="mt-6 sm:mt-10"></hr>
-          <span className="sm:mt-10 mt-6 text-lg sm:text-2xl uppercase dark:text-purple-400/80">
+          <span className="sm:mt-10 mt-6 text-lg sm:text-2xl uppercase ">
             Want to see how your Pokémon stack up? Add them here!
           </span>
           <p className="sm:px-6 px-2 sm:mt-8 mt-4">
@@ -47,7 +47,7 @@ const Default = () => {
           </p>
 
           <FontAwesomeIcon
-            className="sm:text-xl text-base mt-4 sm:mt-4 self-center dark:text-purple-400/80"
+            className="sm:text-xl text-base mt-4 sm:mt-4 self-center "
             icon={faDownLong}
           />
         </div>

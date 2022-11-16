@@ -29,7 +29,6 @@ function App() {
   const [party, setParty] = useState({});
   const [partyLoad, setPartyLoad] = useState(false);
   const [partyLoadInfo, setPartyLoadInfo] = useState(false);
-  const [error, setError] = useState(false);
 
   const colorMap = {
     normal: "rgba(170,170,153,0.9)",
@@ -135,10 +134,8 @@ function App() {
       });
       document.getElementById("search").value = "";
       setOppTypes(oppTypeObj);
-      setError(false);
     } catch (error) {
       console.log(error);
-      setError(true);
       let wrongName = document.getElementById("search").value;
       document.getElementById("search").value = "";
       alert(wrongName + " doesn't exist or is misspelled.");
@@ -174,21 +171,13 @@ function App() {
       document.getElementById("party").value = "";
       setParty((party) => ({ ...party, ...partyObj }));
       setPartyLoad(!partyLoad);
-      setError(false);
-      if (localStorage.getItem("party") && !error) {
-        let storedParty = JSON.parse(localStorage.getItem("party"));
-        let updatedParty = [...storedParty, name];
-        localStorage.setItem("party", JSON.stringify(updatedParty));
-      } else {
-        let storedParty = JSON.stringify([name]);
-        localStorage.setItem("party", storedParty);
-      }
+      return true;
     } catch (error) {
-      setError(true);
       console.log(error);
       let wrongName = document.getElementById("party").value;
       document.getElementById("party").value = "";
       alert(wrongName + " doesn't exist or is misspelled.");
+      return false;
     }
   };
 
@@ -261,9 +250,24 @@ function App() {
     setPartyLoadInfo(!partyLoadInfo);
   };
 
-  const handleParty = (name) => {
+  const handleParty = async (name) => {
     if (Object.keys(party).length < 6) {
-      getParty(name);
+      const result = await getParty(name);
+      if (result) {
+        if (JSON.parse(localStorage.getItem("party"))) {
+          if (JSON.parse(localStorage.getItem("party")).length) {
+            let storedParty = JSON.parse(localStorage.getItem("party"));
+            let updatedParty = [...storedParty, name];
+            localStorage.setItem("party", JSON.stringify(updatedParty));
+          } else {
+            let storedParty = JSON.stringify([name]);
+            localStorage.setItem("party", storedParty);
+          }
+        } else {
+          let storedParty = JSON.stringify([name]);
+          localStorage.setItem("party", storedParty);
+        }
+      }
     }
   };
 
@@ -279,12 +283,14 @@ function App() {
 
   useEffect(() => {
     let localDark = localStorage.getItem("darkMode");
-    if (localStorage.getItem("party")) {
-      console.log("working");
-      let storedParty = JSON.parse(localStorage.getItem("party"));
-      storedParty.forEach((pokemon) => {
-        getParty(pokemon);
-      });
+    if (JSON.parse(localStorage.getItem("party"))) {
+      if (JSON.parse(localStorage.getItem("party")).length) {
+        console.log("working");
+        let storedParty = JSON.parse(localStorage.getItem("party"));
+        storedParty.forEach((pokemon) => {
+          getParty(pokemon);
+        });
+      }
     }
     if (localDark) {
       if (localDark === "on") {
