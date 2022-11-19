@@ -206,7 +206,7 @@ function App() {
     if (searchState) {
       const timer = setTimeout(() => {
         setLoaded(true);
-      }, 200);
+      }, 300);
       return () => {
         clearTimeout(timer);
       };
