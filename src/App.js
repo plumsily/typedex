@@ -29,6 +29,7 @@ function App() {
   const [party, setParty] = useState({});
   const [partyLoad, setPartyLoad] = useState(false);
   const [partyLoadInfo, setPartyLoadInfo] = useState(false);
+  // const [effectLoad, setEffectLoad] = useState(false);
 
   const colorMap = {
     normal: "rgba(170,170,153,0.9)",
@@ -197,28 +198,19 @@ function App() {
       return false;
     }
   };
-
+  // let effectLoad = false;
   const handleSearch = async (name) => {
     setLoaded(false);
     const searchState = await getAPI(name);
-    // const timer = setTimeout(() => {
-    //   setLoaded(true);
-    // }, 500);
-    // getAPI(name);
     setMoveType([]);
-    assignEffectiveness(
-      oppTypes,
-      "opp",
-      oppNotEffective,
-      oppNotVeryEffective,
-      oppSuperEffective
-    );
     if (searchState) {
-      setLoaded(true);
+      const timer = setTimeout(() => {
+        setLoaded(true);
+      }, 200);
+      return () => {
+        clearTimeout(timer);
+      };
     }
-    // return () => {
-    //   clearTimeout(timer);
-    // };
   };
 
   const handleMove = async (move) => {
@@ -300,7 +292,6 @@ function App() {
     let localDark = localStorage.getItem("darkMode");
     if (JSON.parse(localStorage.getItem("party"))) {
       if (JSON.parse(localStorage.getItem("party")).length) {
-        console.log("working");
         let storedParty = JSON.parse(localStorage.getItem("party"));
         storedParty.forEach((pokemon) => {
           getParty(pokemon);
@@ -328,7 +319,7 @@ function App() {
   }, []);
 
   //parameter types will be an object of type names and their corresponding damage relations for each party pokemon
-  const assignEffectiveness = (
+  const assignEffectiveness = async (
     types,
     relation,
     notEffective,
@@ -409,86 +400,84 @@ function App() {
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (Object.keys(oppTypes).length) {
-        if (Object.keys(party).length) {
-          Object.keys(party).forEach((pokemon) => {
-            let counter = 0;
-            partyNotEffective.reset();
-            partyNotVeryEffective.reset();
-            partySuperEffective.reset();
-            assignEffectiveness(
-              party[pokemon]["damage_relations"],
-              "party",
-              partyNotEffective,
-              partyNotVeryEffective,
-              partySuperEffective
-            );
+    // const timer = setTimeout(() => {
+    if (Object.keys(oppTypes).length) {
+      if (Object.keys(party).length) {
+        Object.keys(party).forEach((pokemon) => {
+          let counter = 0;
+          partyNotEffective.reset();
+          partyNotVeryEffective.reset();
+          partySuperEffective.reset();
+          assignEffectiveness(
+            party[pokemon]["damage_relations"],
+            "party",
+            partyNotEffective,
+            partyNotVeryEffective,
+            partySuperEffective
+          );
 
-            //Checks party effectiveness against opponent type - does not need to iterate through each of the party pokemon's type.
-            if (Object.keys(oppTypes).length < 2) {
-              if (partySuperEffective.set.includes(Object.keys(oppTypes)[0])) {
-                counter -= 3;
-                // console.log("subtracted 3 " + counter + " ");
-              }
-              if (partyNotEffective.set.includes(Object.keys(oppTypes)[0])) {
-                counter += 2;
-                // console.log("added 2 " + counter + " ");
-              }
-              if (
-                partyNotVeryEffective.set.includes(Object.keys(oppTypes)[0])
-              ) {
-                counter += 1;
-                // console.log("added 1 " + counter + " ");
-              }
-            } else {
-              if (
-                partySuperEffective.set.includes(Object.keys(oppTypes)[0]) ||
-                partySuperEffective.set.includes(Object.keys(oppTypes)[1])
-              ) {
-                counter -= 3;
-                // console.log("subtracted 3 " + counter + " ");
-              }
-              if (
-                partyNotEffective.set.includes(Object.keys(oppTypes)[0]) ||
-                partyNotEffective.set.includes(Object.keys(oppTypes)[1])
-              ) {
-                counter += 2;
-                // console.log("added 2 " + counter + " ");
-              }
-              if (
-                partyNotVeryEffective.set.includes(Object.keys(oppTypes)[0]) ||
-                partyNotVeryEffective.set.includes(Object.keys(oppTypes)[1])
-              ) {
-                counter += 1;
-                // console.log("added 1 " + counter + " ");
-              }
+          //Checks party effectiveness against opponent type - does not need to iterate through each of the party pokemon's type.
+          if (Object.keys(oppTypes).length < 2) {
+            if (partySuperEffective.set.includes(Object.keys(oppTypes)[0])) {
+              counter -= 3;
+              // console.log("subtracted 3 " + counter + " ");
             }
+            if (partyNotEffective.set.includes(Object.keys(oppTypes)[0])) {
+              counter += 2;
+              // console.log("added 2 " + counter + " ");
+            }
+            if (partyNotVeryEffective.set.includes(Object.keys(oppTypes)[0])) {
+              counter += 1;
+              // console.log("added 1 " + counter + " ");
+            }
+          } else {
+            if (
+              partySuperEffective.set.includes(Object.keys(oppTypes)[0]) ||
+              partySuperEffective.set.includes(Object.keys(oppTypes)[1])
+            ) {
+              counter -= 3;
+              // console.log("subtracted 3 " + counter + " ");
+            }
+            if (
+              partyNotEffective.set.includes(Object.keys(oppTypes)[0]) ||
+              partyNotEffective.set.includes(Object.keys(oppTypes)[1])
+            ) {
+              counter += 2;
+              // console.log("added 2 " + counter + " ");
+            }
+            if (
+              partyNotVeryEffective.set.includes(Object.keys(oppTypes)[0]) ||
+              partyNotVeryEffective.set.includes(Object.keys(oppTypes)[1])
+            ) {
+              counter += 1;
+              // console.log("added 1 " + counter + " ");
+            }
+          }
 
-            Object.keys(party[pokemon]["damage_relations"]).forEach((type) => {
-              if (oppSuperEffective.set.includes(type)) {
-                counter += 3;
-                // console.log("added 3 " + counter + " " + type);
-              }
-              if (oppNotEffective.set.includes(type)) {
-                counter -= 3;
-                // console.log("subtracted 3 " + counter + " " + type);
-              }
-              if (oppNotVeryEffective.set.includes(type)) {
-                counter -= 1;
-                // console.log("subtracted 1 " + counter + " " + type);
-              }
-            });
-            // console.log(pokemon + counter);
-            party[pokemon].matchup = counter;
-            setParty({ ...party });
+          Object.keys(party[pokemon]["damage_relations"]).forEach((type) => {
+            if (oppSuperEffective.set.includes(type)) {
+              counter += 3;
+              // console.log("added 3 " + counter + " " + type);
+            }
+            if (oppNotEffective.set.includes(type)) {
+              counter -= 3;
+              // console.log("subtracted 3 " + counter + " " + type);
+            }
+            if (oppNotVeryEffective.set.includes(type)) {
+              counter -= 1;
+              // console.log("subtracted 1 " + counter + " " + type);
+            }
           });
-        }
+          // console.log(pokemon + counter);
+          party[pokemon].matchup = counter;
+          setParty({ ...party });
+        });
       }
-    }, 300);
-    return () => {
-      clearTimeout(timer);
-    };
+    }
+    // }, 300);
+    // return () => {
+    //   clearTimeout(timer);
+    // };
   }, [loaded, partyLoad]);
 
   return (
