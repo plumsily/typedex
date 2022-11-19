@@ -209,9 +209,9 @@ function App() {
     if (searchState) {
       setLoaded(true);
     }
-    return () => {
-      clearTimeout(timer);
-    };
+    // return () => {
+    //   clearTimeout(timer);
+    // };
   };
 
   const handleMove = async (move) => {
