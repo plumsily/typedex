@@ -206,6 +206,13 @@ function App() {
     // }, 500);
     // getAPI(name);
     setMoveType([]);
+    assignEffectiveness(
+      oppTypes,
+      "opp",
+      oppNotEffective,
+      oppNotVeryEffective,
+      oppSuperEffective
+    );
     if (searchState) {
       setLoaded(true);
     }

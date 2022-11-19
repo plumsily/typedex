@@ -35,7 +35,7 @@ const Viewport = ({
   return (
     <CSSTransition
       in={loaded}
-      timeout={{ enter: 500 }}
+      timeout={{ enter: 100 }}
       classNames="viewport"
       appear
       unmountOnExit
