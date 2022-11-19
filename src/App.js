@@ -134,11 +134,13 @@ function App() {
       });
       document.getElementById("search").value = "";
       setOppTypes(oppTypeObj);
+      return true;
     } catch (error) {
       console.log(error);
       let wrongName = document.getElementById("search").value;
       document.getElementById("search").value = "";
       alert(wrongName + " doesn't exist or is misspelled.");
+      return false;
     }
   };
   const getParty = async (name) => {
@@ -196,13 +198,17 @@ function App() {
     }
   };
 
-  const handleSearch = (name) => {
+  const handleSearch = async (name) => {
     setLoaded(false);
-    const timer = setTimeout(() => {
-      setLoaded(true);
-    }, 500);
-    getAPI(name);
+    const searchState = await getAPI(name);
+    // const timer = setTimeout(() => {
+    //   setLoaded(true);
+    // }, 500);
+    // getAPI(name);
     setMoveType([]);
+    if (searchState) {
+      setLoaded(true);
+    }
     return () => {
       clearTimeout(timer);
     };
